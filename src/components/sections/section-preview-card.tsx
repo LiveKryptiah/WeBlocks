@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Copy, Check, FileText, Eye, Lock, Maximize2 } from "lucide-react";
+import { Copy, Check, FileText, Eye, Maximize2, X } from "lucide-react";
 import { SectionEntity, getSectionDesignMd } from "@/data/sections-data";
 import { RenderSectionPreview } from "./section-previews";
 import { useLibrary } from "@/context/library-context";
@@ -68,75 +68,9 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
   return (
     <>
       <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/50 rounded-2xl p-4 sm:p-6 border border-hairline-soft transition-all duration-200">
-        {/* Main Display Area: Windows 11 Chrome Window Container */}
+        {/* Main Display Area: Clean Scaled Desktop Canvas OR design.md */}
         <div className="mb-4">
           <div className="w-full rounded-xl bg-canvas border border-hairline-soft overflow-hidden flex flex-col shadow-sm">
-            {/* Windows 11 Desktop Title Bar */}
-            <div className="h-9 px-3 bg-canvas-soft border-b border-hairline-soft flex items-center justify-between text-xs text-muted shrink-0 select-none">
-              {/* Left: Window Tab / Brand */}
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-canvas text-ink text-[11px] font-medium border border-hairline-soft/80 shadow-xs max-w-[200px] truncate">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0 shadow-[0_0_6px_rgba(59,130,246,0.8)]" />
-                  <span className="truncate">{section.title}</span>
-                </div>
-
-                {/* Simulated URL bar */}
-                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-md bg-field text-[10px] text-muted font-mono max-w-[280px] truncate">
-                  <Lock className="w-2.5 h-2.5 text-muted shrink-0" />
-                  <span>https://weblocks.design/</span>
-                  <span className="text-ink font-medium truncate">{section.slug}</span>
-                </div>
-              </div>
-
-              {/* Right: Screen Resolution Badge & Windows 11 Control Buttons */}
-              <div className="flex items-center gap-2 h-full">
-                {/* 16:9 Desktop Resolution Indicator */}
-                <span className="hidden md:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono text-muted bg-field">
-                  1440 × 810 · {scalePercent}% (16:9 Desktop)
-                </span>
-
-                {/* Windows 11 Window Controls */}
-                <div className="flex items-center h-full -mr-3">
-                  {/* Minimize (—) */}
-                  <button
-                    type="button"
-                    title="Minimize"
-                    onClick={() => showToast("Desktop window scale locked to 16:9 widescreen", "info")}
-                    className="w-10 h-full flex items-center justify-center text-muted hover:text-ink hover:bg-field transition-colors"
-                  >
-                    <svg width="10" height="1" viewBox="0 0 10 1" className="fill-current">
-                      <rect width="10" height="1" />
-                    </svg>
-                  </button>
-
-                  {/* Maximize (▢) - Launches true Full-Screen Desktop Modal */}
-                  <button
-                    type="button"
-                    title="Maximize (Full-Screen Desktop Canvas)"
-                    onClick={() => setIsFullscreen(true)}
-                    className="w-10 h-full flex items-center justify-center text-muted hover:text-ink hover:bg-field transition-colors"
-                  >
-                    <svg width="10" height="10" viewBox="0 0 10 10" className="fill-none stroke-current" strokeWidth="1">
-                      <rect x="0.5" y="0.5" width="9" height="9" />
-                    </svg>
-                  </button>
-
-                  {/* Close (✕) - Turns red on hover (Authentic Windows OS signature) */}
-                  <button
-                    type="button"
-                    title="Close"
-                    onClick={() => setActiveTab(activeTab === "preview" ? "design" : "preview")}
-                    className="w-10 h-full flex items-center justify-center text-muted hover:text-white hover:bg-[#e81123] transition-colors"
-                  >
-                    <svg width="10" height="10" viewBox="0 0 10 10" className="stroke-current" strokeWidth="1">
-                      <line x1="1" y1="1" x2="9" y2="9" />
-                      <line x1="9" y1="1" x2="1" y2="9" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
             {/* Viewport Content: True Scaled Desktop Canvas OR design.md */}
             {activeTab === "preview" ? (
               <div
@@ -201,7 +135,7 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
               type="button"
               onClick={() => setIsFullscreen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-caption font-semibold bg-field hover:bg-canvas-soft text-muted hover:text-ink transition-colors"
-              title="View in 100% Fullscreen Windows Display"
+              title="View in Fullscreen Desktop Canvas"
             >
               <Maximize2 className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Fullscreen</span>
@@ -240,80 +174,29 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
         </div>
       </div>
 
-      {/* Interactive Full-Screen Windows 11 Desktop Modal */}
+      {/* Interactive Full-Screen Desktop Modal without Title Bar */}
       {isFullscreen && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col p-2 sm:p-6 items-center justify-center animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-2 sm:p-6 animate-in fade-in duration-200"
           onClick={() => setIsFullscreen(false)}
         >
+          {/* Floating Close Button */}
+          <button
+            type="button"
+            onClick={() => setIsFullscreen(false)}
+            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-colors shadow-lg cursor-pointer"
+            title="Close Fullscreen (Esc)"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
           <div
-            className="w-full max-w-[1500px] h-[92vh] max-h-[960px] bg-canvas rounded-xl border border-hairline overflow-hidden flex flex-col shadow-2xl"
+            className="w-full max-w-[1500px] h-[94vh] bg-canvas rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Windows 11 Title Bar in Fullscreen Modal */}
-            <div className="h-10 px-4 bg-canvas-soft border-b border-hairline-soft flex items-center justify-between text-xs text-muted shrink-0 select-none">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-canvas text-ink text-xs font-medium border border-hairline-soft shadow-xs">
-                  <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_6px_rgba(59,130,246,0.8)]" />
-                  <span>{section.title}</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-field text-[11px] text-muted font-mono">
-                  <Lock className="w-3 h-3 text-muted" />
-                  <span>https://weblocks.design/</span>
-                  <span className="text-ink font-semibold">{section.slug}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 h-full">
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono text-muted bg-field">
-                  1440 × 810 (100% Native Desktop Resolution)
-                </span>
-
-                <div className="flex items-center h-full -mr-4">
-                  {/* Minimize (exit fullscreen) */}
-                  <button
-                    type="button"
-                    title="Minimize"
-                    onClick={() => setIsFullscreen(false)}
-                    className="w-11 h-full flex items-center justify-center text-muted hover:text-ink hover:bg-field transition-colors"
-                  >
-                    <svg width="10" height="1" viewBox="0 0 10 1" className="fill-current">
-                      <rect width="10" height="1" />
-                    </svg>
-                  </button>
-
-                  {/* Restore Down (overlapping squares) */}
-                  <button
-                    type="button"
-                    title="Restore Down"
-                    onClick={() => setIsFullscreen(false)}
-                    className="w-11 h-full flex items-center justify-center text-muted hover:text-ink hover:bg-field transition-colors"
-                  >
-                    <svg width="10" height="10" viewBox="0 0 10 10" className="fill-none stroke-current" strokeWidth="1">
-                      <rect x="2.5" y="0.5" width="7" height="7" />
-                      <path d="M0.5,2.5 v7 h7" />
-                    </svg>
-                  </button>
-
-                  {/* Close (red hover) */}
-                  <button
-                    type="button"
-                    title="Close Fullscreen (Esc)"
-                    onClick={() => setIsFullscreen(false)}
-                    className="w-11 h-full flex items-center justify-center text-muted hover:text-white hover:bg-[#e81123] transition-colors"
-                  >
-                    <svg width="10" height="10" viewBox="0 0 10 10" className="stroke-current" strokeWidth="1">
-                      <line x1="1" y1="1" x2="9" y2="9" />
-                      <line x1="9" y1="1" x2="1" y2="9" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* 100% Native 1440px Desktop Viewport inside Modal */}
-            <div className="flex-1 w-full overflow-auto bg-canvas flex items-center justify-center p-4">
-              <div className="w-[1440px] h-[810px] rounded-lg overflow-hidden shrink-0 shadow-lg border border-hairline-soft">
+            {/* 100% Native 1440px Desktop Viewport */}
+            <div className="w-full h-full overflow-auto flex items-center justify-center p-2 sm:p-6 bg-canvas">
+              <div className="w-[1440px] h-[810px] rounded-xl overflow-hidden shrink-0 shadow-xl border border-hairline-soft">
                 <RenderSectionPreview slug={section.slug} />
               </div>
             </div>
