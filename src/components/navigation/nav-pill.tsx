@@ -6,8 +6,6 @@ import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
-  Search,
-  Bookmark,
   User,
   Sparkles,
   Compass,
@@ -16,7 +14,7 @@ import {
   Code2,
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
-import { ButtonPrimary, ButtonSoft } from "@/components/ui/button";
+import { ButtonPrimary } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface NavPillProps {
@@ -25,7 +23,7 @@ interface NavPillProps {
 
 export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
   const pathname = usePathname();
-  const { user, savedIds } = useLibrary();
+  const { savedIds } = useLibrary();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -100,58 +98,12 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
 
           {/* Right Action Items */}
           <div className="flex items-center gap-2">
-            {/* Quick Command Palette Trigger */}
-            <button
-              type="button"
-              onClick={onOpenCommandPalette}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-field hover:bg-canvas-soft text-muted hover:text-ink text-caption font-semibold transition-colors"
-              title="Quick Search (⌘K / Ctrl+K)"
-              aria-label="Open command palette"
-            >
-              <Search className="w-3.5 h-3.5 text-muted" />
-              <span>Search</span>
-              <kbd className="font-mono text-[10px] bg-white px-1.5 py-0.5 rounded text-muted">
-                ⌘K
-              </kbd>
-            </button>
-
-            {/* Saved shortcut */}
-            <Link
-              href="/saved"
-              className="relative p-2 rounded-full text-muted hover:text-ink hover:bg-canvas-soft transition-colors"
-              title="Saved references"
-              aria-label="Saved references"
-            >
-              <Bookmark className="w-4 h-4" />
-              {savedIds.length > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-ink text-white text-[9px] font-bold flex items-center justify-center">
-                  {savedIds.length}
-                </span>
-              )}
-            </Link>
-
-            {/* Account / Sign In */}
-            {user.isAuthenticated ? (
-              <Link
-                href="/account"
-                className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full hover:bg-canvas-soft transition-colors"
-              >
-                <div className="w-7 h-7 rounded-full bg-field flex items-center justify-center font-bold text-xs text-ink">
-                  {user.avatarChar}
-                </div>
-                <span className="hidden sm:inline text-body-sm font-semibold text-ink">
-                  {user.name.split(" ")[0]}
-                </span>
-              </Link>
-            ) : (
-              <Link href="/auth/signin">
-                <ButtonSoft size="sm">Sign in</ButtonSoft>
-              </Link>
-            )}
-
             {/* Primary CTA (Black Pill) */}
-            <Link href="/pricing" className="hidden sm:inline-block">
-              <ButtonPrimary size="sm">Get All Access</ButtonPrimary>
+            <Link
+              href="/pricing"
+              className="inline-flex items-center justify-center h-8 sm:h-9 px-3.5 sm:px-4 rounded-full bg-ink text-white hover:bg-ink-soft text-caption sm:text-body-sm font-semibold transition-colors select-none active:scale-[0.98] whitespace-nowrap"
+            >
+              Get access
             </Link>
 
             {/* Mobile Menu Trigger */}
@@ -222,7 +174,7 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
                   className="w-full block"
                 >
                   <ButtonPrimary size="md" className="w-full">
-                    Get All Access
+                    Get access
                   </ButtonPrimary>
                 </Link>
               </div>
