@@ -1692,6 +1692,334 @@ export function SharePopoverCard({
   );
 }`,
   },
+  {
+    id: "comp-19",
+    slug: "parameter-slider-sheet",
+    title: "Parameter Slider Sheet",
+    description: "Floating action toolbar with integrated parameter popover sheet, featuring a calibrated capsule slider with graduated tick ruler.",
+    category: "modals",
+    tier: "free",
+    cliCommand: "npx weblocks add parameter-slider-sheet",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    tags: ["modals", "sheets", "popover", "slider", "toolbar", "controls"],
+    props: [
+      { name: "label", type: "string", default: "Intensity", description: "Parameter title label displayed above the slider" },
+      { name: "value", type: "number", default: 50, description: "Current numerical value (0 to 100)" },
+      { name: "min", type: "number", default: 0, description: "Minimum slider value" },
+      { name: "max", type: "number", default: 100, description: "Maximum slider value" },
+      { name: "onChange", type: "(value: number) => void", description: "Callback triggered on slider value changes" },
+      { name: "onAdd", type: "() => void", description: "Callback triggered when clicking the + Add button" },
+    ],
+    code: `"use client";
+
+import React, { useState, useRef, useEffect } from "react";
+import { Plus, ChevronDown } from "lucide-react";
+
+interface ParameterSliderSheetProps {
+  label?: string;
+  value?: number;
+  min?: number;
+  max?: number;
+  onChange?: (val: number) => void;
+  onAdd?: () => void;
+  defaultOpen?: boolean;
+}
+
+export function ParameterSliderSheet({
+  label = "Intensity",
+  value: controlledValue,
+  min = 0,
+  max = 100,
+  onChange,
+  onAdd,
+  defaultOpen = true,
+}: ParameterSliderSheetProps) {
+  const [internalValue, setInternalValue] = useState(50);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+
+  const currentValue = controlledValue !== undefined ? controlledValue : internalValue;
+
+  const updateFromPointer = (clientX: number) => {
+    if (!sliderRef.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const nextVal = Math.round(min + ratio * (max - min));
+    setInternalValue(nextVal);
+    onChange?.(nextVal);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    updateFromPointer(e.clientX);
+  };
+
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      if (!isDragging.current) return;
+      updateFromPointer(e.clientX);
+    };
+
+    const handlePointerUp = () => {
+      isDragging.current = false;
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+  }, [min, max]);
+
+  const percentage = Math.max(0, Math.min(100, ((currentValue - min) / (max - min)) * 100));
+
+  // 36 graduated tick marks
+  const totalTicks = 36;
+
+  return (
+    <div className="relative w-full max-w-[340px] flex flex-col items-center select-none font-sans">
+      {/* 1. Top Control Bar */}
+      <div className="flex items-center gap-2 w-full justify-center mb-3">
+        {/* + Add Button */}
+        <button
+          type="button"
+          onClick={onAdd}
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] text-xs font-semibold text-ink hover:bg-field dark:hover:bg-[#23252a] transition-all cursor-pointer shadow-xs active:scale-95"
+        >
+          <Plus className="w-3.5 h-3.5 text-muted" />
+          <span>Add</span>
+        </button>
+
+        {/* Consolidated Pill Toolbar */}
+        <div className="inline-flex items-center gap-1 p-1 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] shadow-xs">
+          {/* Type / Grid Item */}
+          <button
+            type="button"
+            className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-ink hover:text-ink transition-colors cursor-pointer"
+          >
+            {/* Waffle 9-dot Icon */}
+            <svg className="w-3.5 h-3.5 text-muted shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="7" cy="7" r="1.2" />
+              <circle cx="12" cy="7" r="1.2" />
+              <circle cx="17" cy="7" r="1.2" />
+              <circle cx="7" cy="12" r="1.2" />
+              <circle cx="12" cy="12" r="1.2" />
+              <circle cx="17" cy="12" r="1.2" />
+              <circle cx="7" cy="17" r="1.2" />
+              <circle cx="12" cy="17" r="1.2" />
+              <circle cx="17" cy="17" r="1.2" />
+            </svg>
+            <span>Type</span>
+          </button>
+
+          {/* Active Parameter Value Dropdown Pill */}
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className={\`flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-semibold transition-all cursor-pointer \${
+              isOpen
+                ? "bg-[#ebecee] dark:bg-[#23252a] text-ink"
+                : "hover:bg-[#f2f3f5] dark:hover:bg-[#1d1f24] text-muted hover:text-ink"
+            }\`}
+          >
+            <span className="font-mono text-xs">{currentValue}</span>
+            <ChevronDown className={\`w-3 h-3 text-muted transition-transform duration-200 \${isOpen ? "rotate-180" : ""}\`} />
+          </button>
+
+          {/* Divider */}
+          <div className="w-[1px] h-3.5 bg-hairline-soft dark:bg-[#23252a] mx-0.5" />
+
+          {/* 3-Dots Options Button */}
+          <button
+            type="button"
+            className="p-1 rounded-lg text-muted hover:text-ink transition-colors cursor-pointer"
+            title="Options"
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="5" r="1.5" />
+              <circle cx="12" cy="12" r="1.5" />
+              <circle cx="12" cy="19" r="1.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Floating Parameter Sheet / Popover Card */}
+      <div
+        className={\`w-full transition-all duration-300 origin-top \${
+          isOpen
+            ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 scale-95 -translate-y-2 pointer-events-none h-0 overflow-hidden"
+        }\`}
+      >
+        <div className="w-full rounded-[22px] bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] p-4 flex flex-col gap-3 shadow-xs">
+          {/* Header Label */}
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-ink tracking-tight">{label}</span>
+            <span className="text-[10px] font-mono text-muted font-medium">{currentValue}%</span>
+          </div>
+
+          {/* Capsule Slider Track */}
+          <div
+            ref={sliderRef}
+            onPointerDown={handlePointerDown}
+            className="relative w-full h-6 rounded-full bg-[#f0f1f3] dark:bg-[#0f1011] overflow-hidden cursor-pointer select-none border border-transparent dark:border-[#23252a] touch-none"
+          >
+            {/* Active Blue Gradient Progress */}
+            <div
+              className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#38bdf8] dark:from-[#2563eb] dark:via-[#3b82f6] dark:to-[#60a5fa] transition-[width] duration-75 rounded-full"
+              style={{ width: \`\${percentage}%\` }}
+            >
+              {/* End Indicator Line Thumb */}
+              <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#0066ff] dark:bg-white rounded-xs" />
+            </div>
+          </div>
+
+          {/* Graduated Tick Ruler */}
+          <div className="flex items-center justify-between gap-1.5 px-0.5 text-[10px] text-muted select-none">
+            <span className="font-medium text-[10px]">Low</span>
+
+            {/* Micro Tick Notches */}
+            <div className="flex-1 flex items-center justify-between px-2 h-3">
+              {Array.from({ length: totalTicks }).map((_, i) => {
+                const isMajor = i === 0 || i === Math.floor(totalTicks / 4) || i === Math.floor(totalTicks / 2) || i === Math.floor((totalTicks * 3) / 4) || i === totalTicks - 1;
+                return (
+                  <span
+                    key={i}
+                    className={\`w-[1px] rounded-full transition-colors \${
+                      isMajor
+                        ? "h-2.5 bg-muted/60 dark:bg-gray-500"
+                        : "h-1.5 bg-hairline dark:bg-[#23252a]"
+                    }\`}
+                  />
+                );
+              })}
+            </div>
+
+            <span className="font-medium text-[10px]">High</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`,
+  },
+  {
+    id: "comp-20",
+    slug: "file-upload-progress",
+    title: "File Upload Progress Pill",
+    description: "Compact floating transfer status pill card featuring a file badge, smooth progress track, real-time percentage, and transferred byte counter adapted for Weblocks.",
+    category: "cards",
+    tier: "free",
+    cliCommand: "npx weblocks add file-upload-progress",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    tags: ["cards", "bento", "upload", "progress", "toast", "file", "download", "status"],
+    props: [
+      { name: "fileName", type: "string", default: '"weblocks-design-system.pdf"', description: "Target document or file name displayed on card" },
+      { name: "fileSize", type: "number", default: 12.6, description: "Total file size in Megabytes (MB)" },
+      { name: "progress", type: "number", default: 62, description: "Current transfer completion percentage (0-100)" },
+      { name: "fileExtension", type: "string", default: '"PDF"', description: "Document badge type indicator" },
+      { name: "status", type: '"uploading" | "paused" | "completed" | "error"', default: '"uploading"', description: "Current transfer state" },
+      { name: "onPauseToggle", type: "(isPaused: boolean) => void", description: "Callback when pause or resume is toggled" },
+      { name: "onCancel", type: "() => void", description: "Callback when file transfer is cancelled" },
+    ],
+    code: `"use client";
+
+import React, { useState } from "react";
+
+export interface FileUploadProgressProps {
+  fileName?: string;
+  fileSize?: number;
+  progress?: number;
+  fileExtension?: string;
+  status?: "uploading" | "paused" | "completed" | "error";
+  onPauseToggle?: (isPaused: boolean) => void;
+  onCancel?: () => void;
+}
+
+export function FileUploadProgress({
+  fileName = "weblocks-design-system.pdf",
+  fileSize = 12.6,
+  progress: controlledProgress,
+  fileExtension = "PDF",
+  status = "uploading",
+  onPauseToggle,
+  onCancel,
+}: FileUploadProgressProps) {
+  const [internalProgress, setInternalProgress] = useState(62);
+  const [isPaused, setIsPaused] = useState(status === "paused");
+
+  const currentProgress = controlledProgress !== undefined ? controlledProgress : internalProgress;
+  const isComplete = currentProgress >= 100;
+  const currentMB = ((fileSize * Math.min(100, currentProgress)) / 100).toFixed(1);
+
+  const handleTogglePause = () => {
+    const next = !isPaused;
+    setIsPaused(next);
+    onPauseToggle?.(next);
+  };
+
+  return (
+    <div className="relative inline-flex items-center gap-3.5 px-4 py-3 rounded-2xl bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.35)] w-full max-w-[360px] transition-all select-none">
+      {/* 1. Folded Paper File Badge with Extension Label */}
+      <div className="relative w-9 h-11 shrink-0 rounded-md bg-[#f1f2f4] dark:bg-[#202226] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center overflow-hidden">
+        {/* Folded Top-Right Corner */}
+        <div className="absolute top-0 right-0 w-3 h-3 bg-[#e2e4e8] dark:bg-[#2c2f36] rounded-bl-[2px]" />
+        <div className="absolute top-0 right-0 w-0 h-0 border-t-[12px] border-t-white dark:border-t-[#161718] border-l-[12px] border-l-transparent pointer-events-none" />
+
+        {/* Extension Pill Badge (e.g. PDF) */}
+        <div className="absolute bottom-1.5 left-1.5 px-1 py-0.5 rounded-[3px] bg-[#f04438] text-white text-[8px] font-bold uppercase tracking-wider leading-none shadow-xs">
+          {fileExtension}
+        </div>
+      </div>
+
+      {/* 2. File Information & Progress Track */}
+      <div className="flex-1 min-w-0 flex flex-col gap-1.5">
+        {/* Header: Filename & Percentage */}
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[12.5px] font-medium text-[#1c1c1e] dark:text-[#f3f4f6] truncate leading-tight">
+            {fileName}
+          </span>
+          <span className="text-[12px] font-medium text-[#8e8e93] dark:text-[#a1a1aa] tabular-nums shrink-0">
+            {isComplete ? (
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">100%</span>
+            ) : (
+              \`\${Math.round(currentProgress)}%\`
+            )}
+          </span>
+        </div>
+
+        {/* Horizontal Progress Track */}
+        <div className="w-full h-1.5 bg-[#eceef1] dark:bg-[#27272a] rounded-full overflow-hidden">
+          <div
+            className={\`h-full rounded-full transition-all duration-300 ease-out \${
+              isComplete
+                ? "bg-emerald-500"
+                : "bg-[#f04438]"
+            }\`}
+            style={{ width: \`\${Math.min(100, Math.max(0, currentProgress))}%\` }}
+          />
+        </div>
+
+        {/* Subtitle: Uploaded Size of Total */}
+        <div className="flex items-center justify-between text-[11px] text-[#8e8e93] dark:text-[#8e8e93] leading-tight">
+          <span>
+            {currentMB} MB of {fileSize} MB
+          </span>
+          {isPaused && (
+            <span className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">
+              Paused
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}`,
+  },
 ];
 
 export function getComponentDesignMd(component: UIComponentEntity): string {

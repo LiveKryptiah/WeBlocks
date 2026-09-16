@@ -1698,6 +1698,306 @@ export function LiveSharePopoverCard() {
   );
 }
 
+// 19. Parameter Slider Sheet
+export function LiveParameterSliderSheet() {
+  const { showToast } = useLibrary();
+  const [value, setValue] = useState(50);
+  const [isOpen, setIsOpen] = useState(true);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const isHovered = useRef(false);
+
+  // Autonomous smooth glide when idle
+  useEffect(() => {
+    let forward = true;
+    const interval = setInterval(() => {
+      if (isDragging.current || isHovered.current || !isOpen) return;
+      setValue((prev) => {
+        if (prev >= 82) forward = false;
+        if (prev <= 24) forward = true;
+        return forward ? prev + 1 : prev - 1;
+      });
+    }, 60);
+
+    return () => clearInterval(interval);
+  }, [isOpen]);
+
+  const updateFromPointer = (clientX: number) => {
+    if (!sliderRef.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const nextVal = Math.round(ratio * 100);
+    setValue(nextVal);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    updateFromPointer(e.clientX);
+  };
+
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      if (!isDragging.current) return;
+      updateFromPointer(e.clientX);
+    };
+
+    const handlePointerUp = () => {
+      isDragging.current = false;
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+  }, []);
+
+  const totalTicks = 36;
+
+  return (
+    <div
+      className="relative w-full max-w-[340px] flex flex-col items-center select-none font-sans py-2"
+      onMouseEnter={() => (isHovered.current = true)}
+      onMouseLeave={() => (isHovered.current = false)}
+    >
+      {/* 1. Top Control Bar */}
+      <div className="flex items-center gap-2 w-full justify-center mb-3">
+        {/* + Add Button */}
+        <button
+          type="button"
+          onClick={() => showToast("Added parameter preset", "success")}
+          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] text-xs font-semibold text-ink hover:bg-field dark:hover:bg-[#23252a] transition-all cursor-pointer shadow-none active:scale-95"
+        >
+          <Plus className="w-3.5 h-3.5 text-muted" />
+          <span>Add</span>
+        </button>
+
+        {/* Consolidated Pill Toolbar */}
+        <div className="inline-flex items-center gap-1 p-1 rounded-full bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] shadow-none">
+          {/* Type button */}
+          <button
+            type="button"
+            onClick={() => showToast("Parameter type: Linear", "info")}
+            className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-ink hover:text-ink transition-colors cursor-pointer"
+          >
+            <svg className="w-3.5 h-3.5 text-muted shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="3" y="3" width="4" height="4" rx="1" />
+              <rect x="10" y="3" width="4" height="4" rx="1" />
+              <rect x="17" y="3" width="4" height="4" rx="1" />
+              <rect x="3" y="10" width="4" height="4" rx="1" />
+              <rect x="10" y="10" width="4" height="4" rx="1" />
+              <rect x="17" y="10" width="4" height="4" rx="1" />
+              <rect x="3" y="17" width="4" height="4" rx="1" />
+              <rect x="10" y="17" width="4" height="4" rx="1" />
+              <rect x="17" y="17" width="4" height="4" rx="1" />
+            </svg>
+            <span>Type</span>
+          </button>
+
+          {/* Active Parameter Value Dropdown Pill */}
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all cursor-pointer ${
+              isOpen
+                ? "bg-[#ebecee] dark:bg-[#23252a] text-ink font-semibold"
+                : "text-ink hover:bg-field dark:hover:bg-[#23252a]"
+            }`}
+          >
+            <span>{value}</span>
+            <ChevronDown
+              className={`w-3 h-3 text-muted transition-transform duration-200 ${
+                isOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {/* Hairline Divider */}
+          <div className="w-[1px] h-3.5 bg-hairline-soft dark:bg-[#2c2f36] mx-0.5" />
+
+          {/* More Options */}
+          <button
+            type="button"
+            onClick={() => showToast("Parameter options", "info")}
+            className="p-1 text-muted hover:text-ink transition-colors cursor-pointer rounded-full"
+          >
+            <MoreHorizontal className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Floating Popover Card / Sheet */}
+      {isOpen && (
+        <div className="w-full max-w-[280px] p-4 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] animate-in fade-in zoom-in-95 duration-150">
+          {/* Header Row: Label & Current Value */}
+          <div className="flex items-center justify-between mb-3 text-ink">
+            <span className="text-xs font-semibold">Intensity</span>
+            <span className="text-xs font-medium text-muted tabular-nums">
+              {value}%
+            </span>
+          </div>
+
+          {/* Capsule Slider Track */}
+          <div
+            ref={sliderRef}
+            onPointerDown={handlePointerDown}
+            className="relative h-6 rounded-full bg-[#f1f2f4] dark:bg-[#202226] p-1 cursor-pointer select-none touch-none"
+          >
+            {/* Progress Fill */}
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-[#93c5fd] via-[#60a5fa] to-[#38bdf8] dark:from-[#2563eb] dark:to-[#60a5fa] relative transition-[width] duration-75"
+              style={{ width: `${Math.max(6, value)}%` }}
+            >
+              {/* White Indicator Thumb */}
+              <div className="absolute right-1 top-1/2 -translate-y-1/2 w-1 h-3.5 bg-white rounded-full shadow-xs pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Graduated Calibrated Ticks */}
+          <div className="flex items-center justify-between mt-2.5 text-muted px-0.5">
+            <span className="font-medium text-[10px]">Low</span>
+
+            <div className="flex items-center justify-between flex-1 mx-3">
+              {Array.from({ length: totalTicks }).map((_, i) => {
+                const isMajor = i % 7 === 0;
+                return (
+                  <div
+                    key={i}
+                    className={`w-[1px] rounded-full ${
+                      isMajor
+                        ? "h-2.5 bg-hairline-soft dark:bg-[#32363e]"
+                        : "h-1.5 bg-hairline-soft/60 dark:bg-[#272a31]"
+                    }`}
+                  />
+                );
+              })}
+            </div>
+
+            <span className="font-medium text-[10px]">High</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 20. File Upload Progress Pill
+export function LiveFileUploadProgress() {
+  const { showToast } = useLibrary();
+  const [progress, setProgress] = useState(62);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isDone, setIsDone] = useState(false);
+  const totalMB = 12.6;
+
+  // Autonomous progress animation simulation
+  useEffect(() => {
+    if (isPaused || isDone) return;
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setIsDone(true);
+          return 100;
+        }
+        const delta = Math.random() * 2.2 + 0.8;
+        return Math.min(100, prev + delta);
+      });
+    }, 180);
+
+    return () => clearInterval(timer);
+  }, [isPaused, isDone]);
+
+  // When done, hold at 100% for 3.2 seconds then loop back to demonstrate
+  useEffect(() => {
+    if (!isDone) return;
+    const resetTimer = setTimeout(() => {
+      setIsDone(false);
+      setProgress(12);
+    }, 3200);
+
+    return () => clearTimeout(resetTimer);
+  }, [isDone]);
+
+  const togglePause = () => {
+    if (isDone) {
+      setProgress(0);
+      setIsDone(false);
+      setIsPaused(false);
+      showToast("Upload restarted", "info");
+      return;
+    }
+    const next = !isPaused;
+    setIsPaused(next);
+    showToast(next ? "Transfer paused" : "Transfer resumed", next ? "info" : "success");
+  };
+
+  const currentMB = ((totalMB * Math.min(100, progress)) / 100).toFixed(1);
+
+  return (
+    <div className="flex flex-col items-center justify-center p-4">
+      {/* Floating Pill Card matching uploaded image media_1789544657028.png */}
+      <div className="relative inline-flex items-center gap-3.5 px-4 py-3 rounded-2xl bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.35)] w-full max-w-[360px] transition-all select-none">
+        {/* 1. Folded Paper File Badge with Red PDF Label */}
+        <div className="relative w-9 h-11 shrink-0 rounded-md bg-[#f1f2f4] dark:bg-[#202226] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center overflow-hidden">
+          {/* Folded Top-Right Corner */}
+          <div className="absolute top-0 right-0 w-3 h-3 bg-[#e2e4e8] dark:bg-[#2c2f36] rounded-bl-[2px]" />
+          <div className="absolute top-0 right-0 w-0 h-0 border-t-[12px] border-t-white dark:border-t-[#161718] border-l-[12px] border-l-transparent pointer-events-none" />
+
+          {/* Extension Pill Badge */}
+          <div className="absolute bottom-1.5 left-1.5 px-1 py-0.5 rounded-[3px] bg-[#f04438] text-white text-[8px] font-bold uppercase tracking-wider leading-none shadow-xs">
+            PDF
+          </div>
+        </div>
+
+        {/* 2. File Information & Progress Track */}
+        <div className="flex-1 min-w-0 flex flex-col gap-1.5">
+          {/* Header: Filename & Percentage */}
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[12.5px] font-medium text-[#1c1c1e] dark:text-[#f3f4f6] truncate leading-tight">
+              2024-my-portfolio.pdf
+            </span>
+            <span className="text-[12px] font-medium text-[#8e8e93] dark:text-[#a1a1aa] tabular-nums shrink-0">
+              {isDone ? (
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                  <Check className="w-3 h-3" />
+                  100%
+                </span>
+              ) : (
+                `${Math.round(progress)}%`
+              )}
+            </span>
+          </div>
+
+          {/* Horizontal Progress Track */}
+          <div className="w-full h-1.5 bg-[#eceef1] dark:bg-[#27272a] rounded-full overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all duration-300 ease-out ${
+                isDone ? "bg-emerald-500" : "bg-[#f04438]"
+              }`}
+              style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
+            />
+          </div>
+
+          {/* Subtitle: Uploaded Size of Total */}
+          <div className="flex items-center justify-between text-[11px] text-[#8e8e93] dark:text-[#8e8e93] leading-tight">
+            <span>
+              {currentMB} MB of {totalMB} MB
+            </span>
+            <button
+              type="button"
+              onClick={togglePause}
+              className="text-[10px] text-[#707070] dark:text-[#8a8f98] hover:text-ink transition-colors cursor-pointer font-medium"
+            >
+              {isDone ? "Restart" : isPaused ? "Resume" : "Pause"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Component lookup map by slug
 export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "floating-nav-pill": LiveFloatingNavPill,
@@ -1718,4 +2018,6 @@ export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "perspective-roller-picker": LivePerspectiveRollerPicker,
   "spotlight-directory-card": LiveSpotlightDirectoryCard,
   "share-popover-card": LiveSharePopoverCard,
+  "parameter-slider-sheet": LiveParameterSliderSheet,
+  "file-upload-progress": LiveFileUploadProgress,
 };
