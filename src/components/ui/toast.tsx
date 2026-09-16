@@ -37,13 +37,15 @@ export const Toast: React.FC<ToastProps> = ({
       aria-live="polite"
       onClick={onDismiss}
       className={cn(
-        "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-ink text-white text-body-sm font-semibold border border-white/10 shadow-none cursor-pointer select-none transition-all duration-200 animate-in fade-in slide-in-from-bottom-3"
+        "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#141414] text-white text-body-sm font-semibold border border-white/15 shadow-none cursor-pointer select-none transition-all duration-200 animate-in fade-in slide-in-from-bottom-3"
       )}
     >
       <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center shrink-0">
         {getIcon()}
       </div>
-      <span>{message}</span>
+      <span className="text-white text-body-sm font-semibold tracking-tight whitespace-nowrap">
+        {message}
+      </span>
     </div>
   );
 };
