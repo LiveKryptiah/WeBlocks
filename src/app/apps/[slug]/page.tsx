@@ -132,8 +132,8 @@ export default function AppDetailPage() {
             onClick={() => setSelectedPattern(pat)}
             className={`px-4 py-1.5 rounded-full text-body-sm font-semibold transition-colors shrink-0 ${
               selectedPattern === pat
-                ? "bg-ink text-white"
-                : "bg-field text-muted hover:text-ink"
+                ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
+                : "bg-field text-muted hover:text-ink dark:bg-[#161718] dark:text-[#8a8f98] dark:hover:text-white"
             }`}
           >
             {pat}

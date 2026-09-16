@@ -50,8 +50,8 @@ export default function AppsDirectoryPage() {
               onClick={() => setSelectedIndustry(ind)}
               className={`px-3.5 py-1.5 rounded-full text-body-sm font-semibold transition-colors shrink-0 ${
                 selectedIndustry === ind
-                  ? "bg-ink text-white"
-                  : "bg-field text-muted hover:text-ink"
+                  ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
+                  : "bg-field text-muted hover:text-ink dark:bg-[#161718] dark:text-[#8a8f98] dark:hover:text-white"
               }`}
             >
               {ind}

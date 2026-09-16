@@ -78,8 +78,8 @@ export default function SavedPage() {
                 onClick={() => setSelectedPlatform(plat)}
                 className={`px-3.5 py-1.5 rounded-full text-body-sm font-semibold transition-colors shrink-0 ${
                   selectedPlatform === plat
-                    ? "bg-ink text-white"
-                    : "bg-white text-muted hover:text-ink border border-hairline"
+                    ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
+                    : "bg-white dark:bg-[#161718] text-muted hover:text-ink border border-hairline dark:border-[#23252a] dark:text-[#8a8f98] dark:hover:text-white"
                 }`}
               >
                 {plat}

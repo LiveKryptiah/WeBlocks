@@ -117,7 +117,7 @@ export default function ComponentDetailPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 font-mono text-xs bg-white px-4 py-2.5 rounded-full border border-hairline-soft shrink-0">
+          <div className="flex items-center gap-2 font-mono text-xs bg-white dark:bg-[#161718] text-ink px-4 py-2.5 rounded-full border border-hairline-soft dark:border-[#23252a] shrink-0">
             <Terminal className="w-4 h-4 text-muted" />
             <span className="select-all">{component.cliCommand}</span>
             <button

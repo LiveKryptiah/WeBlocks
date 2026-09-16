@@ -63,8 +63,8 @@ export function LiveFloatingNavPill() {
 
   return (
     <div className="flex items-center justify-center p-4">
-      <nav className="flex items-center gap-1.5 p-1.5 rounded-full bg-white border border-hairline-soft shadow-none">
-        <div className="w-7 h-7 rounded-lg bg-[#141414] text-white flex items-center justify-center font-bold text-xs">
+      <nav className="flex items-center gap-1.5 p-1.5 rounded-full bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] shadow-none">
+        <div className="w-7 h-7 rounded-lg bg-[#141414] dark:bg-white text-white dark:text-[#08090a] flex items-center justify-center font-bold text-xs">
           W
         </div>
         {items.map((item) => {
@@ -76,8 +76,8 @@ export function LiveFloatingNavPill() {
               onClick={() => setActive(item.id)}
               className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                 isActive
-                  ? "bg-[#f0f0f0] text-[#141414]"
-                  : "text-[#707070] hover:text-[#141414] hover:bg-[#f3f3f3]"
+                  ? "bg-[#f0f0f0] dark:bg-[#23252a] text-[#141414] dark:text-white"
+                  : "text-[#707070] dark:text-[#8a8f98] hover:text-[#141414] dark:hover:text-white hover:bg-[#f3f3f3] dark:hover:bg-[#1d1f24]"
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -126,7 +126,7 @@ export function LiveIslandDock() {
         setHovered(null);
       }}
     >
-      <div className="relative flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#141414] text-white border border-[#262626] shadow-none">
+      <div className="relative flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#141414] text-white border border-[#262626] dark:bg-[#0f1011] dark:border-[#23252a] shadow-none">
         {dockItems.map((item) => {
           const Icon = item.icon;
           const isActive = active === item.id;
@@ -140,8 +140,8 @@ export function LiveIslandDock() {
                 onMouseLeave={() => setHovered(null)}
                 className={`relative w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 ${
                   isActive
-                    ? "bg-white text-[#141414]"
-                    : "text-[#adadad] hover:text-white hover:bg-[#262626]"
+                    ? "bg-white text-[#141414] dark:bg-white dark:text-[#08090a]"
+                    : "text-[#adadad] hover:text-white hover:bg-[#262626] dark:hover:bg-[#1d1f24]"
                 } ${isHovered ? "scale-110 -translate-y-1" : ""}`}
                 aria-label={item.label}
               >
@@ -153,7 +153,7 @@ export function LiveIslandDock() {
                 )}
               </button>
               {isHovered && (
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-white text-[#141414] text-[10px] font-semibold tracking-tight whitespace-nowrap shadow-none pointer-events-none animate-in fade-in-50">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-white text-[#141414] dark:bg-white dark:text-[#08090a] text-[10px] font-semibold tracking-tight whitespace-nowrap shadow-none pointer-events-none animate-in fade-in-50">
                   {item.label}
                 </div>
               )}
@@ -255,14 +255,14 @@ export function LiveSlideToConfirm() {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
-        className="relative w-full max-w-xs h-12 rounded-full bg-[#f0f0f0] border border-hairline-soft flex items-center px-1 select-none overflow-hidden touch-none"
+        className="relative w-full max-w-xs h-12 rounded-full bg-[#f0f0f0] dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex items-center px-1 select-none overflow-hidden touch-none"
       >
         <div
-          className="absolute left-0 top-0 bottom-0 bg-[#141414] transition-all"
+          className="absolute left-0 top-0 bottom-0 bg-[#141414] dark:bg-white/20 transition-all"
           style={{ width: isConfirmed ? "100%" : `${sliderPos + 44}px` }}
         />
         <div
-          className="relative z-10 w-10 h-10 rounded-full bg-white text-[#141414] flex items-center justify-center cursor-grab active:cursor-grabbing font-bold transition-transform shadow-none"
+          className="relative z-10 w-10 h-10 rounded-full bg-white dark:bg-[#23252a] text-[#141414] dark:text-white flex items-center justify-center cursor-grab active:cursor-grabbing font-bold transition-transform shadow-none"
           style={{ transform: `translateX(${sliderPos}px)` }}
         >
           {isConfirmed ? (
@@ -271,7 +271,7 @@ export function LiveSlideToConfirm() {
             <ChevronRight className="w-4 h-4" />
           )}
         </div>
-        <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold tracking-tight text-[#707070] pointer-events-none">
+        <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold tracking-tight text-[#707070] dark:text-[#8a8f98] pointer-events-none">
           {isConfirmed ? (
             <span className="text-white font-bold">Action Confirmed.</span>
           ) : (
@@ -281,13 +281,13 @@ export function LiveSlideToConfirm() {
         {isConfirmed && (
           <button
             onClick={handleReset}
-            className="absolute right-3 z-20 text-[10px] uppercase tracking-wider font-bold text-[#adadad] hover:text-white"
+            className="absolute right-3 z-20 text-[10px] uppercase tracking-wider font-bold text-[#adadad] hover:text-white dark:text-[#8a8f98] dark:hover:text-white"
           >
             Reset
           </button>
         )}
       </div>
-      <p className="text-[11px] text-[#707070]">Drag the pill across or watch auto-confirm loop.</p>
+      <p className="text-[11px] text-[#707070] dark:text-[#8a8f98]">Drag the pill across or watch auto-confirm loop.</p>
     </div>
   );
 }
@@ -349,12 +349,12 @@ export function LiveMagneticSquircleButton() {
           setTimeout(() => setClicked(false), 1200);
         }}
         style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#141414] text-white text-xs font-semibold tracking-tight transition-transform duration-75 active:scale-95 border border-[#141414]"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#141414] dark:bg-white text-white dark:text-[#08090a] text-xs font-semibold tracking-tight transition-transform duration-75 active:scale-95 border border-[#141414] dark:border-white"
       >
         <span>{clicked ? "Triggered!" : "Deploy Reference"}</span>
-        <ArrowUpRight className={`w-3.5 h-3.5 text-white/80 transition-transform ${clicked ? "rotate-45 text-[#0066ff]" : ""}`} />
+        <ArrowUpRight className={`w-3.5 h-3.5 text-white/80 dark:text-[#08090a] transition-transform ${clicked ? "rotate-45 text-[#0066ff]" : ""}`} />
       </button>
-      <span className="text-[11px] text-[#707070]">Hover to feel magnetic spring or watch auto-drift.</span>
+      <span className="text-[11px] text-[#707070] dark:text-[#8a8f98]">Hover to feel magnetic spring or watch auto-drift.</span>
     </div>
   );
 }
@@ -379,7 +379,7 @@ export function LiveSegmentedToggle() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4">
-      <div className="inline-flex items-center p-1 rounded-full bg-[#f0f0f0]">
+      <div className="inline-flex items-center p-1 rounded-full bg-[#f0f0f0] dark:bg-[#161718] dark:border dark:border-[#23252a]">
         {options.map((option) => {
           const isSelected = selected === option;
           return (
@@ -391,8 +391,8 @@ export function LiveSegmentedToggle() {
               }}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
                 isSelected
-                  ? "bg-white text-[#141414] shadow-none"
-                  : "text-[#707070] hover:text-[#141414]"
+                  ? "bg-white dark:bg-[#23252a] text-[#141414] dark:text-white shadow-none"
+                  : "text-[#707070] dark:text-[#8a8f98] hover:text-[#141414] dark:hover:text-white"
               }`}
             >
               {option}
@@ -400,7 +400,7 @@ export function LiveSegmentedToggle() {
           );
         })}
       </div>
-      <p className="text-[11px] text-[#707070]">Active filter: <span className="font-bold text-[#141414]">{selected}</span></p>
+      <p className="text-[11px] text-[#707070] dark:text-[#8a8f98]">Active filter: <span className="font-bold text-[#141414] dark:text-white">{selected}</span></p>
     </div>
   );
 }
@@ -424,31 +424,31 @@ export function LiveMetricsBentoTile() {
 
   return (
     <div
-      className="w-full max-w-xs p-5 rounded-2xl bg-[#ffffff] border border-hairline-soft flex flex-col justify-between gap-4"
+      className="w-full max-w-xs p-5 rounded-2xl bg-[#ffffff] dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex flex-col justify-between gap-4"
       onMouseEnter={() => setIsUserHovering(true)}
       onMouseLeave={() => {
         setIsUserHovering(false);
       }}
     >
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[#707070]">
+        <span className="text-xs font-semibold uppercase tracking-wider text-[#707070] dark:text-[#8a8f98]">
           Verified Screens
         </span>
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#f3f3f3] text-[#141414] text-[11px] font-bold">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#f3f3f3] dark:bg-[#23252a] text-[#141414] dark:text-white text-[11px] font-bold">
           <TrendingUp className="w-3 h-3 text-[#0066ff]" />
           +18.4%
         </span>
       </div>
 
       <div>
-        <div className="text-3xl font-bold tracking-tight text-[#141414] transition-all duration-150">
+        <div className="text-3xl font-bold tracking-tight text-[#141414] dark:text-white transition-all duration-150">
           {activeBar !== null ? `${(activeBar * 320).toLocaleString()} refs` : "32,490"}
         </div>
-        <p className="text-xs text-[#707070] mt-0.5">Live updated metrics stream.</p>
+        <p className="text-xs text-[#707070] dark:text-[#8a8f98] mt-0.5">Live updated metrics stream.</p>
       </div>
 
       {/* Mini SVG Sparkline */}
-      <div className="h-10 w-full pt-2 border-t border-[#f0f0f0] flex items-end justify-between gap-1.5">
+      <div className="h-10 w-full pt-2 border-t border-[#f0f0f0] dark:border-[#23252a] flex items-end justify-between gap-1.5">
         {data.map((val, idx) => {
           const isHighlighted = activeBar === val;
           return (
@@ -459,7 +459,7 @@ export function LiveMetricsBentoTile() {
                 setActiveBar(val);
               }}
               className={`flex-1 rounded-sm transition-all duration-200 cursor-pointer ${
-                isHighlighted ? "bg-[#0066ff] scale-y-105" : "bg-[#141414] hover:bg-[#0066ff]"
+                isHighlighted ? "bg-[#0066ff] scale-y-105" : "bg-[#141414] dark:bg-[#383b3f] hover:bg-[#0066ff] dark:hover:bg-[#0066ff]"
               }`}
               style={{ height: `${val}%` }}
             />
@@ -489,22 +489,22 @@ export function LiveSquircleProductCard() {
   };
 
   return (
-    <div className="w-full max-w-sm p-4 rounded-2xl bg-white border border-hairline-soft flex items-center justify-between gap-3 group">
+    <div className="w-full max-w-sm p-4 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex items-center justify-between gap-3 group">
       <div className="flex items-center gap-3">
         {/* 30% Squircle Icon */}
-        <div className="w-12 h-12 rounded-[30%] bg-[#141414] text-white flex items-center justify-center font-bold text-base shrink-0">
+        <div className="w-12 h-12 rounded-[30%] bg-[#141414] dark:bg-white text-white dark:text-[#08090a] flex items-center justify-center font-bold text-base shrink-0">
           L
         </div>
         <div>
-          <h4 className="text-sm font-bold tracking-tight text-[#141414] group-hover:underline">
+          <h4 className="text-sm font-bold tracking-tight text-[#141414] dark:text-white group-hover:underline">
             Linear Mobile
           </h4>
-          <p className="text-xs text-[#707070]">Issue tracking and cycles.</p>
+          <p className="text-xs text-[#707070] dark:text-[#8a8f98]">Issue tracking and cycles.</p>
           <div className="flex items-center gap-1.5 mt-1">
-            <span className="px-2 py-0.5 rounded-full bg-[#f0f0f0] text-[10px] font-semibold text-[#141414]">
+            <span className="px-2 py-0.5 rounded-full bg-[#f0f0f0] dark:bg-[#23252a] text-[10px] font-semibold text-[#141414] dark:text-[#d0d6e0]">
               Productivity
             </span>
-            <span className="text-[10px] text-[#707070]">42 screens</span>
+            <span className="text-[10px] text-[#707070] dark:text-[#8a8f98]">42 screens</span>
           </div>
         </div>
       </div>
@@ -512,7 +512,7 @@ export function LiveSquircleProductCard() {
       <button
         onClick={handleSave}
         className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-          saved ? "bg-[#141414] text-white scale-105" : "bg-[#f3f3f3] text-[#707070] hover:text-[#141414]"
+          saved ? "bg-[#141414] text-white dark:bg-white dark:text-[#08090a] scale-105" : "bg-[#f3f3f3] text-[#707070] hover:text-[#141414] dark:bg-[#23252a] dark:text-[#8a8f98] dark:hover:text-white"
         }`}
         aria-label="Save app"
       >
@@ -558,11 +558,11 @@ export function LiveTestimonialTicker() {
   const t = testimonials[currentIdx];
 
   return (
-    <div className="w-full max-w-md p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3 min-h-[160px] justify-between transition-all duration-300">
+    <div className="w-full max-w-md p-5 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex flex-col gap-3 min-h-[160px] justify-between transition-all duration-300">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1 text-[#141414]">
+        <div className="flex items-center gap-1 text-[#141414] dark:text-white">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-3.5 h-3.5 fill-[#141414]" />
+            <Star key={i} className="w-3.5 h-3.5 fill-[#141414] dark:fill-white" />
           ))}
         </div>
         <div className="flex items-center gap-1">
@@ -570,27 +570,27 @@ export function LiveTestimonialTicker() {
             <span
               key={i}
               className={`w-1.5 h-1.5 rounded-full transition-all ${
-                i === currentIdx ? "w-4 bg-[#141414]" : "bg-[#e0e0e0]"
+                i === currentIdx ? "w-4 bg-[#141414] dark:bg-white" : "bg-[#e0e0e0] dark:bg-[#383b3f]"
               }`}
             />
           ))}
         </div>
       </div>
 
-      <p className="text-xs leading-relaxed text-[#141414] font-medium transition-all duration-300 line-clamp-3">
+      <p className="text-xs leading-relaxed text-[#141414] dark:text-[#d0d6e0] font-medium transition-all duration-300 line-clamp-3">
         "{t.quote}"
       </p>
 
-      <div className="flex items-center gap-2.5 pt-2 border-t border-[#f0f0f0]">
-        <div className="w-7 h-7 rounded-[30%] bg-[#141414] text-white flex items-center justify-center text-xs font-bold shrink-0">
+      <div className="flex items-center gap-2.5 pt-2 border-t border-[#f0f0f0] dark:border-[#23252a]">
+        <div className="w-7 h-7 rounded-[30%] bg-[#141414] text-white dark:bg-white dark:text-[#08090a] flex items-center justify-center text-xs font-bold shrink-0">
           {t.initial}
         </div>
         <div>
           <div className="flex items-center gap-1">
-            <span className="text-xs font-bold text-[#141414]">{t.name}</span>
+            <span className="text-xs font-bold text-[#141414] dark:text-white">{t.name}</span>
             <CheckCircle2 className="w-3 h-3 text-[#0066ff]" />
           </div>
-          <span className="text-[10px] text-[#707070]">{t.role}</span>
+          <span className="text-[10px] text-[#707070] dark:text-[#8a8f98]">{t.role}</span>
         </div>
       </div>
     </div>
@@ -649,8 +649,8 @@ export function LiveCommandSearchInput() {
 
   return (
     <div className="w-full max-w-md p-4 flex flex-col items-center gap-2">
-      <div className="relative flex items-center w-full px-3.5 py-2 rounded-full bg-[#f0f0f0] border border-hairline-soft focus-within:border-[#141414] transition-colors">
-        <Search className="w-4 h-4 text-[#707070] shrink-0 mr-2" />
+      <div className="relative flex items-center w-full px-3.5 py-2 rounded-full bg-[#f0f0f0] dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] focus-within:border-[#141414] dark:focus-within:border-white/40 transition-colors">
+        <Search className="w-4 h-4 text-[#707070] dark:text-[#8a8f98] shrink-0 mr-2" />
         <input
           type="text"
           value={query}
@@ -663,7 +663,7 @@ export function LiveCommandSearchInput() {
             setQuery(e.target.value);
           }}
           placeholder="Search components or patterns..."
-          className="w-full bg-transparent text-xs font-medium text-[#141414] placeholder-[#707070] outline-none"
+          className="w-full bg-transparent text-xs font-medium text-[#141414] dark:text-white placeholder-[#707070] dark:placeholder-[#8a8f98] outline-none"
         />
         {query ? (
           <button
@@ -671,18 +671,18 @@ export function LiveCommandSearchInput() {
               setQuery("");
               setIsFocused(false);
             }}
-            className="text-[#707070] hover:text-[#141414]"
+            className="text-[#707070] dark:text-[#8a8f98] hover:text-[#141414] dark:hover:text-white"
           >
             <X className="w-3.5 h-3.5" />
           </button>
         ) : (
-          <span className="px-1.5 py-0.5 rounded-full bg-white border border-hairline-soft text-[10px] font-mono font-semibold text-[#707070]">
+          <span className="px-1.5 py-0.5 rounded-full bg-white dark:bg-[#23252a] border border-hairline-soft dark:border-[#383b3f] text-[10px] font-mono font-semibold text-[#707070] dark:text-[#d0d6e0]">
             ⌘K
           </span>
         )}
       </div>
-      <p className="text-[11px] text-[#707070]">
-        Auto-typing: <span className="font-mono font-bold text-[#141414]">"{query || "..."}"</span>
+      <p className="text-[11px] text-[#707070] dark:text-[#8a8f98]">
+        Auto-typing: <span className="font-mono font-bold text-[#141414] dark:text-white">"{query || "..."}"</span>
       </p>
     </div>
   );
@@ -769,13 +769,13 @@ export function LiveOTPVerificationInput() {
             value={digit}
             onChange={(e) => handleChange(idx, e.target.value)}
             onKeyDown={(e) => handleKeyDown(idx, e)}
-            className="w-10 h-12 rounded-xl text-center text-sm font-mono font-bold bg-[#f0f0f0] border border-hairline-soft text-[#141414] focus:bg-white focus:border-[#141414] outline-none transition-colors"
+            className="w-10 h-12 rounded-xl text-center text-sm font-mono font-bold bg-[#f0f0f0] dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] text-[#141414] dark:text-white focus:bg-white dark:focus:bg-[#0f1011] focus:border-[#141414] dark:focus:border-white/40 outline-none transition-colors"
           />
         ))}
       </div>
-      <p className="text-[11px] text-[#707070]">
+      <p className="text-[11px] text-[#707070] dark:text-[#8a8f98]">
         {code.length === 6 ? (
-          <span className="font-bold text-[#141414] inline-flex items-center gap-1 animate-in fade-in">
+          <span className="font-bold text-[#141414] dark:text-white inline-flex items-center gap-1 animate-in fade-in">
             <Check className="w-3 h-3 text-[#0066ff]" /> Code entered: {code}
           </span>
         ) : (
@@ -817,12 +817,12 @@ export function LiveBottomActionSheet() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-xs h-[190px] rounded-2xl bg-[#f0f0f0] border border-hairline-soft overflow-hidden flex flex-col justify-end p-2 select-none">
+    <div className="relative w-full max-w-xs h-[190px] rounded-2xl bg-[#f0f0f0] dark:bg-[#0f1011] border border-hairline-soft dark:border-[#23252a] overflow-hidden flex flex-col justify-end p-2 select-none">
       {/* Background Simulated UI Wireframe */}
       <div className="absolute inset-0 p-3 flex flex-col gap-2 opacity-50">
-        <div className="w-20 h-2 rounded-full bg-[#d0d0d0]" />
-        <div className="w-full h-10 rounded-xl bg-white border border-hairline-soft" />
-        <div className="w-2/3 h-2 rounded-full bg-[#d0d0d0]" />
+        <div className="w-20 h-2 rounded-full bg-[#d0d0d0] dark:bg-[#23252a]" />
+        <div className="w-full h-10 rounded-xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a]" />
+        <div className="w-2/3 h-2 rounded-full bg-[#d0d0d0] dark:bg-[#23252a]" />
       </div>
 
       {/* Dimmed backdrop */}
@@ -834,28 +834,28 @@ export function LiveBottomActionSheet() {
 
       {/* Slide-up Sheet */}
       <div
-        className={`relative z-10 w-full bg-white rounded-2xl p-3 border border-hairline-soft flex flex-col gap-2 transition-transform duration-300 ${
+        className={`relative z-10 w-full bg-white dark:bg-[#161718] rounded-2xl p-3 border border-hairline-soft dark:border-[#23252a] flex flex-col gap-2 transition-transform duration-300 ${
           open ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className="w-8 h-1 rounded-full bg-[#e0e0e0] mx-auto mb-0.5" />
+        <div className="w-8 h-1 rounded-full bg-[#e0e0e0] dark:bg-[#383b3f] mx-auto mb-0.5" />
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-bold text-[#141414]">Actions</span>
-          <button onClick={() => setOpen(false)} className="text-[#707070] hover:text-[#141414]">
+          <span className="text-[11px] font-bold text-[#141414] dark:text-white">Actions</span>
+          <button onClick={() => setOpen(false)} className="text-[#707070] dark:text-[#8a8f98] hover:text-[#141414] dark:hover:text-white">
             <X className="w-3 h-3" />
           </button>
         </div>
 
         <div className="flex flex-col gap-1">
           <div
-            className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-[#141414] transition-all duration-200 ${
-              activeItem === "Figma Tokens" ? "bg-[#f0f0f0] text-[#0066ff]" : "hover:bg-[#f3f3f3]"
+            className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-[#141414] dark:text-white transition-all duration-200 ${
+              activeItem === "Figma Tokens" ? "bg-[#f0f0f0] dark:bg-[#23252a] text-[#0066ff] dark:text-[#0066ff]" : "hover:bg-[#f3f3f3] dark:hover:bg-[#23252a]"
             }`}
           >
-            <Copy className="w-3 h-3 text-[#707070]" /> Copy Figma Tokens
+            <Copy className="w-3 h-3 text-[#707070] dark:text-[#8a8f98]" /> Copy Figma Tokens
           </div>
-          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-[#141414] hover:bg-[#f3f3f3]">
-            <Share2 className="w-3 h-3 text-[#707070]" /> Share Link
+          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-[#141414] dark:text-white hover:bg-[#f3f3f3] dark:hover:bg-[#23252a]">
+            <Share2 className="w-3 h-3 text-[#707070] dark:text-[#8a8f98]" /> Share Link
           </div>
         </div>
       </div>
@@ -876,22 +876,22 @@ export function LiveSpotlightDialog() {
   }, []);
 
   return (
-    <div className="w-full max-w-xs p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3">
+    <div className="w-full max-w-xs p-5 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex flex-col gap-3">
       <div className="flex items-center gap-2.5">
-        <div className={`w-8 h-8 rounded-full bg-[#f0f0f0] flex items-center justify-center text-[#141414] transition-transform duration-200 ${pulse ? "scale-110 bg-[#e8f0fe]" : ""}`}>
-          <AlertCircle className={`w-4 h-4 transition-colors ${pulse ? "text-[#0066ff]" : "text-[#141414]"}`} />
+        <div className={`w-8 h-8 rounded-full bg-[#f0f0f0] dark:bg-[#23252a] flex items-center justify-center text-[#141414] dark:text-white transition-transform duration-200 ${pulse ? "scale-110 bg-[#e8f0fe] dark:bg-blue-950/40" : ""}`}>
+          <AlertCircle className={`w-4 h-4 transition-colors ${pulse ? "text-[#0066ff]" : "text-[#141414] dark:text-white"}`} />
         </div>
         <div>
-          <h3 className="text-xs font-bold text-[#141414]">Delete collection?</h3>
-          <p className="text-[10px] text-[#707070]">This action cannot be undone.</p>
+          <h3 className="text-xs font-bold text-[#141414] dark:text-white">Delete collection?</h3>
+          <p className="text-[10px] text-[#707070] dark:text-[#8a8f98]">This action cannot be undone.</p>
         </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#f0f0f0]">
-        <button className="px-3 py-1 rounded-full text-[11px] font-semibold text-[#707070] hover:text-[#141414]">
+      <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#f0f0f0] dark:border-[#23252a]">
+        <button className="px-3 py-1 rounded-full text-[11px] font-semibold text-[#707070] dark:text-[#8a8f98] hover:text-[#141414] dark:hover:text-white">
           Cancel
         </button>
-        <button className={`px-3 py-1 rounded-full bg-[#141414] text-white text-[11px] font-semibold transition-all duration-200 ${pulse ? "bg-[#0066ff] scale-105" : ""}`}>
+        <button className={`px-3 py-1 rounded-full bg-[#141414] dark:bg-white text-white dark:text-[#08090a] text-[11px] font-semibold transition-all duration-200 ${pulse ? "bg-[#0066ff] scale-105" : ""}`}>
           Confirm Delete
         </button>
       </div>
@@ -1017,36 +1017,36 @@ export function LiveStatCounterTicker() {
   const percentage = Math.min(100, Math.round((count / target) * 100));
 
   return (
-    <div className="w-full max-w-xs p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3">
+    <div className="w-full max-w-xs p-5 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-[#707070]">Goal Completion</span>
-        <span className="text-xs font-bold text-[#141414]">{percentage}%</span>
+        <span className="text-xs font-semibold text-[#707070] dark:text-[#8a8f98]">Goal Completion</span>
+        <span className="text-xs font-bold text-[#141414] dark:text-white">{percentage}%</span>
       </div>
 
       <div className="flex items-center justify-between py-2">
         <button
           onClick={() => setCount((c) => Math.max(0, c - 1))}
-          className="w-8 h-8 rounded-full bg-[#f0f0f0] text-[#141414] flex items-center justify-center font-bold hover:bg-[#e0e0e0]"
+          className="w-8 h-8 rounded-full bg-[#f0f0f0] dark:bg-[#23252a] text-[#141414] dark:text-white flex items-center justify-center font-bold hover:bg-[#e0e0e0] dark:hover:bg-[#2e323b]"
         >
           <Minus className="w-3.5 h-3.5" />
         </button>
 
-        <span className="text-3xl font-bold font-mono text-[#141414] tracking-tight transition-all duration-150">
+        <span className="text-3xl font-bold font-mono text-[#141414] dark:text-white tracking-tight transition-all duration-150">
           {count}
         </span>
 
         <button
           onClick={() => setCount((c) => c + 1)}
-          className="w-8 h-8 rounded-full bg-[#141414] text-white flex items-center justify-center font-bold hover:bg-[#262626]"
+          className="w-8 h-8 rounded-full bg-[#141414] dark:bg-white text-white dark:text-[#08090a] flex items-center justify-center font-bold hover:bg-[#262626] dark:hover:bg-[#e5e5e6]"
         >
           <Plus className="w-3.5 h-3.5" />
         </button>
       </div>
 
       {/* Progress track */}
-      <div className="w-full h-1.5 rounded-full bg-[#f0f0f0] overflow-hidden">
+      <div className="w-full h-1.5 rounded-full bg-[#f0f0f0] dark:bg-[#23252a] overflow-hidden">
         <div
-          className="h-full bg-[#141414] transition-all duration-300"
+          className="h-full bg-[#141414] dark:bg-white transition-all duration-300"
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -1233,8 +1233,8 @@ export function LivePerspectiveRollerPicker() {
               }}
               className={`absolute left-0 right-0 h-12 rounded-2xl flex items-center gap-3 px-3.5 transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] cursor-pointer ${
                 isCenter
-                  ? "bg-white border border-hairline-soft"
-                  : "bg-white/80 hover:bg-white border border-transparent"
+                  ? "bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a]"
+                  : "bg-white/80 dark:bg-[#161718]/80 hover:bg-white dark:hover:bg-[#161718] border border-transparent"
               }`}
             >
               <div
@@ -1247,7 +1247,7 @@ export function LivePerspectiveRollerPicker() {
 
               <span
                 className={`text-xs sm:text-sm tracking-tight truncate transition-colors ${
-                  isCenter ? "font-bold text-ink" : "font-medium text-[#707070]"
+                  isCenter ? "font-bold text-ink" : "font-medium text-[#707070] dark:text-[#8a8f98]"
                 }`}
               >
                 {item.label}
@@ -1322,11 +1322,11 @@ export function LiveSpotlightDirectoryCard() {
   };
 
   return (
-    <div className="relative w-full max-w-[320px] rounded-3xl bg-white border border-hairline-soft p-3 flex flex-col justify-between select-none overflow-hidden transition-all duration-300">
+    <div className="relative w-full max-w-[320px] rounded-3xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] p-3 flex flex-col justify-between select-none overflow-hidden transition-all duration-300">
       {/* 1. Elevated Spotlight Featured Member Card */}
-      <div className="relative z-20 w-full rounded-2xl bg-white border border-hairline-soft p-2.5 sm:p-3 flex items-center justify-between gap-2.5 shadow-none transition-all duration-200">
+      <div className="relative z-20 w-full rounded-2xl bg-white dark:bg-[#0f1011] border border-hairline-soft dark:border-[#23252a] p-2.5 sm:p-3 flex items-center justify-between gap-2.5 shadow-none transition-all duration-200">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-hairline-soft bg-field">
+          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-hairline-soft dark:border-[#23252a] bg-field dark:bg-[#23252a]">
             <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-ink select-none">
               {active.initials}
             </span>
@@ -1349,7 +1349,7 @@ export function LiveSpotlightDirectoryCard() {
               <BellOff className="w-3 h-3 text-[#adadad] shrink-0" />
               <ChevronDown className="w-3 h-3 text-[#adadad] shrink-0" />
             </div>
-            <p className="text-[9px] uppercase tracking-wider text-[#707070] font-semibold truncate mt-0.5">
+            <p className="text-[9px] uppercase tracking-wider text-[#707070] dark:text-[#8a8f98] font-semibold truncate mt-0.5">
               {active.role}
             </p>
           </div>
@@ -1358,7 +1358,7 @@ export function LiveSpotlightDirectoryCard() {
         <button
           type="button"
           onClick={(e) => handleMessage(e, active.name)}
-          className="w-8 h-8 rounded-xl bg-field hover:bg-canvas-soft flex items-center justify-center text-ink shrink-0 transition-colors cursor-pointer"
+          className="w-8 h-8 rounded-xl bg-field dark:bg-[#23252a] hover:bg-canvas-soft dark:hover:bg-[#2e323b] flex items-center justify-center text-ink shrink-0 transition-colors cursor-pointer"
           title={`Message ${active.name}`}
         >
           <Mail className="w-3.5 h-3.5" />
@@ -1382,10 +1382,10 @@ export function LiveSpotlightDirectoryCard() {
                 if (idx !== -1) setActiveIdx(idx);
               }
             }}
-            className="flex items-center justify-between gap-2 p-1.5 rounded-xl hover:bg-field/50 transition-colors cursor-pointer"
+            className="flex items-center justify-between gap-2 p-1.5 rounded-xl hover:bg-field/50 dark:hover:bg-[#23252a]/50 transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-2 min-w-0">
-              <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 border border-hairline-soft bg-field">
+              <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 border border-hairline-soft dark:border-[#23252a] bg-field dark:bg-[#23252a]">
                 <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-ink select-none">
                   {m.initials}
                 </span>
@@ -1401,12 +1401,12 @@ export function LiveSpotlightDirectoryCard() {
               </div>
               <div className="min-w-0">
                 <div className="text-[11px] font-semibold text-ink truncate">{m.name}</div>
-                <div className="text-[8px] uppercase tracking-wider text-[#707070] truncate">
+                <div className="text-[8px] uppercase tracking-wider text-[#707070] dark:text-[#8a8f98] truncate">
                   {m.role}
                 </div>
               </div>
             </div>
-            <div className="w-5 h-5 rounded-lg bg-field flex items-center justify-center text-[#707070] shrink-0">
+            <div className="w-5 h-5 rounded-lg bg-field dark:bg-[#23252a] flex items-center justify-center text-[#707070] dark:text-[#8a8f98] shrink-0">
               <Mail className="w-2.5 h-2.5" />
             </div>
           </div>
@@ -1418,7 +1418,7 @@ export function LiveSpotlightDirectoryCard() {
         <button
           type="button"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="px-4 py-1.5 rounded-full bg-[#141414] hover:bg-[#262626] text-white text-[11px] font-semibold tracking-tight transition-all cursor-pointer shadow-none"
+          className="px-4 py-1.5 rounded-full bg-[#141414] hover:bg-[#262626] dark:bg-white dark:hover:bg-[#e5e5e6] text-white dark:text-[#08090a] text-[11px] font-semibold tracking-tight transition-all cursor-pointer shadow-none"
         >
           {isExpanded ? "Collapse members" : "View more members"}
         </button>
@@ -1537,7 +1537,7 @@ export function LiveSharePopoverCard() {
             : "opacity-0 scale-95 translate-y-2 pointer-events-none mb-0 h-0 overflow-hidden"
         }`}
       >
-        <div className="relative w-full rounded-[24px] bg-white border border-hairline-soft p-2.5 shadow-none">
+        <div className="relative w-full rounded-[24px] bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] p-2.5 shadow-none">
           {/* Destination List */}
           <div
             className="flex flex-col gap-0.5"
@@ -1551,7 +1551,7 @@ export function LiveSharePopoverCard() {
                   key={dest.id}
                   onMouseEnter={() => setActiveIdx(idx)}
                   className={`flex items-center justify-between px-2.5 py-1.5 rounded-xl transition-all duration-150 cursor-pointer ${
-                    isActive ? "bg-[#ebebed]" : "bg-transparent hover:bg-[#f5f5f7]"
+                    isActive ? "bg-[#ebebed] dark:bg-[#23252a]" : "bg-transparent hover:bg-[#f5f5f7] dark:hover:bg-[#1d1f24]"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
@@ -1569,8 +1569,8 @@ export function LiveSharePopoverCard() {
                       onClick={(e) => handleMoreOptions(e, dest.name)}
                       className={`w-6 h-6 rounded-full flex items-center justify-center transition-all cursor-pointer ${
                         isActive
-                          ? "bg-[#141414] text-white hover:bg-[#262626] scale-105"
-                          : "bg-[#f0f0f2] text-[#8e8e93] hover:bg-[#e4e4e7] hover:text-ink"
+                          ? "bg-[#141414] text-white hover:bg-[#262626] dark:bg-white dark:text-[#08090a] dark:hover:bg-[#e5e5e6] scale-105"
+                          : "bg-[#f0f0f2] text-[#8e8e93] dark:bg-[#23252a] dark:text-[#8a8f98] hover:bg-[#e4e4e7] dark:hover:bg-[#2c2f36] hover:text-ink"
                       }`}
                       title={`Options for ${dest.name}`}
                     >
@@ -1581,8 +1581,8 @@ export function LiveSharePopoverCard() {
                       onClick={(e) => handleShareTarget(e, dest.name)}
                       className={`w-6 h-6 rounded-full flex items-center justify-center transition-all cursor-pointer ${
                         isActive
-                          ? "bg-[#141414] text-white hover:bg-[#262626] scale-105"
-                          : "bg-[#f0f0f2] text-[#8e8e93] hover:bg-[#e4e4e7] hover:text-ink"
+                          ? "bg-[#141414] text-white hover:bg-[#262626] dark:bg-white dark:text-[#08090a] dark:hover:bg-[#e5e5e6] scale-105"
+                          : "bg-[#f0f0f2] text-[#8e8e93] dark:bg-[#23252a] dark:text-[#8a8f98] hover:bg-[#e4e4e7] dark:hover:bg-[#2c2f36] hover:text-ink"
                       }`}
                       title={`Share to ${dest.name}`}
                     >
@@ -1595,7 +1595,7 @@ export function LiveSharePopoverCard() {
           </div>
 
           {/* Popover Footer: Permissions & Copy Link */}
-          <div className="flex items-center justify-between gap-1 pt-2.5 mt-1 border-t border-hairline-soft/60 px-1 text-[10px] text-[#707070]">
+          <div className="flex items-center justify-between gap-1 pt-2.5 mt-1 border-t border-hairline-soft/60 dark:border-[#23252a] px-1 text-[10px] text-[#707070] dark:text-[#8a8f98]">
             <button
               type="button"
               onClick={cyclePermission}
@@ -1621,8 +1621,8 @@ export function LiveSharePopoverCard() {
               onClick={handleCopyLink}
               className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold transition-all cursor-pointer shadow-none shrink-0 ${
                 copied
-                  ? "bg-[#141414] text-white"
-                  : "bg-[#e8e8ea] text-ink hover:bg-[#141414] hover:text-white"
+                  ? "bg-[#141414] text-white dark:bg-white dark:text-[#08090a]"
+                  : "bg-[#e8e8ea] text-ink hover:bg-[#141414] hover:text-white dark:bg-[#23252a] dark:text-white dark:hover:bg-white dark:hover:text-[#08090a]"
               }`}
             >
               {copied ? (
@@ -1637,16 +1637,16 @@ export function LiveSharePopoverCard() {
           </div>
 
           {/* Speech bubble pointer beak */}
-          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-white border-r border-b border-hairline-soft rotate-45 z-10" />
+          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-white dark:bg-[#161718] border-r border-b border-hairline-soft dark:border-[#23252a] rotate-45 z-10" />
         </div>
       </div>
 
       {/* 2. Floating Dock Toolbar at Bottom */}
-      <div className="relative z-20 flex items-center justify-between w-full max-w-[280px] px-3.5 py-1.5 rounded-full bg-[#f2f2f4] border border-hairline-soft shadow-none">
+      <div className="relative z-20 flex items-center justify-between w-full max-w-[280px] px-3.5 py-1.5 rounded-full bg-[#f2f2f4] dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] shadow-none">
         <button
           type="button"
           onClick={() => showToast("Quick dispatch triggered", "info")}
-          className="p-1.5 text-[#707070] hover:text-ink transition-colors cursor-pointer"
+          className="p-1.5 text-[#707070] dark:text-[#8a8f98] hover:text-ink transition-colors cursor-pointer"
           title="Send reference"
         >
           <Send className="w-3.5 h-3.5" />
@@ -1655,7 +1655,7 @@ export function LiveSharePopoverCard() {
         <button
           type="button"
           onClick={() => showToast("Moved to archive", "info")}
-          className="p-1.5 text-[#707070] hover:text-ink transition-colors cursor-pointer"
+          className="p-1.5 text-[#707070] dark:text-[#8a8f98] hover:text-ink transition-colors cursor-pointer"
           title="Archive reference"
         >
           <Trash2 className="w-3.5 h-3.5" />
@@ -1667,8 +1667,8 @@ export function LiveSharePopoverCard() {
           onClick={() => setIsOpen(!isOpen)}
           className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold tracking-tight transition-all cursor-pointer ${
             isOpen
-              ? "bg-white text-ink border border-hairline-soft shadow-none scale-105"
-              : "bg-transparent text-[#707070] hover:text-ink hover:bg-white/60"
+              ? "bg-white text-ink border border-hairline-soft shadow-none scale-105 dark:bg-[#23252a] dark:text-white dark:border-[#2c2f36]"
+              : "bg-transparent text-[#707070] dark:text-[#8a8f98] hover:text-ink hover:bg-white/60 dark:hover:bg-white/10"
           }`}
           title="Toggle share popover"
         >

@@ -456,7 +456,7 @@ export function MinimalSaaSHeroPreview() {
         </div>
         <button
           type="button"
-          className="h-9 px-5 rounded-full bg-ink text-white text-xs font-semibold hover:bg-ink-soft transition-colors"
+          className="h-9 px-5 rounded-full bg-ink text-white dark:bg-white dark:text-[#08090a] dark:hover:bg-[#e5e5e6] text-xs font-semibold hover:bg-ink-soft transition-colors"
         >
           Sign In
         </button>
@@ -464,7 +464,7 @@ export function MinimalSaaSHeroPreview() {
 
       {/* Center Hero */}
       <div className="w-full text-center flex flex-col items-center my-auto py-4 z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-field text-xs font-semibold text-ink mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-field dark:bg-[#161718] dark:border dark:border-[#23252a] text-xs font-semibold text-ink mb-4">
           <Sparkles className="w-3.5 h-3.5 text-ink" />
           <span>Weblocks 2.0</span>
           <ArrowRight className="w-3 h-3 text-muted" />
@@ -478,22 +478,22 @@ export function MinimalSaaSHeroPreview() {
         <div className="flex items-center gap-3.5 mb-8">
           <button
             type="button"
-            className="h-11 px-7 rounded-full bg-ink text-white text-sm font-semibold transition-colors hover:bg-ink-soft active:scale-95"
+            className="h-11 px-7 rounded-full bg-ink text-white dark:bg-white dark:text-[#08090a] dark:hover:bg-[#e5e5e6] text-sm font-semibold transition-colors hover:bg-ink-soft active:scale-95"
           >
             Start exploring
           </button>
           <button
             type="button"
-            className="h-11 px-6 rounded-full bg-field hover:bg-canvas-soft text-ink text-sm font-semibold transition-colors"
+            className="h-11 px-6 rounded-full bg-field dark:bg-[#161718] hover:bg-canvas-soft dark:hover:bg-[#23252a] text-ink text-sm font-semibold transition-colors"
           >
             View plans
           </button>
         </div>
         <div className="flex items-center gap-3 text-xs text-muted">
           <div className="flex -space-x-2 overflow-hidden">
-            <span className="inline-block h-7 w-7 rounded-full bg-slate-200 border-2 border-white text-[9px] flex items-center justify-center font-bold text-slate-800">AK</span>
-            <span className="inline-block h-7 w-7 rounded-full bg-slate-300 border-2 border-white text-[9px] flex items-center justify-center font-bold text-slate-900">JR</span>
-            <span className="inline-block h-7 w-7 rounded-full bg-slate-400 border-2 border-white text-[9px] flex items-center justify-center font-bold text-white">LM</span>
+            <span className="inline-block h-7 w-7 rounded-full bg-slate-200 dark:bg-slate-700 border-2 border-white dark:border-[#08090a] text-[9px] flex items-center justify-center font-bold text-slate-800 dark:text-white">AK</span>
+            <span className="inline-block h-7 w-7 rounded-full bg-slate-300 dark:bg-slate-600 border-2 border-white dark:border-[#08090a] text-[9px] flex items-center justify-center font-bold text-slate-900 dark:text-white">JR</span>
+            <span className="inline-block h-7 w-7 rounded-full bg-slate-400 dark:bg-slate-500 border-2 border-white dark:border-[#08090a] text-[9px] flex items-center justify-center font-bold text-white">LM</span>
           </div>
           <span>Trusted by 4,200+ designers and engineers</span>
         </div>
@@ -523,7 +523,7 @@ export function SplitWaitlistHeroPreview() {
       {/* Split Grid */}
       <div className="grid grid-cols-12 gap-12 items-center my-auto z-10 px-8 py-4">
         <div className="col-span-7 space-y-4">
-          <span className="inline-block px-3 py-1 rounded-full bg-field text-xs font-semibold text-ink">
+          <span className="inline-block px-3 py-1 rounded-full bg-field dark:bg-[#161718] dark:border dark:border-[#23252a] text-xs font-semibold text-ink">
             Private Beta
           </span>
           <h4 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-ink leading-tight">
@@ -550,11 +550,11 @@ export function SplitWaitlistHeroPreview() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="alex@company.com"
-                className="h-11 px-4 rounded-full bg-canvas-soft border border-hairline text-sm text-ink w-72 focus:outline-none"
+                className="h-11 px-4 rounded-full bg-canvas-soft dark:bg-[#161718] border border-hairline dark:border-[#23252a] text-sm text-ink w-72 focus:outline-none"
               />
               <button
                 type="submit"
-                className="h-11 px-6 rounded-full bg-ink text-white text-sm font-semibold shrink-0"
+                className="h-11 px-6 rounded-full bg-ink text-white dark:bg-white dark:text-[#08090a] dark:hover:bg-[#e5e5e6] text-sm font-semibold shrink-0"
               >
                 Join Waitlist
               </button>
@@ -562,22 +562,22 @@ export function SplitWaitlistHeroPreview() {
           )}
         </div>
 
-        <div className="col-span-5 bg-canvas-soft rounded-2xl p-6 space-y-4 border border-hairline-soft">
+        <div className="col-span-5 bg-canvas-soft dark:bg-[#0f1011] rounded-2xl p-6 space-y-4 border border-hairline-soft dark:border-[#23252a]">
           <div className="flex items-center justify-between text-xs font-semibold text-ink">
             <span>Token Specification</span>
-            <span className="bg-white px-2 py-0.5 rounded text-muted font-mono">v2.4</span>
+            <span className="bg-white dark:bg-[#161718] px-2 py-0.5 rounded text-muted font-mono">v2.4</span>
           </div>
           <div className="grid grid-cols-2 gap-3 text-xs">
-            <div className="bg-white p-3 rounded-xl border border-hairline-soft">
+            <div className="bg-white dark:bg-[#161718] p-3 rounded-xl border border-hairline-soft dark:border-[#23252a]">
               <span className="text-muted block text-xs">Headlines Weight</span>
               <span className="font-bold text-ink text-lg">652</span>
             </div>
-            <div className="bg-white p-3 rounded-xl border border-hairline-soft">
+            <div className="bg-white dark:bg-[#161718] p-3 rounded-xl border border-hairline-soft dark:border-[#23252a]">
               <span className="text-muted block text-xs">Body Weight</span>
               <span className="font-bold text-ink text-lg">456</span>
             </div>
           </div>
-          <div className="p-3 bg-white rounded-xl border border-hairline-soft flex items-center justify-between text-xs text-muted">
+          <div className="p-3 bg-white dark:bg-[#161718] rounded-xl border border-hairline-soft dark:border-[#23252a] flex items-center justify-between text-xs text-muted">
             <span>Zero Shadows Surface Contrast</span>
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
           </div>
@@ -729,17 +729,17 @@ export function DirectInquiryContactPreview() {
           </div>
         </div>
 
-        <div className="col-span-7 bg-canvas-soft rounded-2xl p-6 space-y-3.5 border border-hairline-soft">
+        <div className="col-span-7 bg-canvas-soft dark:bg-[#0f1011] rounded-2xl p-6 space-y-3.5 border border-hairline-soft dark:border-[#23252a]">
           <div className="grid grid-cols-2 gap-3">
-            <div className="h-10 bg-white rounded-lg px-3 text-xs flex items-center text-muted border border-hairline-soft">Alex Chen</div>
-            <div className="h-10 bg-white rounded-lg px-3 text-xs flex items-center text-muted border border-hairline-soft">alex@company.com</div>
+            <div className="h-10 bg-white dark:bg-[#161718] rounded-lg px-3 text-xs flex items-center text-muted dark:text-[#8a8f98] border border-hairline-soft dark:border-[#23252a]">Alex Chen</div>
+            <div className="h-10 bg-white dark:bg-[#161718] rounded-lg px-3 text-xs flex items-center text-muted dark:text-[#8a8f98] border border-hairline-soft dark:border-[#23252a]">alex@company.com</div>
           </div>
-          <div className="h-20 bg-white rounded-lg p-3 text-xs text-muted border border-hairline-soft">
+          <div className="h-20 bg-white dark:bg-[#161718] rounded-lg p-3 text-xs text-muted dark:text-[#8a8f98] border border-hairline-soft dark:border-[#23252a]">
             Tell us about your project scope, timeline, or token requirements...
           </div>
           <button
             type="button"
-            className="w-full h-11 rounded-full bg-ink text-white text-xs font-semibold hover:bg-ink-soft transition-colors"
+            className="w-full h-11 rounded-full bg-ink text-white dark:bg-white dark:text-[#08090a] dark:hover:bg-[#e5e5e6] text-xs font-semibold hover:bg-ink-soft transition-colors"
           >
             Send inquiry
           </button>
@@ -760,8 +760,8 @@ export function BentoGridFeaturesPreview() {
         </h4>
       </div>
       <div className="grid grid-cols-3 gap-6 max-w-5xl mx-auto w-full">
-        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-ink shadow-xs">
+        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-white dark:bg-[#161718] flex items-center justify-center text-ink shadow-xs border border-transparent dark:border-[#23252a]">
             <Layers className="w-5 h-5" />
           </div>
           <h5 className="text-lg font-bold text-ink">Token Architecture</h5>
@@ -770,8 +770,8 @@ export function BentoGridFeaturesPreview() {
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-ink shadow-xs">
+        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-white dark:bg-[#161718] flex items-center justify-center text-ink shadow-xs border border-transparent dark:border-[#23252a]">
             <Zap className="w-5 h-5" />
           </div>
           <h5 className="text-lg font-bold text-ink">Zero Extra Dependencies</h5>
@@ -780,8 +780,8 @@ export function BentoGridFeaturesPreview() {
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-ink shadow-xs">
+        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-white dark:bg-[#161718] flex items-center justify-center text-ink shadow-xs border border-transparent dark:border-[#23252a]">
             <Eye className="w-5 h-5" />
           </div>
           <h5 className="text-lg font-bold text-ink">Zero Drop Shadows</h5>
@@ -805,19 +805,19 @@ export function TieredBillingPricingPreview() {
         </h4>
       </div>
       <div className="grid grid-cols-3 gap-6 max-w-5xl mx-auto w-full items-center">
-        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft space-y-4 text-center">
+        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] space-y-4 text-center">
           <span className="text-xs font-semibold text-muted uppercase">Starter</span>
           <div className="text-3xl font-extrabold text-ink">$0</div>
           <p className="text-xs text-muted">Free forever for personal prototyping.</p>
           <button
             type="button"
-            className="w-full h-9 rounded-full bg-field text-xs font-semibold text-ink hover:bg-canvas-soft transition-colors"
+            className="w-full h-9 rounded-full bg-field dark:bg-[#161718] text-xs font-semibold text-ink hover:bg-canvas-soft dark:hover:bg-[#23252a] transition-colors"
           >
             Get Started
           </button>
         </div>
 
-        <div className="p-7 rounded-2xl bg-ink text-white space-y-4 text-center relative shadow-xl scale-105">
+        <div className="p-7 rounded-2xl bg-ink text-white dark:bg-[#161718] dark:border dark:border-[#23252a] space-y-4 text-center relative shadow-xl scale-105">
           <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-blue-600 text-[10px] font-bold text-white uppercase tracking-wider">
             Most Popular
           </span>
@@ -828,19 +828,19 @@ export function TieredBillingPricingPreview() {
           <p className="text-xs text-gray-300">Full access to 100+ production sections & tokens.</p>
           <button
             type="button"
-            className="w-full h-10 rounded-full bg-white text-ink text-xs font-semibold hover:bg-gray-100 transition-colors"
+            className="w-full h-10 rounded-full bg-white text-ink dark:bg-white dark:text-[#08090a] text-xs font-semibold hover:bg-gray-100 dark:hover:bg-[#e5e5e6] transition-colors"
           >
             Join Pro
           </button>
         </div>
 
-        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft space-y-4 text-center">
+        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] space-y-4 text-center">
           <span className="text-xs font-semibold text-muted uppercase">Team</span>
           <div className="text-3xl font-extrabold text-ink">$49<span className="text-xs font-normal text-muted">/mo</span></div>
           <p className="text-xs text-muted">Collaborative licenses for design and dev teams.</p>
           <button
             type="button"
-            className="w-full h-9 rounded-full bg-field text-xs font-semibold text-ink hover:bg-canvas-soft transition-colors"
+            className="w-full h-9 rounded-full bg-field dark:bg-[#161718] text-xs font-semibold text-ink hover:bg-canvas-soft dark:hover:bg-[#23252a] transition-colors"
           >
             Upgrade Team
           </button>
@@ -861,7 +861,7 @@ export function CustomerQuotesGridPreview() {
         </h4>
       </div>
       <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto w-full">
-        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft space-y-3">
+        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] space-y-3">
           <div className="flex gap-1 text-amber-400">
             <Star className="w-4 h-4 fill-current" />
             <Star className="w-4 h-4 fill-current" />
@@ -875,7 +875,7 @@ export function CustomerQuotesGridPreview() {
           <span className="text-xs text-muted block font-semibold">— Sarah J., Head of Product at Vektor</span>
         </div>
 
-        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft space-y-3">
+        <div className="p-6 rounded-2xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] space-y-3">
           <div className="flex gap-1 text-amber-400">
             <Star className="w-4 h-4 fill-current" />
             <Star className="w-4 h-4 fill-current" />
@@ -905,15 +905,15 @@ export function AccordionFAQPreview() {
           </h4>
         </div>
         <div className="space-y-3">
-          <div className="rounded-xl bg-canvas-soft border border-hairline-soft p-4 flex items-center justify-between text-sm font-semibold text-ink">
+          <div className="rounded-xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] p-4 flex items-center justify-between text-sm font-semibold text-ink">
             <span>Can I use these sections in commercial client projects?</span>
             <ChevronDown className="w-4 h-4 text-muted" />
           </div>
-          <div className="rounded-xl bg-canvas-soft border border-hairline-soft p-4 flex items-center justify-between text-sm font-semibold text-ink">
+          <div className="rounded-xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] p-4 flex items-center justify-between text-sm font-semibold text-ink">
             <span>How do optical font weights (652 headline / 456 body) work?</span>
             <ChevronDown className="w-4 h-4 text-muted" />
           </div>
-          <div className="rounded-xl bg-canvas-soft border border-hairline-soft p-4 flex items-center justify-between text-sm font-semibold text-ink">
+          <div className="rounded-xl bg-canvas-soft border border-hairline-soft dark:border-[#23252a] p-4 flex items-center justify-between text-sm font-semibold text-ink">
             <span>Do I need any external CSS framework or component library?</span>
             <ChevronDown className="w-4 h-4 text-muted" />
           </div>
@@ -927,7 +927,7 @@ export function AccordionFAQPreview() {
 export function HighImpactBannerCTAPreview() {
   return (
     <div className="w-full h-full bg-canvas text-ink p-10 lg:p-14 relative overflow-hidden flex items-center justify-center select-none">
-      <div className="w-full max-w-4xl bg-ink text-white rounded-3xl p-10 lg:p-12 text-center flex flex-col items-center justify-center space-y-5 shadow-2xl relative overflow-hidden">
+      <div className="w-full max-w-4xl bg-ink text-white dark:bg-[#0f1011] dark:border dark:border-[#23252a] rounded-3xl p-10 lg:p-12 text-center flex flex-col items-center justify-center space-y-5 shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.15),_transparent_70%)] pointer-events-none" />
         <span className="text-xs font-semibold text-gray-300 bg-white/10 px-3 py-1 rounded-full">
           30-day money-back guarantee
@@ -941,7 +941,7 @@ export function HighImpactBannerCTAPreview() {
         <div className="flex items-center gap-3 pt-2">
           <button
             type="button"
-            className="h-11 px-7 rounded-full bg-white text-ink text-xs font-semibold hover:bg-gray-100 transition-all active:scale-95"
+            className="h-11 px-7 rounded-full bg-white text-ink dark:bg-white dark:text-[#08090a] text-xs font-semibold hover:bg-gray-100 dark:hover:bg-[#e5e5e6] transition-all active:scale-95"
           >
             Get full access
           </button>
