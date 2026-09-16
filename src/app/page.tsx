@@ -50,13 +50,13 @@ export default function HomePage() {
           <span>Curated interface references & component blocks</span>
         </div>
 
-        {/* Display headline (Sentence case + terminal period) */}
-        <h1 className="text-4xl sm:text-6xl lg:text-[76px] font-bold tracking-tight text-ink leading-[1.05] max-w-4xl mb-5">
+        {/* Display headline (Sentence case + terminal period: 56–80px, Weight 652, tight tracking -0.02em) */}
+        <h1 className="text-display font-bold tracking-headline text-ink max-w-4xl mb-5">
           Discover real-world design inspiration.
         </h1>
 
-        {/* Minimal Subtitle */}
-        <p className="text-body-large text-muted font-light max-w-xl leading-relaxed mb-8">
+        {/* Minimal Subtitle: 18px, Weight 456 */}
+        <p className="text-body-large text-muted max-w-xl leading-relaxed mb-8">
           Production screenshots, UI patterns, and interactive component blocks.
         </p>
 

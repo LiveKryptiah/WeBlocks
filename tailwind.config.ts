@@ -61,9 +61,14 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "Saans",
-          "Inter",
+          '"M Saans"',
+          '"Saans"',
+          "var(--font-inter)",
+          "var(--font-geist)",
+          '"Inter"',
+          '"Geist"',
           "-apple-system",
+          "BlinkMacSystemFont",
           '"Segoe UI"',
           '"Helvetica Neue"',
           "Arial",
@@ -72,11 +77,17 @@ const config: Config = {
       },
       fontWeight: {
         light: "300",
-        normal: "450",
-        medium: "450",
+        normal: "456",
+        medium: "456",
         semibold: "600",
-        bold: "650",
-        display: "650",
+        bold: "652",
+        display: "652",
+      },
+      letterSpacing: {
+        tighter: "-0.02em",
+        tight: "-0.015em",
+        headline: "-0.02em",
+        normal: "0",
       },
       boxShadow: {
         none: "none",
