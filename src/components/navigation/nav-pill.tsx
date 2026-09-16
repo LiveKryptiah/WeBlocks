@@ -16,6 +16,7 @@ import {
   Sun,
   Moon,
   Contrast,
+  Code2,
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
 import { ButtonPrimary, ButtonSoft } from "@/components/ui/button";
@@ -42,6 +43,7 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
   const navLinks = [
     { href: "/explore", label: "Explore", icon: Compass },
     { href: "/patterns", label: "Patterns", icon: Grid },
+    { href: "/components", label: "Components", icon: Code2 },
     { href: "/apps", label: "Apps", icon: Sparkles },
     { href: "/collections", label: "Collections", icon: FolderHeart },
     { href: "/pricing", label: "Pricing" },

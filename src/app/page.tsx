@@ -15,11 +15,13 @@ import {
   SCREENSHOTS,
   COLLECTIONS,
 } from "@/data/mock-data";
+import { UI_COMPONENTS } from "@/data/components-data";
 import { ButtonPrimary, ButtonOutline } from "@/components/ui/button";
 import { BrandMarquee } from "@/components/ui/marquee";
 import { ScreenshotGrid } from "@/components/reference/screenshot-grid";
 import { CollectionCard } from "@/components/collection/collection-card";
 import { AppIconSquircle } from "@/components/ui/app-icon";
+import { ComponentPreviewCard } from "@/components/components-library/component-preview-card";
 
 export default function HomePage() {
   const router = useRouter();
@@ -36,6 +38,7 @@ export default function HomePage() {
 
   const featuredScreenshots = SCREENSHOTS.filter((s) => s.featured).slice(0, 8);
   const recentScreenshots = SCREENSHOTS.slice().reverse().slice(0, 4);
+  const featuredComponents = UI_COMPONENTS.slice(0, 4);
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -244,6 +247,33 @@ export default function HomePage() {
                 </span>
               </div>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION: INTERACTIVE COMPONENT BLOCKS */}
+      <section className="w-full max-w-7xl px-6 sm:px-8 py-16 sm:py-24 border-t border-hairline">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-field text-ink text-xs font-semibold mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#0066ff]" />
+              New Feature
+            </div>
+            <h2 className="text-h2 text-ink font-bold">
+              Interactive component blocks.
+            </h2>
+            <p className="text-body text-muted mt-2 max-w-xl font-light">
+              Copy-paste production React + Tailwind blocks with live interactive playgrounds, zero drop shadows, and clean code tabs.
+            </p>
+          </div>
+          <Link href="/components">
+            <ButtonOutline size="sm">Explore all 14 components</ButtonOutline>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          {featuredComponents.map((comp) => (
+            <ComponentPreviewCard key={comp.id} component={comp} />
           ))}
         </div>
       </section>

@@ -10,8 +10,10 @@ import {
   FolderHeart,
   CornerDownLeft,
   X,
+  Code2,
 } from "lucide-react";
 import { APPS, PATTERNS, SCREENSHOTS, COLLECTIONS } from "@/data/mock-data";
+import { UI_COMPONENTS } from "@/data/components-data";
 import { useLibrary } from "@/context/library-context";
 import { AppIconSquircle } from "@/components/ui/app-icon";
 import { cn } from "@/lib/utils";
@@ -56,6 +58,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           action: () => router.push("/explore"),
         },
         {
+          id: "nav-components",
+          type: "nav" as const,
+          title: "Interactive UI Components",
+          subtitle: "14 copy-paste React & Tailwind building blocks",
+          icon: <Code2 className="w-4 h-4 text-muted" />,
+          action: () => router.push("/components"),
+        },
+        {
           id: "nav-patterns",
           type: "nav" as const,
           title: "UI Patterns Taxonomy",
@@ -84,12 +94,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
     const results: Array<{
       id: string;
-      type: "screen" | "app" | "pattern" | "collection";
+      type: "screen" | "app" | "pattern" | "collection" | "component";
       title: string;
       subtitle: string;
       icon: React.ReactNode;
       action: () => void;
     }> = [];
+
+    // Matched Components
+    UI_COMPONENTS.filter(
+      (c) =>
+        c.title.toLowerCase().includes(q) ||
+        c.description.toLowerCase().includes(q) ||
+        c.category.toLowerCase().includes(q) ||
+        c.tags.some((t) => t.toLowerCase().includes(q))
+    )
+      .slice(0, 3)
+      .forEach((comp) => {
+        results.push({
+          id: `comp-${comp.id}`,
+          type: "component",
+          title: comp.title,
+          subtitle: `${comp.category} • ${comp.tier.toUpperCase()} • ${comp.cliCommand}`,
+          icon: <Code2 className="w-4 h-4 text-muted" />,
+          action: () => router.push(`/components/${comp.slug}`),
+        });
+      });
 
     // Matched Apps
     APPS.filter(
@@ -234,7 +264,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            placeholder="Search screens, apps, patterns, or collections..."
+            placeholder="Search components, screens, apps, patterns, or collections..."
             className="flex-1 text-body text-ink placeholder:text-faint bg-transparent border-none outline-none"
           />
           {query ? (
