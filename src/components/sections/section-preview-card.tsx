@@ -28,7 +28,7 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
   return (
     <article className="w-full bg-white rounded-2xl border border-hairline-soft overflow-hidden transition-all duration-200">
       {/* Top Header & Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:px-6 border-b border-hairline-soft bg-white">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-3 p-4 sm:p-5 border-b border-hairline-soft bg-white">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <h2 className="text-body font-bold text-ink tracking-tight">{section.title}</h2>
@@ -36,12 +36,12 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
               {section.category}
             </span>
           </div>
-          <p className="text-caption text-muted max-w-xl font-normal">
+          <p className="text-caption text-muted max-w-lg font-normal">
             {section.description}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+        <div className="flex items-center gap-2 shrink-0 self-start xl:self-auto flex-wrap">
           {/* Responsive viewport toggle (only visible in Preview mode) */}
           {activeTab === "preview" && (
             <div className="flex items-center p-0.5 rounded-full bg-field border border-hairline-soft">

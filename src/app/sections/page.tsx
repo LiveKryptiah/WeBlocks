@@ -44,7 +44,7 @@ function SectionShowcaseContent() {
   }, [selectedCategory, query]);
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
+    <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
       {/* Header */}
       <div className="mb-10">
         <div className="inline-block px-3 py-1 rounded-full bg-field text-caption font-semibold text-ink mb-3">
@@ -87,8 +87,8 @@ function SectionShowcaseContent() {
         </div>
       </div>
 
-      {/* Sections List */}
-      <div className="space-y-10">
+      {/* 2-Column Sections Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {filteredSections.map((section) => (
           <SectionPreviewCard key={section.id} section={section} />
         ))}
@@ -119,10 +119,13 @@ export default function SectionsPage() {
   return (
     <Suspense
       fallback={
-        <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-12 space-y-8">
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-12 space-y-8">
           <div className="h-10 w-64 bg-field rounded-full animate-pulse" />
           <div className="h-12 w-full bg-field rounded-xl animate-pulse" />
-          <div className="h-96 w-full bg-field rounded-2xl animate-pulse" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="h-96 bg-field rounded-2xl animate-pulse" />
+            <div className="h-96 bg-field rounded-2xl animate-pulse" />
+          </div>
         </div>
       }
     >
