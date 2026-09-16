@@ -30,6 +30,22 @@
     --space-section-lg: 120px;
   }
 
+  html.dark,
+  :root.dark,
+  [data-theme="dark"] {
+    /* design.md dark mode tokens */
+    --color-ink: #ffffff; /* Paper */
+    --color-ink-soft: #d0d6e0; /* Mist */
+    --color-canvas: #08090a; /* Void */
+    --color-canvas-soft: #0f1011; /* Carbon */
+    --color-field: #161718; /* Obsidian */
+    --color-hairline: #23252a; /* Graphite */
+    --color-hairline-soft: #1d1f24; /* Subtle Graphite edge */
+    --color-muted: #8a8f98; /* Fog */
+    --color-faint: #62666d; /* Ash */
+    --color-accent: #0066ff; /* Electric blue */
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -168,10 +184,15 @@
     box-shadow: inset 0 0 0 1px var(--color-hairline-soft);
   }
 
-  /* Inverse: #141414 background + white text */
+  /* Inverse: #141414 background + white text in light; in dark: white background + #08090a text */
   .surface-inverse {
     background-color: var(--color-ink);
-    color: #ffffff;
+    color: var(--color-canvas);
+  }
+
+  html.dark .surface-inverse {
+    background-color: #ffffff;
+    color: #08090a;
   }
 
   /* Squircle border radius helper */

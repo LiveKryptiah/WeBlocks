@@ -108,7 +108,7 @@ export default function PricingPage() {
               </thead>
               <tbody className="divide-y divide-hairline">
                 {comparisonFeatures.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-white/60 transition-colors">
+                  <tr key={idx} className="hover:bg-white/60 dark:hover:bg-field/40 transition-colors">
                     <td className="p-4 sm:p-5 font-medium text-ink-soft">
                       {row.name}
                     </td>

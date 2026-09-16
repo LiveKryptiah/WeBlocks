@@ -14,9 +14,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "inline-flex items-center justify-center font-semibold rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none select-none active:scale-[0.98]";
 
     const variantStyles = {
-      primary: "bg-ink text-white hover:bg-ink-soft",
-      outline: "bg-white border border-hairline text-ink hover:bg-canvas-soft",
-      soft: "bg-canvas-soft text-ink hover:bg-field border-none",
+      primary:
+        "bg-ink text-white hover:bg-ink-soft dark:bg-white dark:text-[#08090a] dark:hover:bg-[#e5e5e6]",
+      outline:
+        "bg-white border border-hairline text-ink hover:bg-canvas-soft dark:bg-transparent dark:border-[#23252a] dark:text-white dark:hover:bg-[#161718]",
+      soft:
+        "bg-canvas-soft text-ink hover:bg-field border-none dark:bg-[#161718] dark:text-white dark:hover:bg-[#23252a]",
     };
 
     const sizeStyles = {

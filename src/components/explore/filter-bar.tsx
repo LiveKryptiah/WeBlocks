@@ -119,7 +119,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 className={cn(
                   "px-3 py-1 rounded-full text-body-sm font-semibold transition-colors shrink-0 select-none",
                   isSelected
-                    ? "bg-ink text-white"
+                    ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
                     : "bg-field text-muted hover:text-ink hover:bg-canvas-soft"
                 )}
               >
@@ -144,7 +144,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 className={cn(
                   "px-3 py-1 rounded-full text-body-sm font-semibold transition-colors shrink-0 select-none",
                   isSelected
-                    ? "bg-ink text-white"
+                    ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
                     : "bg-field text-muted hover:text-ink hover:bg-canvas-soft"
                 )}
               >
@@ -165,7 +165,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             className={cn(
               "px-3 py-1 rounded-full text-body-sm font-semibold transition-colors shrink-0 select-none",
               filters.pattern === "All"
-                ? "bg-ink text-white"
+                ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
                 : "bg-field text-muted hover:text-ink hover:bg-canvas-soft"
             )}
           >
@@ -181,7 +181,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 className={cn(
                   "px-3 py-1 rounded-full text-body-sm font-semibold transition-colors shrink-0 select-none",
                   isSelected
-                    ? "bg-ink text-white"
+                    ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
                     : "bg-field text-muted hover:text-ink hover:bg-canvas-soft"
                 )}
               >
@@ -202,7 +202,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             className={cn(
               "px-3 py-1 rounded-full text-body-sm font-semibold transition-colors shrink-0 select-none",
               filters.app === "All"
-                ? "bg-ink text-white"
+                ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
                 : "bg-field text-muted hover:text-ink hover:bg-canvas-soft"
             )}
           >
@@ -218,7 +218,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 className={cn(
                   "px-3 py-1 rounded-full text-body-sm font-semibold transition-colors shrink-0 select-none",
                   isSelected
-                    ? "bg-ink text-white"
+                    ? "bg-ink text-white dark:bg-white dark:text-[#08090a]"
                     : "bg-field text-muted hover:text-ink hover:bg-canvas-soft"
                 )}
               >

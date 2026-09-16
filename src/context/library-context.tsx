@@ -9,6 +9,7 @@ import {
 } from "@/data/mock-data";
 
 export type CanvasTheme = "light" | "neutral" | "dark";
+export type AppTheme = "light" | "dark" | "system";
 
 export interface ToastData {
   id: number;
@@ -46,6 +47,10 @@ interface LibraryContextType {
   clearSearchHistory: () => void;
   canvasTheme: CanvasTheme;
   setCanvasTheme: (theme: CanvasTheme) => void;
+  theme: AppTheme;
+  isDark: boolean;
+  setTheme: (theme: AppTheme) => void;
+  toggleTheme: () => void;
   toast: ToastData | null;
   showToast: (message: string, type?: ToastData["type"]) => void;
   dismissToast: () => void;
@@ -75,8 +80,53 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     "Checkout sheet",
   ]);
   const [canvasTheme, setCanvasThemeState] = useState<CanvasTheme>("light");
+  const [theme, setThemeState] = useState<AppTheme>("system");
+  const [isDark, setIsDark] = useState<boolean>(false);
   const [toast, setToast] = useState<ToastData | null>(null);
   const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const applyTheme = (targetTheme: AppTheme) => {
+    if (typeof window === "undefined") return;
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldBeDark = targetTheme === "dark" || (targetTheme === "system" && systemPrefersDark);
+    setIsDark(shouldBeDark);
+    if (shouldBeDark) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  };
+
+  const setTheme = (newTheme: AppTheme) => {
+    setThemeState(newTheme);
+    try {
+      localStorage.setItem("weblocks_theme", newTheme);
+    } catch (e) {
+      console.warn("Failed to persist theme", e);
+    }
+    applyTheme(newTheme);
+  };
+
+  const toggleTheme = () => {
+    const nextTheme: AppTheme = isDark ? "light" : "dark";
+    setTheme(nextTheme);
+    showToast(`Switched to ${nextTheme === "dark" ? "dark mode" : "light mode"}`, "info");
+  };
+
+  // Listen for system theme changes when in 'system' mode
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      if (theme === "system") {
+        applyTheme("system");
+      }
+    };
+    media.addEventListener("change", handleChange);
+    return () => media.removeEventListener("change", handleChange);
+  }, [theme]);
 
   const showToast = (message: string, type: ToastData["type"] = "success") => {
     if (toastTimeoutRef.current) {
@@ -113,6 +163,13 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
       const storedTheme = localStorage.getItem("weblocks_canvas_theme") as CanvasTheme | null;
       if (storedTheme && ["light", "neutral", "dark"].includes(storedTheme)) {
         setCanvasThemeState(storedTheme);
+      }
+      const storedAppTheme = localStorage.getItem("weblocks_theme") as AppTheme | null;
+      if (storedAppTheme && ["light", "dark", "system"].includes(storedAppTheme)) {
+        setThemeState(storedAppTheme);
+        applyTheme(storedAppTheme);
+      } else {
+        applyTheme("system");
       }
     } catch (e) {
       console.warn("Storage access failed", e);
@@ -298,6 +355,10 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
         clearSearchHistory,
         canvasTheme,
         setCanvasTheme,
+        theme,
+        isDark,
+        setTheme,
+        toggleTheme,
         toast,
         showToast,
         dismissToast,

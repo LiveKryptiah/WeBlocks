@@ -273,10 +273,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         role="dialog"
         aria-modal="true"
         aria-label="Command Menu"
-        className="relative w-full max-w-2xl bg-white rounded-md border border-hairline overflow-hidden shadow-none z-10 animate-in fade-in zoom-in-95 duration-150"
+        className="relative w-full max-w-2xl bg-white dark:bg-[#0f1011] rounded-md border border-hairline dark:border-[#23252a] overflow-hidden shadow-none z-10 animate-in fade-in zoom-in-95 duration-150"
       >
         {/* Search input header */}
-        <div className="flex items-center px-4 py-3 border-b border-hairline gap-3 bg-white">
+        <div className="flex items-center px-4 py-3 border-b border-hairline dark:border-[#23252a] gap-3 bg-white dark:bg-[#0f1011]">
           <Search className="w-5 h-5 text-muted shrink-0" />
           <input
             ref={inputRef}
@@ -298,7 +298,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               <X className="w-4 h-4" />
             </button>
           ) : (
-            <span className="text-[10px] font-mono text-muted bg-field px-2 py-0.5 rounded-full">
+            <span className="text-[10px] font-mono text-muted bg-field dark:bg-[#161718] px-2 py-0.5 rounded-full">
               ESC to close
             </span>
           )}
@@ -319,11 +319,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={cn(
                     "flex items-center justify-between px-3.5 py-2.5 rounded-sm cursor-pointer transition-colors select-none",
-                    isSelected ? "bg-canvas-soft text-ink" : "text-muted hover:text-ink"
+                    isSelected
+                      ? "bg-canvas-soft dark:bg-[#161718] text-ink"
+                      : "text-muted hover:text-ink"
                   )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-6 h-6 rounded-full bg-field flex items-center justify-center shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-field dark:bg-[#161718] flex items-center justify-center shrink-0">
                       {item.icon}
                     </div>
                     <div className="min-w-0">
@@ -353,12 +355,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         </div>
 
         {/* Footer shortcuts helper */}
-        <div className="px-4 py-2.5 bg-canvas-soft border-t border-hairline flex items-center justify-between text-caption text-muted">
+        <div className="px-4 py-2.5 bg-canvas-soft dark:bg-[#0f1011] border-t border-hairline dark:border-[#23252a] flex items-center justify-between text-caption text-muted">
           <div className="flex items-center gap-3">
             <span>Navigation</span>
-            <span className="font-mono bg-field px-1.5 py-0.5 rounded text-[10px]">↑↓</span>
+            <span className="font-mono bg-field dark:bg-[#161718] px-1.5 py-0.5 rounded text-[10px]">↑↓</span>
             <span>Select</span>
-            <span className="font-mono bg-field px-1.5 py-0.5 rounded text-[10px]">↵</span>
+            <span className="font-mono bg-field dark:bg-[#161718] px-1.5 py-0.5 rounded text-[10px]">↵</span>
           </div>
           <span>Weblocks Quick Command</span>
         </div>

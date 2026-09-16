@@ -29,7 +29,7 @@ export const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-ink">
+    <div className="min-h-screen flex flex-col bg-canvas text-ink transition-colors duration-200">
       <NavPill onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />
       <main className="flex-1 pt-24 sm:pt-28">{children}</main>
       <Footer />

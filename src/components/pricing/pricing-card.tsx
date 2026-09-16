@@ -27,8 +27,8 @@ export const PricingCard: React.FC<PricingCardProps> = ({
       className={cn(
         "relative rounded-md p-8 flex flex-col justify-between transition-all",
         plan.isFeatured
-          ? "bg-canvas-soft border-none" // Level 1: #f3f3f3, no border
-          : "bg-white border border-[#f0f0f0]" // Level 2: white + 1px #f0f0f0
+          ? "bg-canvas-soft border border-transparent dark:border-[#23252a]"
+          : "bg-white dark:bg-[#0f1011] border border-hairline-soft dark:border-[#23252a]"
       )}
     >
       <div>

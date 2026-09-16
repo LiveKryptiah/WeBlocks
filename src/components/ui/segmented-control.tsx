@@ -44,7 +44,7 @@ export function SegmentedControl<T extends string = string>({
               "relative inline-flex items-center justify-center gap-1.5 font-semibold rounded-full transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink",
               size === "sm" ? "px-3 text-body-sm h-7" : "px-4 text-body h-9",
               isSelected
-                ? "bg-white text-ink shadow-none"
+                ? "bg-white dark:bg-[#161718] text-ink shadow-none"
                 : "text-muted hover:text-ink bg-transparent"
             )}
           >

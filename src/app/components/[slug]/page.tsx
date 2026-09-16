@@ -142,7 +142,7 @@ export default function ComponentDetailPage() {
               className={cn(
                 "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-caption font-semibold transition-all",
                 activeTab === "preview"
-                  ? "bg-white text-ink shadow-none"
+                  ? "bg-white dark:bg-[#161718] text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -154,7 +154,7 @@ export default function ComponentDetailPage() {
               className={cn(
                 "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-caption font-semibold transition-all",
                 activeTab === "code"
-                  ? "bg-white text-ink shadow-none"
+                  ? "bg-white dark:bg-[#161718] text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -166,7 +166,7 @@ export default function ComponentDetailPage() {
               className={cn(
                 "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-caption font-semibold transition-all",
                 activeTab === "props"
-                  ? "bg-white text-ink shadow-none"
+                  ? "bg-white dark:bg-[#161718] text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -182,7 +182,7 @@ export default function ComponentDetailPage() {
                 onClick={() => setViewportWidth("mobile")}
                 className={cn(
                   "p-1.5 rounded-full transition-colors",
-                  viewportWidth === "mobile" ? "bg-white text-ink shadow-none" : "hover:text-ink"
+                  viewportWidth === "mobile" ? "bg-white dark:bg-[#161718] text-ink shadow-none" : "hover:text-ink"
                 )}
                 title="Mobile (380px)"
               >
@@ -192,7 +192,7 @@ export default function ComponentDetailPage() {
                 onClick={() => setViewportWidth("tablet")}
                 className={cn(
                   "p-1.5 rounded-full transition-colors",
-                  viewportWidth === "tablet" ? "bg-white text-ink shadow-none" : "hover:text-ink"
+                  viewportWidth === "tablet" ? "bg-white dark:bg-[#161718] text-ink shadow-none" : "hover:text-ink"
                 )}
                 title="Tablet (640px)"
               >
@@ -202,7 +202,7 @@ export default function ComponentDetailPage() {
                 onClick={() => setViewportWidth("desktop")}
                 className={cn(
                   "p-1.5 rounded-full transition-colors",
-                  viewportWidth === "desktop" ? "bg-white text-ink shadow-none" : "hover:text-ink"
+                  viewportWidth === "desktop" ? "bg-white dark:bg-[#161718] text-ink shadow-none" : "hover:text-ink"
                 )}
                 title="Desktop (100%)"
               >
@@ -214,7 +214,7 @@ export default function ComponentDetailPage() {
           {/* Quick copy TSX button */}
           <button
             onClick={handleCopyCode}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-ink text-white hover:bg-ink-soft text-caption font-semibold transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-ink text-white dark:bg-white dark:text-[#08090a] hover:bg-ink-soft dark:hover:bg-[#e5e5e6] text-caption font-semibold transition-colors"
           >
             {copiedCode ? <Check className="w-3.5 h-3.5 text-[#0066ff]" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copiedCode ? "Copied" : "Copy TSX"}</span>
@@ -226,7 +226,7 @@ export default function ComponentDetailPage() {
           {activeTab === "preview" && (
             <div
               className={cn(
-                "w-full transition-all duration-200 flex items-center justify-center mx-auto min-h-[340px] bg-white rounded-md border border-hairline-soft p-6",
+                "w-full transition-all duration-200 flex items-center justify-center mx-auto min-h-[340px] bg-white dark:bg-[#08090a] rounded-md border border-hairline-soft dark:border-[#23252a] p-6",
                 viewportWidth === "mobile" && "max-w-[380px]",
                 viewportWidth === "tablet" && "max-w-[640px]",
                 viewportWidth === "desktop" && "max-w-full"

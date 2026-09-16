@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-ink text-white rounded-t-md mt-section pt-16 sm:pt-20 pb-12 px-6 sm:px-12 selection:bg-white selection:text-ink">
+    <footer className="w-full bg-[#141414] dark:bg-[#0f1011] dark:border-t dark:border-[#23252a] text-white rounded-t-md mt-section pt-16 sm:pt-20 pb-12 px-6 sm:px-12 selection:bg-white selection:text-ink">
       <div className="max-w-6xl mx-auto">
         {/* Top brand lockup */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-16 border-b border-white/10">

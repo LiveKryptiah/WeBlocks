@@ -20,7 +20,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           ref={ref}
           className={cn(
-            "w-full h-12 bg-field text-ink placeholder:text-faint rounded-sm px-4 text-body transition-all border-none outline-none focus:ring-2 focus:ring-ink focus:bg-white",
+            "w-full h-12 bg-field text-ink placeholder:text-faint rounded-sm px-4 text-body transition-all border border-transparent dark:border-[#23252a] outline-none focus:ring-2 focus:ring-ink focus:bg-white dark:focus:bg-[#0f1011]",
             icon ? "pl-11" : "px-4",
             className
           )}
@@ -54,7 +54,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           onChange={onChange}
           placeholder={placeholder}
           className={cn(
-            "w-full h-12 bg-field text-ink placeholder:text-faint rounded-sm pl-12 pr-10 text-body transition-all border-none outline-none focus:ring-2 focus:ring-ink focus:bg-white",
+            "w-full h-12 bg-field text-ink placeholder:text-faint rounded-sm pl-12 pr-10 text-body transition-all border border-transparent dark:border-[#23252a] outline-none focus:ring-2 focus:ring-ink focus:bg-white dark:focus:bg-[#0f1011]",
             className
           )}
           {...props}

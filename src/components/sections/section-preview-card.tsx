@@ -149,7 +149,7 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
                 className={cn(
                   "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-caption font-semibold transition-all",
                   activeTab === "preview"
-                    ? "bg-white text-ink shadow-xs"
+                    ? "bg-white dark:bg-[#161718] text-ink shadow-xs"
                     : "text-muted hover:text-ink"
                 )}
               >
@@ -162,7 +162,7 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
                 className={cn(
                   "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-caption font-semibold transition-all",
                   activeTab === "design"
-                    ? "bg-white text-ink shadow-xs"
+                    ? "bg-white dark:bg-[#161718] text-ink shadow-xs"
                     : "text-muted hover:text-ink"
                 )}
               >

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
 import { ButtonPrimary } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
 
 interface NavPillProps {
@@ -58,7 +59,9 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
           aria-label="Main Navigation"
           className={cn(
             "pointer-events-auto flex items-center justify-between gap-1 sm:gap-2 px-3 sm:px-4 py-2 rounded-full border border-hairline-soft transition-all duration-200 backdrop-blur-md max-w-5xl w-full shadow-none",
-            isScrolled ? "bg-white/95" : "bg-white/90"
+            isScrolled
+              ? "bg-white/95 dark:bg-[#0f1011]/95"
+              : "bg-white/90 dark:bg-[#0f1011]/90"
           )}
         >
           {/* Logo / Brand Mark */}
@@ -67,7 +70,7 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
             className="flex items-center gap-2 pl-2 pr-3 py-1 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink rounded-full"
           >
             {/* Geometric Mark */}
-            <div className="w-7 h-7 rounded-[8px] bg-ink flex items-center justify-center text-white font-bold text-xs group-hover:scale-95 transition-transform">
+            <div className="w-7 h-7 rounded-[8px] bg-ink dark:bg-white text-white dark:text-[#08090a] flex items-center justify-center font-bold text-xs group-hover:scale-95 transition-transform">
               W
             </div>
             <span className="font-bold text-title tracking-tight text-ink">
@@ -97,11 +100,14 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
           </div>
 
           {/* Right Action Items */}
-          <div className="flex items-center gap-2">
-            {/* Primary CTA (Black Pill) */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Primary CTA */}
             <Link
               href="/pricing"
-              className="inline-flex items-center justify-center h-8 sm:h-9 px-3.5 sm:px-4 rounded-full bg-ink text-white hover:bg-ink-soft text-caption sm:text-body-sm font-semibold transition-colors select-none active:scale-[0.98] whitespace-nowrap"
+              className="inline-flex items-center justify-center h-8 sm:h-9 px-3.5 sm:px-4 rounded-full bg-ink text-white dark:bg-white dark:text-[#08090a] hover:bg-ink-soft dark:hover:bg-[#e5e5e6] text-caption sm:text-body-sm font-semibold transition-colors select-none active:scale-[0.98] whitespace-nowrap"
             >
               Get access
             </Link>
@@ -122,7 +128,7 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-30 bg-ink/50 backdrop-blur-sm md:hidden pt-24 px-4 pb-6 overflow-y-auto">
-          <div className="bg-white rounded-md border border-hairline-soft p-6 space-y-4">
+          <div className="bg-white dark:bg-[#0f1011] rounded-md border border-hairline-soft p-6 space-y-4">
             <div className="space-y-1">
               {navLinks.map((link) => {
                 const Icon = link.icon;
@@ -166,6 +172,11 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
                 <User className="w-4 h-4" />
                 <span>Account & Plan</span>
               </Link>
+
+              <div className="flex items-center justify-between px-4 py-2">
+                <span className="text-body-sm font-semibold text-muted">Theme</span>
+                <ThemeToggle showLabel />
+              </div>
 
               <div className="pt-2">
                 <Link

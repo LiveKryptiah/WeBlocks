@@ -33,7 +33,7 @@ export const ReferenceCard: React.FC<ReferenceCardProps> = ({
       {/* Screenshot Container */}
       <div
         onClick={() => openLightbox(screenshot)}
-        className="relative w-full rounded-sm overflow-hidden bg-field transition-all border border-hairline-soft"
+        className="relative w-full rounded-sm overflow-hidden bg-field dark:bg-[#0f1011] transition-all border border-hairline-soft dark:border-[#23252a]"
       >
         <ScreenshotMockup screenshot={screenshot} />
 

@@ -17,7 +17,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
   return (
     <Link
       href={`/collections/${collection.id}`}
-      className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-md p-6 border-none transition-all duration-200"
+      className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-md p-6 border border-transparent dark:border-[#23252a] transition-all duration-200"
     >
       {/* Visual Preview Collage */}
       <div className="grid grid-cols-3 gap-2 mb-4">
@@ -25,7 +25,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
           previewItems.map((item) => (
             <div
               key={item.id}
-              className="aspect-[9/14] rounded-sm bg-white overflow-hidden p-2 flex flex-col justify-between"
+              className="aspect-[9/14] rounded-sm bg-white dark:bg-[#08090a] border border-transparent dark:border-[#23252a] overflow-hidden p-2 flex flex-col justify-between"
             >
               <div className="flex items-center gap-1">
                 <AppIconSquircle

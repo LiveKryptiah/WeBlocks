@@ -98,9 +98,9 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
       />
 
       {/* Lightbox dialog card */}
-      <div className="relative w-full max-w-5xl bg-white rounded-md border border-hairline my-auto z-10 overflow-hidden shadow-none flex flex-col max-h-[92vh]">
+      <div className="relative w-full max-w-5xl bg-white dark:bg-[#0f1011] rounded-md border border-hairline dark:border-[#23252a] my-auto z-10 overflow-hidden shadow-none flex flex-col max-h-[92vh]">
         {/* Header bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-hairline bg-white shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-hairline dark:border-[#23252a] bg-white dark:bg-[#0f1011] shrink-0">
           <div className="flex items-center gap-3">
             <AppIconSquircle
               name={activeLightboxRef.appName}
@@ -123,7 +123,7 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
             <button
               type="button"
               onClick={handleShare}
-              className="w-10 h-10 rounded-full bg-canvas-soft hover:bg-field flex items-center justify-center text-muted hover:text-ink transition-colors"
+              className="w-10 h-10 rounded-full bg-canvas-soft dark:bg-[#161718] hover:bg-field dark:hover:bg-[#23252a] flex items-center justify-center text-muted hover:text-ink transition-colors"
               title="Copy link"
               aria-label="Share reference"
             >
@@ -132,7 +132,7 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
             <button
               type="button"
               onClick={closeLightbox}
-              className="w-10 h-10 rounded-full bg-canvas-soft hover:bg-field flex items-center justify-center text-muted hover:text-ink transition-colors"
+              className="w-10 h-10 rounded-full bg-canvas-soft dark:bg-[#161718] hover:bg-field dark:hover:bg-[#23252a] flex items-center justify-center text-muted hover:text-ink transition-colors"
               title="Close"
               aria-label="Close lightbox"
             >
@@ -148,13 +148,13 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
             {/* Top Floating Controls */}
             <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
               {/* Canvas Theme Selector */}
-              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline-soft text-caption font-semibold select-none">
+              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 dark:bg-[#0f1011]/90 backdrop-blur-sm p-1 rounded-full border border-hairline-soft dark:border-[#23252a] text-caption font-semibold select-none">
                 <button
                   type="button"
                   onClick={() => setLocalTheme("light")}
                   className={cn(
                     "px-2 py-0.5 rounded-full transition-colors text-[11px]",
-                    localTheme === "light" ? "bg-ink text-white" : "text-muted hover:text-ink"
+                    localTheme === "light" ? "bg-ink text-white dark:bg-white dark:text-[#08090a]" : "text-muted hover:text-ink"
                   )}
                 >
                   Light
@@ -164,7 +164,7 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
                   onClick={() => setLocalTheme("neutral")}
                   className={cn(
                     "px-2 py-0.5 rounded-full transition-colors text-[11px]",
-                    localTheme === "neutral" ? "bg-ink text-white" : "text-muted hover:text-ink"
+                    localTheme === "neutral" ? "bg-ink text-white dark:bg-white dark:text-[#08090a]" : "text-muted hover:text-ink"
                   )}
                 >
                   Neutral
@@ -174,7 +174,7 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
                   onClick={() => setLocalTheme("dark")}
                   className={cn(
                     "px-2 py-0.5 rounded-full transition-colors text-[11px]",
-                    localTheme === "dark" ? "bg-ink text-white" : "text-muted hover:text-ink"
+                    localTheme === "dark" ? "bg-ink text-white dark:bg-white dark:text-[#08090a]" : "text-muted hover:text-ink"
                   )}
                 >
                   Dark
