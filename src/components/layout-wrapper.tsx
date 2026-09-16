@@ -6,10 +6,13 @@ import { Footer } from "./navigation/footer";
 import { ReferenceDetailModal } from "./reference/reference-detail-modal";
 import { AddToCollectionModal } from "./collection/add-to-collection-modal";
 import { CommandPalette } from "./navigation/command-palette";
+import { Toast } from "./ui/toast";
+import { useLibrary } from "@/context/library-context";
 
 export const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { toast, dismissToast } = useLibrary();
   const [collectionScreenshotId, setCollectionScreenshotId] = useState<string | null>(null);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
@@ -47,6 +50,15 @@ export const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({
         screenshotId={collectionScreenshotId}
         onClose={() => setCollectionScreenshotId(null)}
       />
+
+      {/* Global toast notifications */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onDismiss={dismissToast}
+        />
+      )}
     </div>
   );
 };

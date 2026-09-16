@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import {
   ScreenshotEntity,
   CollectionEntity,
@@ -9,6 +9,12 @@ import {
 } from "@/data/mock-data";
 
 export type CanvasTheme = "light" | "neutral" | "dark";
+
+export interface ToastData {
+  id: number;
+  message: string;
+  type?: "success" | "saved" | "collection" | "copy" | "info";
+}
 
 export interface UserProfile {
   name: string;
@@ -40,6 +46,9 @@ interface LibraryContextType {
   clearSearchHistory: () => void;
   canvasTheme: CanvasTheme;
   setCanvasTheme: (theme: CanvasTheme) => void;
+  toast: ToastData | null;
+  showToast: (message: string, type?: ToastData["type"]) => void;
+  dismissToast: () => void;
 }
 
 const defaultUser: UserProfile = {
@@ -66,6 +75,25 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     "Checkout sheet",
   ]);
   const [canvasTheme, setCanvasThemeState] = useState<CanvasTheme>("light");
+  const [toast, setToast] = useState<ToastData | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const showToast = (message: string, type: ToastData["type"] = "success") => {
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+    }
+    setToast({ id: Date.now(), message, type });
+    toastTimeoutRef.current = setTimeout(() => {
+      setToast(null);
+    }, 2600);
+  };
+
+  const dismissToast = () => {
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+    }
+    setToast(null);
+  };
 
   // Load from localStorage if client-side
   useEffect(() => {
@@ -101,8 +129,14 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const toggleSave = (id: string) => {
     setSavedIds((prev) => {
-      const next = prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
+      const isCurrentlySaved = prev.includes(id);
+      const next = isCurrentlySaved ? prev.filter((item) => item !== id) : [...prev, id];
       saveToStorage("weblocks_saved_ids", next);
+      if (isCurrentlySaved) {
+        showToast("Removed from saved references", "info");
+      } else {
+        showToast("Saved reference to your library", "saved");
+      }
       return next;
     });
   };
@@ -122,6 +156,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     const nextCols = [newCol, ...collections];
     setCollections(nextCols);
     saveToStorage("weblocks_collections", nextCols);
+    showToast(`Created collection "${title}"`, "collection");
     return newCol.id;
   };
 
@@ -131,17 +166,21 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     );
     setCollections(nextCols);
     saveToStorage("weblocks_collections", nextCols);
+    showToast("Collection renamed", "success");
   };
 
   const deleteCollection = (id: string) => {
     const nextCols = collections.filter((col) => col.id !== id);
     setCollections(nextCols);
     saveToStorage("weblocks_collections", nextCols);
+    showToast("Collection deleted", "info");
   };
 
   const addReferenceToCollection = (collectionId: string, screenshotId: string) => {
+    let collectionTitle = "Collection";
     const nextCols = collections.map((col) => {
       if (col.id === collectionId) {
+        collectionTitle = col.title;
         const nextIds = col.screenshotIds.includes(screenshotId)
           ? col.screenshotIds
           : [...col.screenshotIds, screenshotId];
@@ -156,6 +195,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     });
     setCollections(nextCols);
     saveToStorage("weblocks_collections", nextCols);
+    showToast(`Added to "${collectionTitle}"`, "collection");
   };
 
   const removeReferenceFromCollection = (collectionId: string, screenshotId: string) => {
@@ -173,6 +213,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     });
     setCollections(nextCols);
     saveToStorage("weblocks_collections", nextCols);
+    showToast("Removed from collection", "info");
   };
 
   const openLightbox = (screenshot: ScreenshotEntity) => {
@@ -257,6 +298,9 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
         clearSearchHistory,
         canvasTheme,
         setCanvasTheme,
+        toast,
+        showToast,
+        dismissToast,
       }}
     >
       {children}

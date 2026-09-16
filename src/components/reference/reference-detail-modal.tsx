@@ -26,7 +26,7 @@ interface ReferenceDetailModalProps {
 export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
   onOpenCollectionModal,
 }) => {
-  const { activeLightboxRef, closeLightbox, isSaved, toggleSave, openLightbox, canvasTheme } =
+  const { activeLightboxRef, closeLightbox, isSaved, toggleSave, openLightbox, canvasTheme, showToast } =
     useLibrary();
   const [copied, setCopied] = useState(false);
   const [copiedFigma, setCopiedFigma] = useState(false);
@@ -48,6 +48,7 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
         `${window.location.origin}/ref/${activeLightboxRef.id}`
       );
       setCopied(true);
+      showToast("Reference link copied to clipboard", "copy");
       setTimeout(() => setCopied(false), 2000);
     }
   };
@@ -75,6 +76,7 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
       );
       navigator.clipboard.writeText(figmaTokenJson);
       setCopiedFigma(true);
+      showToast("Copied design tokens for Figma", "copy");
       setTimeout(() => setCopiedFigma(false), 2500);
     }
   };

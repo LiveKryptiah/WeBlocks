@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 export default function ReferenceDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const { isSaved, toggleSave } = useLibrary();
+  const { isSaved, toggleSave, showToast } = useLibrary();
   const [copied, setCopied] = useState(false);
   const [copiedFigma, setCopiedFigma] = useState(false);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
@@ -61,6 +61,7 @@ export default function ReferenceDetailPage() {
     if (typeof window !== "undefined") {
       navigator.clipboard.writeText(window.location.href);
       setCopied(true);
+      showToast("Reference link copied to clipboard", "copy");
       setTimeout(() => setCopied(false), 2000);
     }
   };
@@ -88,6 +89,7 @@ export default function ReferenceDetailPage() {
       );
       navigator.clipboard.writeText(figmaTokenJson);
       setCopiedFigma(true);
+      showToast("Copied design tokens for Figma", "copy");
       setTimeout(() => setCopiedFigma(false), 2500);
     }
   };
