@@ -105,7 +105,7 @@ function renderMockupContent(s: ScreenshotEntity) {
               <span className="text-[#9FE870] font-mono">+$2,400.00</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-white/80">AWS Cloud</span>
+              <span className="text-white/50 font-mono">AWS Cloud</span>
               <span className="text-white/50 font-mono">-£142.50</span>
             </div>
           </div>
@@ -192,7 +192,194 @@ function renderMockupContent(s: ScreenshotEntity) {
         </div>
       );
 
-    default: // Generic High-Fidelity UI Layout
+    case "ref-17": // Apple Music Live Lyrics
+      return (
+        <div className="space-y-4 text-white">
+          <div className="flex items-center gap-2">
+            <span className="bg-[#FC3C44] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+              LOSSLESS
+            </span>
+            <span className="bg-white/10 text-white/70 text-[9px] font-semibold px-2 py-0.5 rounded-full">
+              DOLBY ATMOS
+            </span>
+          </div>
+          <div className="space-y-2 py-2">
+            <p className="text-xs text-white/40">Cause we were just kids when we fell in love</p>
+            <p className="text-lg font-bold text-white tracking-tight leading-tight">
+              Not knowing what it was...
+            </p>
+            <p className="text-xs text-white/40">I will not give you up this time</p>
+          </div>
+          <div className="space-y-1 pt-2">
+            <div className="h-1 bg-white/20 rounded-full overflow-hidden">
+              <div className="w-2/3 h-full bg-white rounded-full" />
+            </div>
+            <div className="flex justify-between text-[9px] text-white/50 font-mono">
+              <span>2:14</span>
+              <span>-1:46</span>
+            </div>
+          </div>
+        </div>
+      );
+
+    case "ref-18": // Perplexity Pro Search Synthesis
+      return (
+        <div className="bg-[#181a1b] p-4 rounded-sm border border-white/10 text-white space-y-3">
+          <div className="flex items-center gap-2 text-[11px] text-[#20B2AA] font-semibold">
+            <div className="w-2 h-2 rounded-full bg-[#20B2AA]" />
+            <span>Answer synthesized from 18 web sources</span>
+          </div>
+          <div className="flex gap-1.5 overflow-hidden">
+            <span className="bg-white/5 text-[10px] px-2 py-1 rounded border border-white/10 text-white/80 font-mono truncate">
+              [1] bloomberg.com
+            </span>
+            <span className="bg-white/5 text-[10px] px-2 py-1 rounded border border-white/10 text-white/80 font-mono truncate">
+              [2] techcrunch.com
+            </span>
+          </div>
+          <p className="text-xs text-white/85 leading-relaxed">
+            The next-generation AI architecture replaces standard transformers with hybrid state-space models [1], achieving 4.2x lower latency [2].
+          </p>
+          <div className="flex gap-1.5 pt-1">
+            <span className="px-2.5 py-1 rounded-full bg-white/10 text-[10px] text-white/70">
+              Compare benchmark scores →
+            </span>
+          </div>
+        </div>
+      );
+
+    case "ref-19": // Airbnb Map Pin Clusters
+      return (
+        <div className="relative h-full flex flex-col justify-between text-white p-2">
+          {/* Simulated Map Background */}
+          <div className="absolute inset-0 bg-[#1e232a] opacity-80 flex items-center justify-center">
+            <div className="grid grid-cols-4 gap-6 opacity-30 text-[10px] text-white">
+              <span>Central Park</span>
+              <span>Midtown</span>
+              <span>SoHo</span>
+              <span>Tribeca</span>
+            </div>
+          </div>
+          <div className="relative flex justify-center gap-3 pt-2">
+            <span className="bg-black text-white px-2.5 py-1 rounded-full text-xs font-bold border border-white/20">
+              $185
+            </span>
+            <span className="bg-white text-black px-2.5 py-1 rounded-full text-xs font-bold scale-110">
+              $240
+            </span>
+            <span className="bg-black text-white px-2.5 py-1 rounded-full text-xs font-bold border border-white/20">
+              $310
+            </span>
+          </div>
+          <div className="relative bg-white text-black p-3 rounded-sm shadow-none mt-auto">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-xs font-bold">The Industrial Loft</p>
+                <p className="text-[10px] text-gray-500">★ 4.98 • Tribeca</p>
+              </div>
+              <p className="text-sm font-bold font-mono">$240<span className="text-[10px] font-normal text-gray-500">/nt</span></p>
+            </div>
+          </div>
+        </div>
+      );
+
+    case "ref-21": // Figma Dev Mode
+      return (
+        <div className="bg-[#1e1e1e] p-4 rounded-sm border border-white/10 text-white font-mono space-y-2">
+          <div className="flex justify-between items-center text-[10px] text-white/50 pb-2 border-b border-white/10">
+            <span>CSS Variables</span>
+            <span className="text-[#38bdf8]">COPY CODE</span>
+          </div>
+          <pre className="text-[11px] text-[#e2e8f0] leading-relaxed">
+            <span className="text-[#f43f5e]">border-radius</span>: var(<span className="text-[#38bdf8]">--radius-sm</span>, 16px);{"\n"}
+            <span className="text-[#f43f5e]">background</span>: var(<span className="text-[#38bdf8]">--color-canvas</span>);{"\n"}
+            <span className="text-[#f43f5e]">box-shadow</span>: <span className="text-emerald-400">none</span>;
+          </pre>
+          <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px]">
+            <span className="text-white/60">Layout: flex-col</span>
+            <span className="bg-white/10 px-1.5 py-0.5 rounded text-white/70">W: 380px</span>
+          </div>
+        </div>
+      );
+
+    case "ref-23": // Linear Velocity Burnup
+      return (
+        <div className="bg-[#16171a] p-4 rounded-sm border border-white/10 text-white space-y-3">
+          <div className="flex justify-between items-center">
+            <span className="text-xs font-bold text-white/90">Cycle 42 Burnup</span>
+            <span className="text-[10px] font-mono text-[#5E6AD2] bg-[#5E6AD2]/15 px-2 py-0.5 rounded-full">
+              ON TRACK
+            </span>
+          </div>
+          <div className="h-20 flex items-end gap-1.5 pt-2">
+            {[20, 35, 45, 60, 72, 85, 94].map((h, i) => (
+              <div key={i} className="flex-1 flex flex-col justify-end gap-1 items-center">
+                <div
+                  className="w-full bg-[#5E6AD2] rounded-t-[2px] transition-all"
+                  style={{ height: `${h}%` }}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-between text-[10px] text-white/50 border-t border-white/10 pt-2 font-mono">
+            <span>Scope: 94 pts</span>
+            <span className="text-emerald-400">+12 pts velocity</span>
+          </div>
+        </div>
+      );
+
+    case "ref-31": // GitHub Code Diff Review
+      return (
+        <div className="bg-[#0d1117] p-3 rounded-sm border border-white/10 text-white font-mono text-[10px] space-y-2">
+          <div className="flex items-center justify-between text-white/60 border-b border-white/10 pb-1">
+            <span>src/tokens.ts</span>
+            <span className="text-emerald-400">+4 -1</span>
+          </div>
+          <div className="space-y-1">
+            <div className="bg-red-500/10 text-red-300 px-1 py-0.5 rounded flex items-center gap-1">
+              <span className="opacity-50">-</span>
+              <span>boxShadow: &apos;0 4px 6px -1px rgb(0 0 0 / 0.1)&apos;</span>
+            </div>
+            <div className="bg-emerald-500/10 text-emerald-300 px-1 py-0.5 rounded flex items-center gap-1">
+              <span className="opacity-50">+</span>
+              <span>boxShadow: &apos;none&apos;</span>
+            </div>
+          </div>
+          <div className="bg-[#161b22] p-2 rounded border border-white/10 flex items-center justify-between font-sans">
+            <span className="text-white/80 text-[10px]">1 change requested</span>
+            <span className="bg-white text-black px-2 py-0.5 rounded-full text-[9px] font-bold">Submit</span>
+          </div>
+        </div>
+      );
+
+    case "ref-32": // Apple Fitness Activity Rings
+      return (
+        <div className="flex flex-col items-center justify-center p-2 text-white space-y-3">
+          <div className="relative w-24 h-24 flex items-center justify-center">
+            {/* Concentric rings simulator */}
+            <div className="absolute inset-0 rounded-full border-4 border-[#FA114F] opacity-90" />
+            <div className="absolute inset-2 rounded-full border-4 border-[#A1F93A] opacity-90" />
+            <div className="absolute inset-4 rounded-full border-4 border-[#00FFF7] opacity-90" />
+            <span className="text-xs font-bold font-mono">100%</span>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center w-full pt-1">
+            <div className="bg-white/5 p-1.5 rounded">
+              <p className="text-[9px] text-[#FA114F] font-bold">MOVE</p>
+              <p className="text-xs font-mono font-bold">640</p>
+            </div>
+            <div className="bg-white/5 p-1.5 rounded">
+              <p className="text-[9px] text-[#A1F93A] font-bold">EXERCISE</p>
+              <p className="text-xs font-mono font-bold">45m</p>
+            </div>
+            <div className="bg-white/5 p-1.5 rounded">
+              <p className="text-[9px] text-[#00FFF7] font-bold">STAND</p>
+              <p className="text-xs font-mono font-bold">12h</p>
+            </div>
+          </div>
+        </div>
+      );
+
+    default: // Clean fallback mockup for all other references
       return (
         <div className="space-y-3 text-white">
           <div className="flex items-center gap-2">
