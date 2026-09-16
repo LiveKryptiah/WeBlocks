@@ -1043,6 +1043,117 @@ export function LiveStatCounterTicker() {
   );
 }
 
+// 15. Live Transcribe (Effects & Media)
+export function LiveTranscribe() {
+  const [isRecording, setIsRecording] = useState(true);
+  const [language, setLanguage] = useState("English");
+  const [wordIndex, setWordIndex] = useState(6);
+  const [sentenceIdx, setSentenceIdx] = useState(0);
+
+  const sentences = [
+    "Weblocks is a way to view design inspiration at a glance—today's screen references, navigation pills, bento grids, design tokens, and components in real time.",
+    "Transform curated mobile references into production React code—instant token export, zero drop shadows, tight hairline borders, and fluid responsive layouts.",
+  ];
+
+  const words = sentences[sentenceIdx].split(" ");
+
+  // Auto-streaming live transcription word-by-word
+  useEffect(() => {
+    if (!isRecording) return;
+
+    const timer = setInterval(() => {
+      setWordIndex((prev) => {
+        if (prev >= words.length) {
+          // Pause at end then switch sentence
+          setTimeout(() => {
+            setSentenceIdx((s) => (s + 1) % sentences.length);
+            setWordIndex(4);
+          }, 2000);
+          return words.length;
+        }
+        return prev + 1;
+      });
+    }, 280);
+
+    return () => clearInterval(timer);
+  }, [isRecording, words.length, sentences.length]);
+
+  const committedWords = words.slice(0, Math.max(0, wordIndex - 3)).join(" ");
+  const activeWords = words.slice(Math.max(0, wordIndex - 3), wordIndex).join(" ");
+
+  const languages = ["English", "Design Spec", "TypeScript"];
+  const handleToggleLang = () => {
+    setLanguage((prev) => {
+      const idx = languages.indexOf(prev);
+      return languages[(idx + 1) % languages.length];
+    });
+  };
+
+  return (
+    <div className="w-full max-w-sm rounded-3xl bg-[#1c1c1e] text-white p-5 border border-[#2c2c2e] flex flex-col justify-between gap-5 select-none transition-all duration-200">
+      {/* Real-time speech transcript */}
+      <div className="min-h-[76px] text-xs sm:text-[13px] leading-relaxed font-medium">
+        <span className="text-[#8e8e93] transition-colors duration-200">
+          {committedWords}{committedWords ? " " : ""}
+        </span>
+        <span className="text-white font-bold tracking-tight inline transition-all duration-150">
+          {activeWords}
+        </span>
+        {isRecording && (
+          <span className="inline-block w-1.5 h-3 ml-1 bg-[#f05a28] rounded-xs animate-pulse align-middle" />
+        )}
+      </div>
+
+      {/* Bottom controls: Language Pill & Record/Stop Button */}
+      <div className="flex items-center justify-between pt-1">
+        {/* Language Badge */}
+        <button
+          type="button"
+          onClick={handleToggleLang}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white/90 text-[11px] font-semibold transition-colors cursor-pointer"
+          title="Toggle Language"
+        >
+          {/* 文A Language icon */}
+          <svg
+            className="w-3.5 h-3.5 text-white/80"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m5 8 6 6" />
+            <path d="m4 14 6-6 2-3" />
+            <path d="M2 5h12" />
+            <path d="M7 2h1" />
+            <path d="m22 22-5-10-5 10" />
+            <path d="M14 18h6" />
+          </svg>
+          <span>{language}</span>
+        </button>
+
+        {/* Record / Stop Button */}
+        <button
+          type="button"
+          onClick={() => setIsRecording(!isRecording)}
+          className="relative w-10 h-10 rounded-full bg-[#f05a28] hover:bg-[#ff6838] flex items-center justify-center transition-transform active:scale-90 cursor-pointer shadow-none"
+          title={isRecording ? "Stop transcribing" : "Start transcribing"}
+        >
+          {isRecording && (
+            <span className="absolute inset-0 rounded-full bg-[#f05a28] animate-ping opacity-30 pointer-events-none" />
+          )}
+          {isRecording ? (
+            <span className="w-3.5 h-3.5 rounded-[2.5px] bg-[#1c1c1e]" />
+          ) : (
+            <span className="w-3.5 h-3.5 rounded-full bg-[#1c1c1e]" />
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // Component lookup map by slug
 export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "floating-nav-pill": LiveFloatingNavPill,
@@ -1059,4 +1170,5 @@ export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "spotlight-dialog": LiveSpotlightDialog,
   "audio-lyrics-scrubber": LiveAudioLyricsScrubber,
   "stat-counter-ticker": LiveStatCounterTicker,
+  "live-transcribe": LiveTranscribe,
 };
