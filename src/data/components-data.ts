@@ -2020,6 +2020,201 @@ export function FileUploadProgress({
   );
 }`,
   },
+  {
+    id: "comp-21",
+    slug: "waitlist-referral-card",
+    title: "Waitlist Referral Card",
+    description: "Interactive waitlist and referral queue card featuring concentric radar wave graphics, interconnected user and referral slot nodes, live queue positioning, and invite progression adapted for Weblocks.",
+    category: "cards",
+    tier: "free",
+    cliCommand: "npx weblocks add waitlist-referral-card",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    tags: ["cards", "bento", "waitlist", "referral", "queue", "nodes", "social", "radar"],
+    props: [
+      { name: "brand", type: "string", default: '"Weblocks"', description: "Product or ecosystem badge name" },
+      { name: "userAvatar", type: "string", default: '"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"', description: "Primary account avatar URL" },
+      { name: "initialJoined", type: "boolean", default: "false", description: "Whether the user starts as already on the waitlist" },
+      { name: "queuePosition", type: "number", default: 142, description: "Waitlist numerical rank position" },
+      { name: "totalInvites", type: "number", default: 3, description: "Total available referral slots to unlock perks" },
+      { name: "onJoin", type: "() => void", description: "Callback triggered when user joins waitlist" },
+      { name: "onShareInvite", type: "() => void", description: "Callback triggered when user copies invite link" },
+    ],
+    code: `"use client";
+
+import React, { useState } from "react";
+import { ArrowRight, Check, Sparkles, Copy, Users } from "lucide-react";
+
+export interface WaitlistReferralCardProps {
+  brand?: string;
+  userAvatar?: string;
+  initialJoined?: boolean;
+  queuePosition?: number;
+  totalInvites?: number;
+  onJoin?: () => void;
+  onShareInvite?: () => void;
+}
+
+export function WaitlistReferralCard({
+  brand = "Weblocks",
+  userAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+  initialJoined = false,
+  queuePosition = 142,
+  totalInvites = 3,
+  onJoin,
+  onShareInvite,
+}: WaitlistReferralCardProps) {
+  const [isJoined, setIsJoined] = useState(initialJoined);
+  const [copied, setCopied] = useState(false);
+  const [invitedCount, setInvitedCount] = useState(0);
+
+  const handleJoin = () => {
+    setIsJoined(true);
+    onJoin?.();
+  };
+
+  const handleCopy = () => {
+    setCopied(true);
+    if (invitedCount < totalInvites) {
+      setInvitedCount((prev) => prev + 1);
+    }
+    onShareInvite?.();
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const slots = Array.from({ length: totalInvites }, (_, idx) => ({
+    id: idx,
+    isClaimed: isJoined && idx < invitedCount,
+  }));
+
+  return (
+    <div className="flex flex-col items-center select-none font-sans">
+      {/* 1. Floating Brand Capsule */}
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/10 text-[11px] font-medium text-ink dark:text-white/80 mb-3 shadow-xs backdrop-blur-sm">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        <span>{brand} Access</span>
+      </div>
+
+      {/* 2. Main Card Container */}
+      <div className="relative w-full max-w-[340px] rounded-[26px] bg-[#121316] dark:bg-[#0e0f11] text-white p-5 border border-white/10 dark:border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.4)] overflow-hidden">
+        {/* Background Concentric Radar Rings */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none opacity-20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="70" cy="62" r="35" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
+          <circle cx="70" cy="62" r="68" fill="none" stroke="currentColor" strokeWidth="1" />
+          <circle cx="70" cy="62" r="102" fill="none" stroke="currentColor" strokeWidth="1" />
+          <circle cx="70" cy="62" r="140" fill="none" stroke="currentColor" strokeWidth="1" />
+          <circle cx="70" cy="62" r="185" fill="none" stroke="currentColor" strokeWidth="1" />
+          <circle cx="70" cy="62" r="235" fill="none" stroke="currentColor" strokeWidth="1" />
+        </svg>
+
+        {/* Top Nodes Row: You -> Interconnector -> Referral Slots */}
+        <div className="relative z-10 flex items-center justify-between mb-6 pt-1">
+          {/* "You" Node */}
+          <div className="relative flex flex-col items-center justify-center p-2 rounded-2xl bg-white/[0.06] border border-white/15 w-[66px] h-[78px] backdrop-blur-md shadow-md">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/25 bg-white/10 flex items-center justify-center mb-1 shrink-0">
+              <img
+                src={userAvatar}
+                alt="You"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80";
+                }}
+              />
+            </div>
+            <span className="text-[10px] font-medium text-white/90">You</span>
+          </div>
+
+          {/* Connector Line */}
+          <div className="relative flex-1 flex items-center justify-center px-1">
+            <div className="w-full h-[1.5px] bg-gradient-to-r from-white/30 via-white/15 to-white/30 relative">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+            </div>
+          </div>
+
+          {/* Referral Slot Cluster */}
+          <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-white/[0.02] border border-white/5">
+            {slots.map((slot) => (
+              <div
+                key={slot.id}
+                className="flex flex-col items-center justify-center p-1.5 rounded-xl bg-white/[0.04] border border-white/5 w-[52px] h-[72px] gap-1 transition-all"
+              >
+                <div
+                  className={\`w-7 h-7 rounded-full flex items-center justify-center border transition-all \${
+                    slot.isClaimed
+                      ? "border-emerald-400 bg-emerald-500/20 text-emerald-400"
+                      : "border-white/10 bg-white/[0.06] text-white/30"
+                  }\`}
+                >
+                  {slot.isClaimed ? (
+                    <Check className="w-3.5 h-3.5" />
+                  ) : (
+                    <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+                  )}
+                </div>
+                <span
+                  className={\`px-1 py-0.5 rounded text-[8px] font-medium flex items-center gap-0.5 leading-none \${
+                    slot.isClaimed
+                      ? "bg-emerald-500/20 text-emerald-300"
+                      : "bg-white/[0.06] text-white/40"
+                  }\`}
+                >
+                  {slot.isClaimed ? "Joined" : "Join ✓"}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Middle Content */}
+        <div className="relative z-10 flex flex-col gap-1.5 mb-5">
+          <h3 className="text-[17px] font-semibold text-white tracking-tight leading-snug">
+            {isJoined ? \`You're #\${queuePosition} in the waitlist\` : "You're not in the waitlist"}
+          </h3>
+          <p className="text-[12.5px] text-white/50 leading-relaxed max-w-[280px]">
+            {isJoined
+              ? "Share your referral link with teammates to jump ahead in line and unlock component packs early."
+              : "You need to join the waitlist before able to see your referral point."}
+          </p>
+        </div>
+
+        {/* Bottom Action Button */}
+        <div className="relative z-10">
+          {isJoined ? (
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="w-full py-2.5 px-4 rounded-full bg-white text-black font-semibold text-xs tracking-tight hover:bg-white/90 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-[0.98]"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-black" />
+                  <span>Referral link copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-black" />
+                  <span>Copy referral link</span>
+                </>
+              )}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleJoin}
+              className="w-full py-2.5 px-4 rounded-full bg-white/[0.08] hover:bg-white hover:text-black text-white font-semibold text-xs tracking-tight border border-white/10 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
+            >
+              <span>Join waitlist now</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}`,
+  },
 ];
 
 export function getComponentDesignMd(component: UIComponentEntity): string {
