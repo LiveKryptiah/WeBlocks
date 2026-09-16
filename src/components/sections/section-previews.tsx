@@ -12,7 +12,204 @@ import {
   Eye,
   Star,
   ChevronDown,
+  Search,
+  Users,
+  Folder,
+  Settings,
+  Plus,
 } from "lucide-react";
+
+// --- HERO: Dark Perspective Dashboard Hero ---
+export function DarkPerspectiveDashboardHeroPreview() {
+  return (
+    <div className="w-full bg-[#050608] text-white rounded-xl p-3.5 sm:p-4 border border-white/10 relative overflow-hidden shadow-2xl">
+      {/* Background ambient stars / glow */}
+      <div className="absolute top-0 right-1/4 w-44 h-44 bg-blue-600/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute -bottom-10 left-10 w-36 h-36 bg-purple-600/10 rounded-full blur-2xl pointer-events-none" />
+
+      {/* Subtle twinkling stars */}
+      <div className="absolute top-3 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-ping" />
+      <div className="absolute top-10 left-12 w-1.5 h-1.5 bg-white/20 rounded-full animate-pulse" />
+      <div className="absolute bottom-8 left-1/3 w-1 h-1 bg-white/30 rounded-full animate-pulse" />
+
+      {/* Mini top nav */}
+      <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-white/10 text-[10px]">
+        <div className="flex items-center gap-1.5 font-bold tracking-tight text-white">
+          <div className="w-4 h-4 rounded-full bg-white/15 flex items-center justify-center border border-white/20">
+            <Sparkles className="w-2.5 h-2.5 text-white" />
+          </div>
+          <span>.weblocks</span>
+        </div>
+        <div className="hidden sm:flex items-center gap-3 text-white/50 text-[9px]">
+          <span className="text-white hover:text-white cursor-pointer font-medium">Product</span>
+          <span className="hover:text-white cursor-pointer">Customers</span>
+          <span className="hover:text-white cursor-pointer">Log</span>
+          <span className="hover:text-white cursor-pointer">Pricing</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            className="h-5 px-2 rounded-full bg-white/5 text-white text-[9px] font-medium border border-white/10"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            className="h-5 px-2.5 rounded-full bg-white text-black text-[9px] font-semibold hover:bg-gray-200 transition-colors"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
+
+      {/* Main Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+        {/* Left Column: Copy & Actions */}
+        <div className="sm:col-span-6 space-y-2 z-10">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[9px] text-gray-300">
+            <Sparkles className="w-2.5 h-2.5 text-white" />
+            <span>Introducing V2.0</span>
+          </div>
+
+          {/* Dual-style Headline */}
+          <h4 className="text-xs sm:text-sm font-bold tracking-tight leading-snug">
+            Upgrade your productivity to <br />
+            <span className="font-serif italic font-normal text-white text-sm sm:text-base">
+              the next level
+            </span>
+          </h4>
+
+          {/* Body */}
+          <p className="text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-light">
+            Manage your design systems and tokens with zero overhead — keep your focus where it belongs.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex items-center gap-2 pt-0.5">
+            <button
+              type="button"
+              className="h-6 px-3 rounded-full bg-white text-black text-[10px] font-semibold shadow-md hover:bg-gray-200 transition-all"
+            >
+              Get Started
+            </button>
+            <button
+              type="button"
+              className="h-6 px-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white text-[10px] font-medium border border-white/10 transition-colors"
+            >
+              Learn More
+            </button>
+          </div>
+
+          {/* Customer Logos Row */}
+          <div className="pt-2 border-t border-white/5">
+            <p className="text-[8px] text-gray-500 font-medium mb-1">Meet our customers</p>
+            <div className="flex items-center gap-3 text-gray-500 text-[8px]">
+              <span className="font-bold tracking-wider opacity-70">LOGO</span>
+              <span className="font-semibold opacity-70">◆ IPSUM</span>
+              <span className="font-light tracking-wider opacity-70">LOGOIPSUM</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: 3D Perspective Floating Dashboard Mockup with Automatic Float Animation */}
+        <div className="sm:col-span-6 relative flex items-center justify-center min-h-[140px] sm:min-h-[160px] py-1">
+          <div
+            className="w-full max-w-[240px] sm:max-w-[270px] animate-[pulse_5s_ease-in-out_infinite]"
+            style={{
+              perspective: "600px",
+            }}
+          >
+            <div
+              className="w-full bg-[#111216] border border-white/15 rounded-xl shadow-2xl overflow-hidden transition-transform duration-500 hover:rotate-0"
+              style={{
+                transform: "rotateY(-14deg) rotateX(10deg) rotateZ(2deg)",
+                transformStyle: "preserve-3d",
+              }}
+            >
+              {/* Header Bar */}
+              <div className="h-5 bg-[#17181e] border-b border-white/10 px-2 flex items-center justify-between text-[8px] text-gray-400">
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-500/70" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/70" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500/70" />
+                </div>
+                <span className="text-[8px] text-gray-400 font-mono truncate px-1">Projects &gt; SaaS</span>
+                <span className="text-[7px] text-gray-500 font-mono">⌘K</span>
+              </div>
+
+              {/* Grid content */}
+              <div className="grid grid-cols-12 min-h-[110px]">
+                {/* Rail */}
+                <div className="col-span-2 bg-[#0c0d10] border-r border-white/10 p-1 flex flex-col items-center justify-between py-1.5">
+                  <div className="space-y-1.5 flex flex-col items-center">
+                    <div className="w-3.5 h-3.5 rounded bg-white/15 flex items-center justify-center">
+                      <Sparkles className="w-2 h-2 text-white" />
+                    </div>
+                    <div className="w-3.5 h-3.5 rounded bg-white/10 flex items-center justify-center text-white">
+                      <Users className="w-2 h-2" />
+                    </div>
+                    <div className="w-3.5 h-3.5 rounded hover:bg-white/5 flex items-center justify-center text-gray-400">
+                      <Folder className="w-2 h-2" />
+                    </div>
+                  </div>
+                  <div className="w-3.5 h-3.5 rounded hover:bg-white/5 flex items-center justify-center text-gray-400">
+                    <Settings className="w-2 h-2" />
+                  </div>
+                </div>
+
+                {/* Subnav */}
+                <div className="col-span-5 bg-[#131419] border-r border-white/10 p-1.5 space-y-1">
+                  <div className="flex items-center justify-between text-[9px] font-semibold text-white">
+                    <span>Projects</span>
+                    <span className="text-[7px] text-gray-500">&laquo;</span>
+                  </div>
+                  <div className="flex bg-[#0a0a0d] p-0.5 rounded text-[7px]">
+                    <span className="flex-1 text-center rounded bg-white/10 text-white font-medium">Team</span>
+                    <span className="flex-1 text-center text-gray-400">Personal</span>
+                  </div>
+                  <div className="space-y-0.5 pt-0.5">
+                    <div className="p-1 rounded bg-white/10 border border-white/10 flex items-center justify-between text-[8px] text-white">
+                      <span className="truncate">Dashboard</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-white/20 text-[6px] flex items-center justify-center font-bold">8</span>
+                    </div>
+                    <div className="p-1 rounded hover:bg-white/5 flex items-center justify-between text-[8px] text-gray-400">
+                      <span className="truncate">Landing Page</span>
+                    </div>
+                    <div className="p-1 rounded hover:bg-white/5 flex items-center justify-between text-[8px] text-gray-400">
+                      <span className="truncate">App Dev</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-white/10 text-[6px] flex items-center justify-center font-bold">3</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Canvas */}
+                <div className="col-span-5 bg-[#0e0f13] p-1.5 space-y-1">
+                  <div className="flex items-center justify-between text-[8px] font-semibold text-white">
+                    <span>To Do</span>
+                    <Plus className="w-2 h-2 text-gray-400" />
+                  </div>
+                  <div className="p-1 rounded bg-[#181920] border border-white/10 space-y-1 shadow-sm">
+                    <div className="h-1.5 w-10 bg-white/25 rounded" />
+                    <div className="h-1 w-full bg-white/10 rounded" />
+                    <div className="flex items-center justify-between text-[6px] text-gray-400 pt-0.5">
+                      <Clock className="w-1.5 h-1.5" />
+                      <span>Today</span>
+                    </div>
+                  </div>
+                  <div className="p-1 rounded bg-[#181920] border border-white/10 space-y-1 shadow-sm">
+                    <div className="h-1.5 w-8 bg-white/20 rounded" />
+                    <div className="h-1 w-3/4 bg-white/10 rounded" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // --- HERO 0: Dark Parametric Studio Hero ---
 export function DarkParametricHeroPreview() {
@@ -513,6 +710,8 @@ export function HighImpactBannerCTAPreview() {
 // Master Dispatcher
 export function RenderSectionPreview({ slug }: { slug: string }) {
   switch (slug) {
+    case "dark-perspective-dashboard-hero":
+      return <DarkPerspectiveDashboardHeroPreview />;
     case "dark-parametric-hero":
       return <DarkParametricHeroPreview />;
     case "minimal-saas-hero":
