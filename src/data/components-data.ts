@@ -1055,6 +1055,153 @@ export function LiveTranscribe({
   );
 }`,
   },
+  {
+    id: "comp-16",
+    slug: "perspective-roller-picker",
+    title: "Perspective Roller Picker",
+    description: "3D perspective cylindrical list picker with smooth depth stacking, squircle badge icons, and fluid auto-rolling selection adapted for Weblocks.",
+    category: "buttons",
+    tier: "pro",
+    cliCommand: "npx weblocks add perspective-roller-picker",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    tags: ["picker", "roller", "wheel", "perspective", "3d", "controls", "buttons", "selector", "stack"],
+    props: [
+      { name: "items", type: "Array<{ id: string; label: string; color: string; icon: React.ComponentType }>", description: "List of options with labels, colors, and icons" },
+      { name: "defaultIndex", type: "number", default: "3", description: "Default centered index" },
+      { name: "autoRoll", type: "boolean", default: "true", description: "Whether to continuously auto-roll through items" },
+      { name: "onChange", type: "(item: any, index: number) => void", description: "Callback when active item changes" },
+    ],
+    code: `"use client";
+
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Sliders,
+  Sparkles,
+  Layers,
+  Scan,
+  Share2,
+  Code2,
+  ShieldCheck,
+} from "lucide-react";
+
+export interface RollerItem {
+  id: string;
+  label: string;
+  color: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const DEFAULT_ITEMS: RollerItem[] = [
+  { id: "palette", label: "Design Tokens", color: "bg-[#e5a968]", icon: Sliders },
+  { id: "typography", label: "Typography System", color: "bg-[#5b96f7]", icon: Sparkles },
+  { id: "source", label: "Source Inspiration", color: "bg-[#d49b6a]", icon: Layers },
+  { id: "screens", label: "Screen Verification", color: "bg-[#9d4edd]", icon: Scan },
+  { id: "states", label: "Interactive States", color: "bg-[#64b5f6]", icon: Share2 },
+  { id: "export", label: "Clean Code Export", color: "bg-[#66bb6a]", icon: Code2 },
+  { id: "audit", label: "Production Audit", color: "bg-[#e57373]", icon: ShieldCheck },
+];
+
+export function PerspectiveRollerPicker({
+  items = DEFAULT_ITEMS,
+  defaultIndex = 3,
+  autoRoll = true,
+  onChange,
+}: {
+  items?: RollerItem[];
+  defaultIndex?: number;
+  autoRoll?: boolean;
+  onChange?: (item: RollerItem, index: number) => void;
+}) {
+  const [activeIndex, setActiveIndex] = useState(defaultIndex);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (!autoRoll || isUserInteracting) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => {
+        const next = (prev + 1) % items.length;
+        onChange?.(items[next], next);
+        return next;
+      });
+    }, 2400);
+
+    return () => clearInterval(timer);
+  }, [autoRoll, isUserInteracting, items, onChange]);
+
+  const handleSelect = (idx: number) => {
+    setActiveIndex(idx);
+    onChange?.(items[idx], idx);
+    setIsUserInteracting(true);
+    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    pauseTimerRef.current = setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 3500);
+  };
+
+  const n = items.length;
+
+  return (
+    <div className="relative w-full h-[210px] flex items-center justify-center overflow-hidden select-none">
+      <div
+        className="relative w-64 sm:w-72 h-full flex items-center justify-center"
+        style={{ perspective: "800px" }}
+      >
+        {items.map((item, idx) => {
+          let diff = idx - activeIndex;
+          while (diff > n / 2) diff -= n;
+          while (diff < -n / 2) diff += n;
+
+          if (Math.abs(diff) > 3) return null;
+
+          const isCenter = diff === 0;
+          const translateY = diff * 36;
+          const scale = 1 - Math.abs(diff) * 0.08;
+          const opacity = Math.max(0.15, 1 - Math.abs(diff) * 0.28);
+          const zIndex = 20 - Math.abs(diff) * 5;
+          const rotateX = -diff * 12;
+
+          const Icon = item.icon;
+
+          return (
+            <div
+              key={item.id}
+              onClick={() => handleSelect(idx)}
+              style={{
+                transform: \`translateY(\${translateY}px) scale(\${scale}) rotateX(\${rotateX}deg)\`,
+                opacity,
+                zIndex,
+              }}
+              className={\`absolute left-0 right-0 h-12 rounded-2xl flex items-center gap-3 px-3.5 transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] cursor-pointer \${
+                isCenter
+                  ? "bg-white border border-hairline-soft"
+                  : "bg-white/80 hover:bg-white border border-transparent"
+              }\`}
+            >
+              <div
+                className={\`w-7 h-7 rounded-xl \${item.color} text-white flex items-center justify-center shrink-0 transition-transform \${
+                  isCenter ? "scale-105" : "scale-95 opacity-90"
+                }\`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+              </div>
+
+              <span
+                className={\`text-xs sm:text-sm tracking-tight truncate transition-colors \${
+                  isCenter ? "font-bold text-ink" : "font-medium text-[#707070]"
+                }\`}
+              >
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}`,
+  },
 ];
 
 export function getComponentDesignMd(component: UIComponentEntity): string {

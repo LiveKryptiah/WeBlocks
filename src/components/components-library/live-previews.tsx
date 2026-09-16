@@ -26,6 +26,10 @@ import {
   RotateCcw,
   Plus,
   Minus,
+  Scan,
+  Layers,
+  Code2,
+  ShieldCheck,
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
 
@@ -1154,6 +1158,101 @@ export function LiveTranscribe() {
   );
 }
 
+// 16. Perspective Roller Picker (Buttons & Controls)
+export function LivePerspectiveRollerPicker() {
+  const [activeIndex, setActiveIndex] = useState(3); // Start centered on purple item
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const items = [
+    { id: "palette", label: "Design Tokens", color: "bg-[#e5a968]", icon: Sliders },
+    { id: "typography", label: "Typography System", color: "bg-[#5b96f7]", icon: Sparkles },
+    { id: "source", label: "Source Inspiration", color: "bg-[#d49b6a]", icon: Layers },
+    { id: "screens", label: "Screen Verification", color: "bg-[#9d4edd]", icon: Scan },
+    { id: "states", label: "Interactive States", color: "bg-[#64b5f6]", icon: Share2 },
+    { id: "export", label: "Clean Code Export", color: "bg-[#66bb6a]", icon: Code2 },
+    { id: "audit", label: "Production Audit", color: "bg-[#e57373]", icon: ShieldCheck },
+  ];
+
+  // Auto-rolling wheel animation
+  useEffect(() => {
+    if (isUserInteracting) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % items.length);
+    }, 2400);
+
+    return () => clearInterval(timer);
+  }, [isUserInteracting, items.length]);
+
+  const handleSelect = (idx: number) => {
+    setActiveIndex(idx);
+    setIsUserInteracting(true);
+    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
+    pauseTimerRef.current = setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 3500);
+  };
+
+  const n = items.length;
+
+  return (
+    <div className="relative w-full h-[210px] flex items-center justify-center overflow-hidden select-none">
+      <div className="relative w-64 sm:w-72 h-full flex items-center justify-center" style={{ perspective: "800px" }}>
+        {items.map((item, idx) => {
+          let diff = idx - activeIndex;
+          while (diff > n / 2) diff -= n;
+          while (diff < -n / 2) diff += n;
+
+          if (Math.abs(diff) > 3) return null;
+
+          const isCenter = diff === 0;
+          const translateY = diff * 36;
+          const scale = 1 - Math.abs(diff) * 0.08;
+          const opacity = Math.max(0.15, 1 - Math.abs(diff) * 0.28);
+          const zIndex = 20 - Math.abs(diff) * 5;
+          const rotateX = -diff * 12;
+
+          const Icon = item.icon;
+
+          return (
+            <div
+              key={item.id}
+              onClick={() => handleSelect(idx)}
+              style={{
+                transform: `translateY(${translateY}px) scale(${scale}) rotateX(${rotateX}deg)`,
+                opacity,
+                zIndex,
+              }}
+              className={`absolute left-0 right-0 h-12 rounded-2xl flex items-center gap-3 px-3.5 transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] cursor-pointer ${
+                isCenter
+                  ? "bg-white border border-hairline-soft"
+                  : "bg-white/80 hover:bg-white border border-transparent"
+              }`}
+            >
+              <div
+                className={`w-7 h-7 rounded-xl ${item.color} text-white flex items-center justify-center shrink-0 transition-transform ${
+                  isCenter ? "scale-105" : "scale-95 opacity-90"
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+              </div>
+
+              <span
+                className={`text-xs sm:text-sm tracking-tight truncate transition-colors ${
+                  isCenter ? "font-bold text-ink" : "font-medium text-[#707070]"
+                }`}
+              >
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // Component lookup map by slug
 export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "floating-nav-pill": LiveFloatingNavPill,
@@ -1171,4 +1270,5 @@ export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "audio-lyrics-scrubber": LiveAudioLyricsScrubber,
   "stat-counter-ticker": LiveStatCounterTicker,
   "live-transcribe": LiveTranscribe,
+  "perspective-roller-picker": LivePerspectiveRollerPicker,
 };
