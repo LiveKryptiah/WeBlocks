@@ -26,9 +26,36 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
 
   return (
     <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-md p-6 border-none transition-all duration-200">
-      {/* Card Top: Title & Controls */}
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <h2 className="text-h4 font-bold text-ink tracking-tight">
+      {/* Display Area: Interactive Preview or Code */}
+      <div className="mb-4">
+        {activeTab === "preview" ? (
+          <div className="w-full min-h-[220px] rounded-sm bg-white p-4 flex items-center justify-center overflow-hidden">
+            <div className="w-full flex items-center justify-center">
+              <RenderSectionPreview slug={section.slug} />
+            </div>
+          </div>
+        ) : (
+          <div className="relative w-full h-[220px] overflow-auto rounded-sm bg-[#141414] text-[#f0f0f0] p-4 text-xs font-mono">
+            <div className="absolute top-3 right-3 z-10">
+              <button
+                type="button"
+                onClick={handleCopyCode}
+                className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#262626] text-white hover:bg-[#333333] text-[10px] font-semibold transition-colors"
+              >
+                {copiedCode ? <Check className="w-3 h-3 text-[#0066ff]" /> : <Copy className="w-3 h-3" />}
+                <span>{copiedCode ? "Copied" : "Copy TSX"}</span>
+              </button>
+            </div>
+            <pre className="text-[11px] leading-relaxed select-all">
+              <code>{section.code}</code>
+            </pre>
+          </div>
+        )}
+      </div>
+
+      {/* Card Bottom: Title & Controls */}
+      <div className="flex items-center justify-between gap-3 pt-1">
+        <h2 className="text-body font-bold text-ink tracking-tight">
           {section.title}
         </h2>
 
@@ -61,33 +88,6 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
             <span>Code</span>
           </button>
         </div>
-      </div>
-
-      {/* Display Area: Interactive Preview or Code */}
-      <div>
-        {activeTab === "preview" ? (
-          <div className="w-full min-h-[220px] rounded-sm bg-white p-4 flex items-center justify-center overflow-hidden">
-            <div className="w-full flex items-center justify-center">
-              <RenderSectionPreview slug={section.slug} />
-            </div>
-          </div>
-        ) : (
-          <div className="relative w-full h-[220px] overflow-auto rounded-sm bg-[#141414] text-[#f0f0f0] p-4 text-xs font-mono">
-            <div className="absolute top-3 right-3 z-10">
-              <button
-                type="button"
-                onClick={handleCopyCode}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#262626] text-white hover:bg-[#333333] text-[10px] font-semibold transition-colors"
-              >
-                {copiedCode ? <Check className="w-3 h-3 text-[#0066ff]" /> : <Copy className="w-3 h-3" />}
-                <span>{copiedCode ? "Copied" : "Copy TSX"}</span>
-              </button>
-            </div>
-            <pre className="text-[11px] leading-relaxed select-all">
-              <code>{section.code}</code>
-            </pre>
-          </div>
-        )}
       </div>
     </div>
   );
