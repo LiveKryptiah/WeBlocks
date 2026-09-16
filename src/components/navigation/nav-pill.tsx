@@ -13,9 +13,6 @@ import {
   Compass,
   Grid,
   FolderHeart,
-  Sun,
-  Moon,
-  Contrast,
   Code2,
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
@@ -28,7 +25,7 @@ interface NavPillProps {
 
 export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
   const pathname = usePathname();
-  const { user, savedIds, canvasTheme, setCanvasTheme } = useLibrary();
+  const { user, savedIds } = useLibrary();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -109,31 +106,15 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
             <button
               type="button"
               onClick={onOpenCommandPalette}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-field hover:bg-canvas-soft text-muted hover:text-ink text-caption font-semibold transition-colors border border-hairline-soft"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-field hover:bg-canvas-soft text-muted hover:text-ink text-caption font-semibold transition-colors"
               title="Quick Search (⌘K / Ctrl+K)"
               aria-label="Open command palette"
             >
               <Search className="w-3.5 h-3.5 text-muted" />
               <span>Search</span>
-              <kbd className="font-mono text-[10px] bg-white px-1.5 py-0.5 rounded border border-hairline text-muted">
+              <kbd className="font-mono text-[10px] bg-white px-1.5 py-0.5 rounded text-muted">
                 ⌘K
               </kbd>
-            </button>
-
-            {/* Canvas Theme Switcher */}
-            <button
-              type="button"
-              onClick={() => {
-                const nextTheme = canvasTheme === "light" ? "neutral" : canvasTheme === "neutral" ? "dark" : "light";
-                setCanvasTheme(nextTheme);
-              }}
-              className="p-2 rounded-full text-muted hover:text-ink hover:bg-canvas-soft transition-colors border border-hairline-soft"
-              title={`Canvas Lighting: ${canvasTheme.toUpperCase()} (Click to toggle)`}
-              aria-label="Toggle canvas lighting theme"
-            >
-              {canvasTheme === "light" && <Sun className="w-4 h-4 text-amber-600" />}
-              {canvasTheme === "neutral" && <Contrast className="w-4 h-4 text-ink" />}
-              {canvasTheme === "dark" && <Moon className="w-4 h-4 text-indigo-400" />}
             </button>
 
             {/* Saved shortcut */}
