@@ -38,6 +38,7 @@ import {
   Users,
   MoreHorizontal,
   ArrowRight,
+  Link2,
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
 
@@ -2190,6 +2191,174 @@ export function LiveWaitlistReferralCard() {
   );
 }
 
+// 22. Share Modal Dialog
+export function LiveShareModalDialog() {
+  const { showToast } = useLibrary();
+  const [isOpen, setIsOpen] = useState(true);
+  const [copied, setCopied] = useState(false);
+  const shareUrl = "https://weblocks.dev/ref/screen-729";
+
+  const handleCopy = () => {
+    navigator.clipboard?.writeText(shareUrl);
+    setCopied(true);
+    showToast("Link copied to clipboard!", "success");
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSocialClick = (platform: string) => {
+    showToast(`Shared to ${platform}`, "info");
+  };
+
+  const socialChannels = [
+    {
+      name: "Facebook",
+      bgClass: "bg-[#1877f2] hover:bg-[#166fe5]",
+      icon: (
+        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      ),
+    },
+    {
+      name: "X",
+      bgClass: "bg-black dark:bg-[#262626] hover:bg-neutral-800",
+      icon: (
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      ),
+    },
+    {
+      name: "Whatsapp",
+      bgClass: "bg-[#25d366] hover:bg-[#20bd5a]",
+      icon: (
+        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M12.031 2c-5.508 0-9.988 4.477-9.988 9.984 0 1.76.459 3.478 1.333 4.993L2 22l5.233-1.373c1.458.794 3.1 1.213 4.798 1.213 5.508 0 9.988-4.477 9.988-9.984C22.019 6.477 17.539 2 12.031 2zm0 18.291c-1.503 0-2.977-.404-4.264-1.168l-.306-.182-3.167.831.845-3.088-.2-.318a8.272 8.272 0 0 1-1.268-4.382c0-4.577 3.724-8.3 8.301-8.3 4.577 0 8.301 3.723 8.301 8.3 0 4.577-3.724 8.3-8.301 8.3zm4.549-6.216c-.249-.125-1.472-.726-1.7-.809-.228-.083-.394-.125-.56.125-.166.249-.643.809-.788.975-.145.166-.29.187-.539.062-.249-.125-1.052-.388-2.003-1.236-.74-.66-1.24-1.475-1.385-1.724-.145-.249-.015-.384.11-.508.112-.112.249-.29.373-.435.125-.145.166-.249.249-.415.083-.166.041-.311-.021-.435-.062-.125-.56-1.349-.768-1.847-.202-.486-.407-.42-.56-.428l-.477-.008c-.166 0-.435.062-.663.311-.228.249-.871.851-.871 2.075 0 1.224.892 2.407 1.016 2.573.125.166 1.756 2.681 4.254 3.759.594.257 1.058.411 1.42.526.597.19 1.141.163 1.57.099.479-.071 1.472-.602 1.68-1.183.207-.581.207-1.079.145-1.183-.062-.104-.228-.166-.477-.291z" />
+        </svg>
+      ),
+    },
+    {
+      name: "Telegram",
+      bgClass: "bg-[#24a1de] hover:bg-[#208fc4]",
+      icon: (
+        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+        </svg>
+      ),
+    },
+    {
+      name: "Linkedin",
+      bgClass: "bg-[#0077b5] hover:bg-[#00669c]",
+      icon: (
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.92 0-1.67.75-1.67 1.67 0 .91.75 1.66 1.67 1.66s1.67-.75 1.67-1.66c0-.92-.75-1.67-1.67-1.67Z" />
+        </svg>
+      ),
+    },
+  ];
+
+  if (!isOpen) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] text-xs font-semibold text-ink hover:bg-field dark:hover:bg-[#23252a] transition-all cursor-pointer shadow-xs active:scale-95"
+        >
+          <Share2 className="w-3.5 h-3.5 text-muted" />
+          <span>Open Share Modal</span>
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center justify-center pt-8 pb-4 px-4 select-none font-sans">
+      <div className="relative w-full max-w-[360px] rounded-[32px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] pt-9 pb-6 px-6 transition-all animate-in fade-in zoom-in-95 duration-150">
+        {/* Protruding Top Center Emblem: Interconnected Chain Links */}
+        <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-white dark:bg-[#161718] border-4 border-[#f4f4f5] dark:border-[#0e0f11] shadow-sm flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#94a3b8] to-[#cbd5e1] dark:from-[#334155] dark:to-[#64748b] flex items-center justify-center shadow-inner">
+            <Link2 className="w-4 h-4 text-white -rotate-45" />
+          </div>
+        </div>
+
+        {/* Top Right Close Button */}
+        <button
+          type="button"
+          onClick={() => {
+            setIsOpen(false);
+            showToast("Share modal closed", "info");
+          }}
+          className="absolute top-4 right-4 w-7 h-7 rounded-full border border-black/[0.06] dark:border-white/10 flex items-center justify-center text-[#9ca3af] hover:text-[#111827] dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+          title="Close dialog"
+        >
+          <X className="w-3.5 h-3.5" />
+        </button>
+
+        {/* Title & Subtitle */}
+        <div className="text-center mb-6">
+          <h3 className="text-xl font-bold text-[#111827] dark:text-white tracking-tight leading-tight">
+            Share with Friends
+          </h3>
+          <p className="text-[13px] text-[#6b7280] dark:text-[#9ca3af] max-w-[260px] mx-auto mt-2 leading-relaxed">
+            Trading is more effective when you connect with friends!
+          </p>
+        </div>
+
+        {/* Section 1: Share you link */}
+        <div className="mb-5">
+          <label className="block text-[13px] font-bold text-[#111827] dark:text-white mb-2">
+            Share your link
+          </label>
+          <div className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#f8f9fa] dark:bg-[#202226] border border-black/[0.04] dark:border-white/[0.06] text-[13px] text-[#374151] dark:text-[#d1d5db]">
+            <span className="truncate pr-2 select-all font-sans text-[12.5px]">
+              {shareUrl}
+            </span>
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="p-1 rounded-md text-[#6b7280] dark:text-[#9ca3af] hover:text-ink dark:hover:text-white transition-colors cursor-pointer shrink-0"
+              title="Copy link"
+            >
+              {copied ? (
+                <Check className="w-4 h-4 text-emerald-500" />
+              ) : (
+                <Copy className="w-4 h-4" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Section 2: Share to Social Network Icons */}
+        <div>
+          <label className="block text-[13px] font-bold text-[#111827] dark:text-white mb-3">
+            Share to
+          </label>
+          <div className="flex items-center justify-between gap-1">
+            {socialChannels.map((channel) => (
+              <button
+                key={channel.name}
+                type="button"
+                onClick={() => handleSocialClick(channel.name)}
+                className="flex flex-col items-center gap-1.5 group cursor-pointer focus:outline-none"
+              >
+                <div
+                  className={`w-11 h-11 rounded-full flex items-center justify-center text-white shadow-xs transition-transform duration-150 group-hover:scale-105 group-active:scale-95 ${channel.bgClass}`}
+                >
+                  {channel.icon}
+                </div>
+                <span className="text-[10.5px] font-medium text-[#6b7280] dark:text-[#9ca3af] group-hover:text-[#111827] dark:group-hover:text-white transition-colors">
+                  {channel.name}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Component lookup map by slug
 export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "floating-nav-pill": LiveFloatingNavPill,
@@ -2213,4 +2382,5 @@ export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "parameter-slider-sheet": LiveParameterSliderSheet,
   "file-upload-progress": LiveFileUploadProgress,
   "waitlist-referral-card": LiveWaitlistReferralCard,
+  "share-modal-dialog": LiveShareModalDialog,
 };
