@@ -250,25 +250,27 @@ export default function HomePage() {
       </section>
 
       {/* SECTION: INTERACTIVE COMPONENT BLOCKS */}
-      <section className="w-full max-w-7xl px-6 sm:px-8 py-16 sm:py-24 border-t border-hairline">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <span className="text-label uppercase tracking-wider text-muted font-semibold">
-              Components
-            </span>
-            <h2 className="text-h2 text-ink font-bold mt-1">
-              Interactive component blocks.
-            </h2>
+      <section className="w-full border-t border-hairline py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <span className="text-label uppercase tracking-wider text-muted font-semibold">
+                Components
+              </span>
+              <h2 className="text-h2 text-ink font-bold mt-1">
+                Interactive component blocks.
+              </h2>
+            </div>
+            <Link href="/components">
+              <ButtonOutline size="sm">Browse all components</ButtonOutline>
+            </Link>
           </div>
-          <Link href="/components">
-            <ButtonOutline size="sm">Browse all components</ButtonOutline>
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {featuredComponents.map((comp) => (
-            <ComponentPreviewCard key={comp.id} component={comp} />
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+            {featuredComponents.map((comp) => (
+              <ComponentPreviewCard key={comp.id} component={comp} />
+            ))}
+          </div>
         </div>
       </section>
 
