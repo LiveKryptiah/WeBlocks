@@ -33,6 +33,10 @@ import {
   Mail,
   BellOff,
   ChevronDown,
+  Send,
+  Trash2,
+  Users,
+  MoreHorizontal,
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
 
@@ -1322,16 +1326,19 @@ export function LiveSpotlightDirectoryCard() {
       {/* 1. Elevated Spotlight Featured Member Card */}
       <div className="relative z-20 w-full rounded-2xl bg-white border border-hairline-soft p-2.5 sm:p-3 flex items-center justify-between gap-2.5 shadow-none transition-all duration-200">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-hairline-soft bg-field flex items-center justify-center">
+          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-hairline-soft bg-field">
+            <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-ink select-none">
+              {active.initials}
+            </span>
             <img
+              key={active.id}
               src={active.avatar}
               alt={active.name}
-              className="w-full h-full object-cover"
+              className="relative z-10 w-full h-full aspect-square object-cover rounded-full block"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}
             />
-            <span className="text-xs font-bold text-ink">{active.initials}</span>
           </div>
 
           <div className="min-w-0">
@@ -1378,16 +1385,19 @@ export function LiveSpotlightDirectoryCard() {
             className="flex items-center justify-between gap-2 p-1.5 rounded-xl hover:bg-field/50 transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-2 min-w-0">
-              <div className="w-6 h-6 rounded-full overflow-hidden bg-field shrink-0 border border-hairline-soft flex items-center justify-center">
+              <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 border border-hairline-soft bg-field">
+                <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-ink select-none">
+                  {m.initials}
+                </span>
                 <img
+                  key={m.id}
                   src={m.avatar}
                   alt={m.name}
-                  className="w-full h-full object-cover"
+                  className="relative z-10 w-full h-full aspect-square object-cover rounded-full block"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                   }}
                 />
-                <span className="text-[9px] font-bold text-ink">{m.initials}</span>
               </div>
               <div className="min-w-0">
                 <div className="text-[11px] font-semibold text-ink truncate">{m.name}</div>
@@ -1417,6 +1427,277 @@ export function LiveSpotlightDirectoryCard() {
   );
 }
 
+// 18. Share Popover Card (Cards & Bento)
+export function LiveSharePopoverCard() {
+  const [activeIdx, setActiveIdx] = useState(1); // Gmail default active matching reference
+  const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const [permissionIdx, setPermissionIdx] = useState(0);
+  const [accessIdx, setAccessIdx] = useState(0);
+  const [copied, setCopied] = useState(false);
+  const { showToast } = useLibrary();
+
+  const permissions = ["Anyone with this link", "Team members only", "Weblocks community"];
+  const accessLevels = ["can view", "can inspect", "can copy code"];
+
+  const destinations = [
+    {
+      id: "linkedin",
+      name: "LinkedIn",
+      icon: (
+        <svg className="w-3.5 h-3.5 text-ink shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.92 0-1.67.75-1.67 1.67 0 .91.75 1.66 1.67 1.66s1.67-.75 1.67-1.66c0-.92-.75-1.67-1.67-1.67Z" />
+        </svg>
+      ),
+    },
+    {
+      id: "gmail",
+      name: "Gmail",
+      icon: (
+        <svg className="w-3.5 h-3.5 text-ink shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+        </svg>
+      ),
+    },
+    {
+      id: "whatsapp",
+      name: "WhatsApp",
+      icon: (
+        <svg className="w-3.5 h-3.5 text-ink shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.28-2.42 5.84a8.19 8.19 0 0 1-5.82 2.41h-.01c-1.42 0-2.82-.37-4.05-1.08l-.29-.17-3.11.82.83-3.03-.19-.3a8.21 8.21 0 0 1-1.26-4.48c0-4.55 3.7-8.24 8.24-8.24m4.52 11.63c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3" />
+        </svg>
+      ),
+    },
+    {
+      id: "facebook",
+      name: "Facebook",
+      icon: (
+        <svg className="w-3.5 h-3.5 text-ink shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      ),
+    },
+    {
+      id: "telegram",
+      name: "Telegram",
+      icon: (
+        <svg className="w-3.5 h-3.5 text-ink shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.93-1.28 4.88-2.12 5.86-2.54 2.79-1.16 3.37-1.36 3.75-1.36.08 0 .28.02.4.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+        </svg>
+      ),
+    },
+  ];
+
+  // Auto-cycle destinations when not hovering
+  useEffect(() => {
+    if (isHovered || !isOpen) return;
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % destinations.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [isHovered, isOpen, destinations.length]);
+
+  const handleCopyLink = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText("https://weblocks.dev/ref/screen-729");
+    setCopied(true);
+    showToast("Shareable reference link copied!", "copy");
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleShareTarget = (e: React.MouseEvent, destName: string) => {
+    e.stopPropagation();
+    showToast(`Shared Weblocks reference to ${destName}`, "info");
+  };
+
+  const handleMoreOptions = (e: React.MouseEvent, destName: string) => {
+    e.stopPropagation();
+    showToast(`Additional options for ${destName}`, "info");
+  };
+
+  const cyclePermission = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setPermissionIdx((prev) => (prev + 1) % permissions.length);
+    showToast(`Permission set: ${permissions[(permissionIdx + 1) % permissions.length]}`, "info");
+  };
+
+  const cycleAccess = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setAccessIdx((prev) => (prev + 1) % accessLevels.length);
+    showToast(`Access updated: ${accessLevels[(accessIdx + 1) % accessLevels.length]}`, "info");
+  };
+
+  return (
+    <div className="relative w-full max-w-[320px] flex flex-col items-center select-none py-2">
+      {/* 1. Popover Card with Pointer Beak */}
+      <div
+        className={`w-full transition-all duration-300 transform origin-bottom ${
+          isOpen
+            ? "opacity-100 scale-100 translate-y-0 mb-3"
+            : "opacity-0 scale-95 translate-y-2 pointer-events-none mb-0 h-0 overflow-hidden"
+        }`}
+      >
+        <div className="relative w-full rounded-[24px] bg-white border border-hairline-soft p-2.5 shadow-none">
+          {/* Destination List */}
+          <div
+            className="flex flex-col gap-0.5"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {destinations.map((dest, idx) => {
+              const isActive = activeIdx === idx;
+              return (
+                <div
+                  key={dest.id}
+                  onMouseEnter={() => setActiveIdx(idx)}
+                  className={`flex items-center justify-between px-2.5 py-1.5 rounded-xl transition-all duration-150 cursor-pointer ${
+                    isActive ? "bg-[#ebebed]" : "bg-transparent hover:bg-[#f5f5f7]"
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                      {dest.icon}
+                    </div>
+                    <span className="text-xs font-medium text-ink tracking-tight">
+                      {dest.name}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button
+                      type="button"
+                      onClick={(e) => handleMoreOptions(e, dest.name)}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                        isActive
+                          ? "bg-[#141414] text-white hover:bg-[#262626] scale-105"
+                          : "bg-[#f0f0f2] text-[#8e8e93] hover:bg-[#e4e4e7] hover:text-ink"
+                      }`}
+                      title={`Options for ${dest.name}`}
+                    >
+                      <MoreHorizontal className="w-3 h-3" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => handleShareTarget(e, dest.name)}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                        isActive
+                          ? "bg-[#141414] text-white hover:bg-[#262626] scale-105"
+                          : "bg-[#f0f0f2] text-[#8e8e93] hover:bg-[#e4e4e7] hover:text-ink"
+                      }`}
+                      title={`Share to ${dest.name}`}
+                    >
+                      <ArrowUpRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Popover Footer: Permissions & Copy Link */}
+          <div className="flex items-center justify-between gap-1 pt-2.5 mt-1 border-t border-hairline-soft/60 px-1 text-[10px] text-[#707070]">
+            <button
+              type="button"
+              onClick={cyclePermission}
+              className="flex items-center gap-0.5 hover:text-ink transition-colors cursor-pointer truncate max-w-[90px]"
+              title="Change permission scope"
+            >
+              <span className="truncate">{permissions[permissionIdx]}</span>
+              <ChevronDown className="w-2.5 h-2.5 shrink-0" />
+            </button>
+
+            <button
+              type="button"
+              onClick={cycleAccess}
+              className="flex items-center gap-0.5 hover:text-ink transition-colors cursor-pointer shrink-0"
+              title="Change access level"
+            >
+              <span>{accessLevels[accessIdx]}</span>
+              <ChevronDown className="w-2.5 h-2.5 shrink-0" />
+            </button>
+
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold transition-all cursor-pointer shadow-none shrink-0 ${
+                copied
+                  ? "bg-[#141414] text-white"
+                  : "bg-[#e8e8ea] text-ink hover:bg-[#141414] hover:text-white"
+              }`}
+            >
+              {copied ? (
+                <>
+                  <Check className="w-2.5 h-2.5" />
+                  <span>copied</span>
+                </>
+              ) : (
+                <span>copy link</span>
+              )}
+            </button>
+          </div>
+
+          {/* Speech bubble pointer beak */}
+          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-white border-r border-b border-hairline-soft rotate-45 z-10" />
+        </div>
+      </div>
+
+      {/* 2. Floating Dock Toolbar at Bottom */}
+      <div className="relative z-20 flex items-center justify-between w-full max-w-[280px] px-3.5 py-1.5 rounded-full bg-[#f2f2f4] border border-hairline-soft shadow-none">
+        <button
+          type="button"
+          onClick={() => showToast("Quick dispatch triggered", "info")}
+          className="p-1.5 text-[#707070] hover:text-ink transition-colors cursor-pointer"
+          title="Send reference"
+        >
+          <Send className="w-3.5 h-3.5" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => showToast("Moved to archive", "info")}
+          className="p-1.5 text-[#707070] hover:text-ink transition-colors cursor-pointer"
+          title="Archive reference"
+        >
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
+
+        {/* Center Share Pill Toggle */}
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold tracking-tight transition-all cursor-pointer ${
+            isOpen
+              ? "bg-white text-ink border border-hairline-soft shadow-none scale-105"
+              : "bg-transparent text-[#707070] hover:text-ink hover:bg-white/60"
+          }`}
+          title="Toggle share popover"
+        >
+          <span>share</span>
+          <Share2 className="w-3 h-3" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => showToast("Collaborator permissions", "info")}
+          className="p-1.5 text-[#707070] hover:text-ink transition-colors cursor-pointer"
+          title="Team collaborators"
+        >
+          <Users className="w-3.5 h-3.5" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => showToast("Saved to collection", "info")}
+          className="p-1.5 text-[#707070] hover:text-ink transition-colors cursor-pointer"
+          title="Bookmark reference"
+        >
+          <Bookmark className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // Component lookup map by slug
 export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "floating-nav-pill": LiveFloatingNavPill,
@@ -1436,4 +1717,5 @@ export const LIVE_COMPONENTS_MAP: Record<string, React.ComponentType> = {
   "live-transcribe": LiveTranscribe,
   "perspective-roller-picker": LivePerspectiveRollerPicker,
   "spotlight-directory-card": LiveSpotlightDirectoryCard,
+  "share-popover-card": LiveSharePopoverCard,
 };
