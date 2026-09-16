@@ -47,29 +47,24 @@ function SectionShowcaseContent() {
     <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
       {/* Header */}
       <div className="mb-10">
-        <div className="inline-block px-3 py-1 rounded-full bg-field text-caption font-semibold text-ink mb-3">
-          Section Showcase
-        </div>
-        <h1 className="text-display sm:text-h2 font-bold tracking-headline text-ink mb-3">
-          Full-width section blocks.
-        </h1>
-        <p className="text-body-large text-muted max-w-2xl font-normal leading-relaxed">
-          Inspect, interact with, and copy production-ready website sections — heroes, footers, contact forms, feature bentos, and pricing tables.
+        <h1 className="text-h2 font-bold text-ink mb-2">Section showcase.</h1>
+        <p className="text-body text-muted max-w-2xl font-light">
+          Explore interactive production sections crafted with pure React, Tailwind CSS, and zero drop shadows.
         </p>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-10">
+      <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
         <div className="flex-1 w-full">
           <SearchInput
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onClear={() => setQuery("")}
-            placeholder="Search sections by name, keyword, or tag..."
+            placeholder="Search sections by name, category, or tag..."
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full md:w-auto pb-1">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -78,7 +73,7 @@ function SectionShowcaseContent() {
               className={`px-3.5 py-1.5 rounded-full text-body-sm font-semibold transition-colors shrink-0 ${
                 selectedCategory === cat.id
                   ? "bg-ink text-white"
-                  : "bg-field text-muted hover:text-ink hover:bg-canvas-soft"
+                  : "bg-field text-muted hover:text-ink"
               }`}
             >
               {cat.label}
@@ -96,19 +91,8 @@ function SectionShowcaseContent() {
 
       {/* Empty State */}
       {filteredSections.length === 0 && (
-        <div className="py-24 text-center space-y-3">
-          <p className="text-body-large font-semibold text-ink">No sections match your criteria.</p>
-          <p className="text-body-sm text-muted">Try resetting your search or selecting another category.</p>
-          <button
-            type="button"
-            onClick={() => {
-              setQuery("");
-              setSelectedCategory("All");
-            }}
-            className="mt-2 inline-flex items-center justify-center h-9 px-4 rounded-full bg-field hover:bg-canvas-soft text-ink text-body-sm font-semibold transition-colors"
-          >
-            Clear filters
-          </button>
+        <div className="py-20 text-center text-body text-muted font-light">
+          No sections found matching &quot;{query}&quot;.
         </div>
       )}
     </div>
