@@ -27,17 +27,17 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
   };
 
   return (
-    <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-md p-6 border-none transition-all duration-200">
+    <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-xl p-5 sm:p-7 border-none transition-all duration-200">
       {/* Display Area: Interactive Preview or design.md */}
       <div className="mb-4">
         {activeTab === "preview" ? (
-          <div className="w-full min-h-[220px] rounded-sm bg-white p-4 flex items-center justify-center overflow-hidden">
+          <div className="w-full min-h-[360px] sm:min-h-[460px] rounded-lg bg-canvas p-2 sm:p-4 flex items-center justify-center overflow-hidden">
             <div className="w-full flex items-center justify-center">
               <RenderSectionPreview slug={section.slug} />
             </div>
           </div>
         ) : (
-          <div className="relative w-full h-[220px] overflow-auto rounded-sm bg-[#141414] text-[#f0f0f0] p-4 text-xs font-mono">
+          <div className="relative w-full h-[360px] sm:h-[460px] overflow-auto rounded-lg bg-[#141414] text-[#f0f0f0] p-4 sm:p-6 text-xs font-mono">
             <div className="sticky top-0 float-right z-10 mb-2">
               <button
                 type="button"
@@ -57,7 +57,7 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
 
       {/* Card Bottom: Bold Title & Controls */}
       <div className="flex items-center justify-between gap-3 pt-1">
-        <h2 className="text-lg sm:text-xl font-bold text-ink tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
           {section.title}
         </h2>
 

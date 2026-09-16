@@ -82,8 +82,8 @@ function SectionShowcaseContent() {
         </div>
       </div>
 
-      {/* 2-Column Sections Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Single-Row (1 Card per Row) Sections Showcase */}
+      <div className="flex flex-col gap-12 w-full">
         {filteredSections.map((section) => (
           <SectionPreviewCard key={section.id} section={section} />
         ))}
