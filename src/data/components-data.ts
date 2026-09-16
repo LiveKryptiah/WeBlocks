@@ -916,3 +916,45 @@ export function StatCounterTicker() {
 }`,
   },
 ];
+
+export function getComponentDesignMd(component: UIComponentEntity): string {
+  const propsLines = component.props && component.props.length > 0
+    ? component.props.map((p) => `- \`${p.name}\` (\`${p.type}\`${p.default ? `, default: ${p.default}` : ""}): ${p.description}`)
+    : ["- No configurable props required (self-contained block)."];
+
+  const tagsStr = component.tags.map((t) => "#" + t).join(" ");
+  const depsStr = component.dependencies.join(", ");
+
+  return [
+    `# ${component.title} — design.md`,
+    "",
+    "## 1. Overview",
+    component.description,
+    "",
+    "## 2. Component Properties (Props)",
+    ...propsLines,
+    "",
+    "## 3. Design Tokens & Styling",
+    "- **Typeface**: M Saans / Inter Variable",
+    "- **Optical Weights**: Headlines 652 • Body 456 • Actions 600",
+    "- **Elevation**: Level 1 (borderless contrast, zero shadows)",
+    "- **Border Radius**: rounded-full (pill) / rounded-md",
+    "- **Dependencies**: " + depsStr,
+    "",
+    "## 4. CLI Installation",
+    "```bash",
+    component.cliCommand,
+    "```",
+    "",
+    "## 5. Metadata",
+    `- **Category**: ${component.category}`,
+    `- **Tier**: ${component.tier}`,
+    `- **Slug**: ${component.slug}`,
+    `- **Tags**: ${tagsStr}`,
+    "",
+    "## 6. React + Tailwind Implementation",
+    "```tsx",
+    component.code,
+    "```",
+  ].join("\n");
+}
