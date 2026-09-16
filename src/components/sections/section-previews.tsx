@@ -17,7 +17,107 @@ import {
   Folder,
   Settings,
   Plus,
+  ArrowUpRight,
 } from "lucide-react";
+
+// --- HERO: Celestial Horizon Hero ---
+export function CelestialHorizonHeroPreview() {
+  return (
+    <div className="w-full bg-[#02040a] text-white rounded-2xl p-5 sm:p-8 lg:p-10 border border-white/10 relative overflow-hidden shadow-2xl min-h-[380px] sm:min-h-[440px] flex flex-col justify-between">
+      {/* Background Perspective Wireframe Grid */}
+      <div
+        className="absolute inset-0 opacity-[0.08] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
+        }}
+      />
+
+      {/* Right Aurora Light Ray */}
+      <div className="absolute top-0 right-0 w-80 sm:w-96 h-[400px] bg-gradient-to-bl from-blue-600/25 via-blue-500/10 to-transparent blur-3xl pointer-events-none animate-[pulse_7s_ease-in-out_infinite]" />
+
+      {/* Top Floating Navigation */}
+      <div className="relative flex items-center justify-between pb-4 border-b border-white/10 z-10">
+        <div className="flex items-center gap-2 font-bold tracking-tight text-white">
+          <div className="flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+            <div className="flex flex-col gap-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+            </div>
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+          </div>
+          <span className="text-sm pl-1">.weblocks</span>
+        </div>
+
+        <nav className="hidden md:flex items-center gap-6 text-white/60 text-xs font-normal">
+          <span className="text-white hover:text-white cursor-pointer font-medium">Platform</span>
+          <span className="hover:text-white cursor-pointer transition-colors">How It Works</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Developers</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Community</span>
+          <span className="hover:text-white cursor-pointer transition-colors">Docs</span>
+        </nav>
+
+        <button
+          type="button"
+          className="h-7 px-3.5 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-xs font-semibold transition-all shadow-[0_0_15px_rgba(0,85,255,0.45)] hover:shadow-[0_0_20px_rgba(0,85,255,0.6)]"
+        >
+          Get Started
+        </button>
+      </div>
+
+      {/* Main Centered Hero Content */}
+      <div className="relative max-w-3xl mx-auto text-center flex flex-col items-center py-8 sm:py-12 z-10">
+        {/* Metallic Gradient Dual-Tone Headline */}
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-4">
+          <span className="bg-gradient-to-b from-white via-gray-200 to-gray-400 bg-clip-text text-transparent block">
+            Decentralized Design,
+          </span>
+          <span className="bg-gradient-to-b from-white via-gray-300 to-gray-500 bg-clip-text text-transparent block">
+            Owned by You.
+          </span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-xs sm:text-sm lg:text-base text-gray-400 max-w-lg mx-auto leading-relaxed font-light mb-6">
+          A Web3-native UI platform where design intelligence is transparent, permissionless, and user-owned — not locked inside centralized frameworks.
+        </p>
+
+        {/* Action CTAs */}
+        <div className="flex items-center justify-center gap-3">
+          <button
+            type="button"
+            className="h-9 sm:h-10 px-6 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-xs sm:text-sm font-semibold transition-all shadow-[0_0_20px_rgba(0,85,255,0.5)] active:scale-95"
+          >
+            Launch App
+          </button>
+          <button
+            type="button"
+            className="inline-flex items-center gap-1.5 h-9 sm:h-10 px-5 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-medium border border-white/15 backdrop-blur transition-all"
+          >
+            <span>Explore</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-gray-300" />
+          </button>
+        </div>
+      </div>
+
+      {/* Celestial Horizon Curve & Atmosphere Glow with Automatic Animation */}
+      <div className="absolute -bottom-36 sm:-bottom-48 left-1/2 -translate-x-1/2 w-[150%] sm:w-[125%] h-[280px] sm:h-[360px] rounded-[100%] bg-[#010204] border-t-2 border-blue-400/80 shadow-[0_-20px_60px_rgba(37,99,235,0.5),0_-40px_100px_rgba(59,130,246,0.25)] pointer-events-none animate-[pulse_5s_ease-in-out_infinite]">
+        {/* Bright rim line */}
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-cyan-300 to-transparent blur-[1px]" />
+      </div>
+
+      {/* Floating Stardust Particles */}
+      <div className="absolute bottom-20 left-[44%] w-1 h-1 bg-cyan-400 rounded-full animate-ping pointer-events-none" />
+      <div className="absolute bottom-24 left-[47%] w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-16 left-[52%] w-1 h-1 bg-cyan-300 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-22 left-[55%] w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping pointer-events-none" />
+      <div className="absolute bottom-14 left-[59%] w-1 h-1 bg-blue-300 rounded-full animate-pulse pointer-events-none" />
+    </div>
+  );
+}
 
 // --- HERO: Dark Perspective Dashboard Hero ---
 export function DarkPerspectiveDashboardHeroPreview() {
@@ -733,6 +833,8 @@ export function HighImpactBannerCTAPreview() {
 // Master Dispatcher
 export function RenderSectionPreview({ slug }: { slug: string }) {
   switch (slug) {
+    case "celestial-horizon-hero":
+      return <CelestialHorizonHeroPreview />;
     case "dark-perspective-dashboard-hero":
       return <DarkPerspectiveDashboardHeroPreview />;
     case "dark-parametric-hero":

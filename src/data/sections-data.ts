@@ -32,6 +32,117 @@ export const SECTION_CATEGORIES: { id: SectionCategory; label: string }[] = [
 export const SECTIONS: SectionEntity[] = [
   // --- HERO SECTIONS ---
   {
+    id: "sec-hero-horizon",
+    slug: "celestial-horizon-hero",
+    title: "Celestial Horizon Hero",
+    description: "Futuristic dark cosmic hero featuring glowing celestial planet curvature, ambient aurora light rays, metallic gradient typography, and dual pill action buttons.",
+    category: "hero",
+    tags: ["hero", "dark", "cosmic", "celestial", "blue", "horizon", "futuristic"],
+    code: `"use client";
+
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
+
+export function CelestialHorizonHero() {
+  return (
+    <section className="relative w-full bg-[#02040a] text-white overflow-hidden py-16 sm:py-28 px-6 sm:px-12 rounded-3xl border border-white/5">
+      {/* Background Perspective Wireframe Grid */}
+      <div
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
+        }}
+      />
+
+      {/* Right Aurora Light Ray */}
+      <div className="absolute top-0 right-0 w-[420px] h-[550px] bg-gradient-to-bl from-blue-600/25 via-blue-500/10 to-transparent blur-3xl pointer-events-none" />
+
+      {/* Top Floating Navigation */}
+      <div className="relative flex items-center justify-between pb-16 max-w-6xl mx-auto z-10">
+        <div className="flex items-center gap-2.5">
+          {/* Braided Connected Node Logo */}
+          <div className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]" />
+            <div className="flex flex-col gap-1">
+              <span className="w-2 h-2 rounded-full bg-blue-400" />
+              <span className="w-2 h-2 rounded-full bg-blue-600" />
+            </div>
+            <span className="w-2 h-2 rounded-full bg-blue-400" />
+          </div>
+          <span className="font-bold text-sm tracking-tight text-white pl-1">.weblocks</span>
+        </div>
+
+        <nav className="hidden md:flex items-center gap-8 text-xs text-gray-300 font-medium">
+          <a href="#platform" className="hover:text-white transition-colors">Platform</a>
+          <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
+          <a href="#developers" className="hover:text-white transition-colors">Developers</a>
+          <a href="#community" className="hover:text-white transition-colors">Community</a>
+          <a href="#docs" className="hover:text-white transition-colors">Docs</a>
+        </nav>
+
+        <button
+          type="button"
+          className="h-9 px-5 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-xs font-semibold transition-all shadow-[0_0_20px_rgba(0,85,255,0.4)] hover:shadow-[0_0_25px_rgba(0,85,255,0.6)]"
+        >
+          Get Started
+        </button>
+      </div>
+
+      {/* Main Centered Content */}
+      <div className="relative max-w-4xl mx-auto text-center flex flex-col items-center pt-8 pb-32 z-10">
+        {/* Metallic Gradient Headline */}
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08] mb-6">
+          <span className="bg-gradient-to-b from-white via-gray-200 to-gray-400 bg-clip-text text-transparent block">
+            Decentralized Design,
+          </span>
+          <span className="bg-gradient-to-b from-white via-gray-300 to-gray-500 bg-clip-text text-transparent block">
+            Owned by You.
+          </span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-light mb-8">
+          A Web3-native UI platform where design intelligence is transparent, permissionless, and user-owned — not locked inside centralized frameworks.
+        </p>
+
+        {/* CTAs */}
+        <div className="flex items-center justify-center gap-3.5">
+          <button
+            type="button"
+            className="h-11 px-7 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-sm font-semibold transition-all shadow-[0_0_25px_rgba(0,85,255,0.5)] active:scale-95"
+          >
+            Launch App
+          </button>
+          <a
+            href="#explore"
+            className="inline-flex items-center gap-1.5 h-11 px-6 rounded-full bg-white/5 hover:bg-white/10 text-white text-sm font-medium border border-white/15 backdrop-blur transition-all"
+          >
+            <span>Explore</span>
+            <ArrowUpRight className="w-4 h-4 text-gray-300" />
+          </a>
+        </div>
+      </div>
+
+      {/* Celestial Horizon Curve & Atmosphere Glow */}
+      <div className="absolute -bottom-48 sm:-bottom-64 left-1/2 -translate-x-1/2 w-[160%] sm:w-[130%] h-[380px] sm:h-[480px] rounded-[100%] bg-[#010204] border-t-2 border-blue-400/80 shadow-[0_-25px_80px_rgba(37,99,235,0.45),0_-50px_140px_rgba(59,130,246,0.25)] pointer-events-none animate-[pulse_6s_ease-in-out_infinite]">
+        {/* Atmosphere Arc Rim */}
+        <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-300 to-transparent blur-[1px]" />
+      </div>
+
+      {/* Floating Stardust Particles */}
+      <div className="absolute bottom-28 left-[45%] w-1 h-1 bg-cyan-400 rounded-full animate-ping pointer-events-none" />
+      <div className="absolute bottom-36 left-[48%] w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-24 left-[53%] w-1 h-1 bg-cyan-300 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-32 left-[56%] w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping pointer-events-none" />
+      <div className="absolute bottom-20 left-[60%] w-1 h-1 bg-blue-300 rounded-full animate-pulse pointer-events-none" />
+    </section>
+  );
+}`,
+  },
+  {
     id: "sec-hero-perspective",
     slug: "dark-perspective-dashboard-hero",
     title: "Dark Perspective Dashboard Hero",
