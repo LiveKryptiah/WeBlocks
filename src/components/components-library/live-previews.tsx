@@ -38,6 +38,18 @@ export function LiveFloatingNavPill() {
     { id: "saved", label: "Saved", icon: FolderHeart },
   ];
 
+  // Auto-cycle tabs smoothly every 2.4s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => {
+        const idx = items.findIndex((item) => item.id === prev);
+        const nextIdx = (idx + 1) % items.length;
+        return items[nextIdx].id;
+      });
+    }, 2400);
+    return () => clearInterval(timer);
+  }, [items]);
+
   return (
     <div className="flex items-center justify-center p-4">
       <nav className="flex items-center gap-1.5 p-1.5 rounded-full bg-white border border-hairline-soft shadow-none">
@@ -51,7 +63,7 @@ export function LiveFloatingNavPill() {
             <button
               key={item.id}
               onClick={() => setActive(item.id)}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-150 ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                 isActive
                   ? "bg-[#f0f0f0] text-[#141414]"
                   : "text-[#707070] hover:text-[#141414] hover:bg-[#f3f3f3]"
@@ -71,6 +83,7 @@ export function LiveFloatingNavPill() {
 export function LiveIslandDock() {
   const [active, setActive] = useState("home");
   const [hovered, setHovered] = useState<string | null>(null);
+  const [isUserHovering, setIsUserHovering] = useState(false);
 
   const dockItems = [
     { id: "home", label: "Overview", icon: Home },
@@ -81,8 +94,27 @@ export function LiveIslandDock() {
     { id: "settings", label: "Controls", icon: Sliders },
   ];
 
+  // Auto wave across dock items every 1.8s
+  useEffect(() => {
+    if (isUserHovering) return;
+    let step = 0;
+    const timer = setInterval(() => {
+      step = (step + 1) % dockItems.length;
+      setHovered(dockItems[step].id);
+      setActive(dockItems[step].id);
+    }, 1800);
+    return () => clearInterval(timer);
+  }, [isUserHovering, dockItems.length]);
+
   return (
-    <div className="flex items-center justify-center py-6">
+    <div
+      className="flex items-center justify-center py-6"
+      onMouseEnter={() => setIsUserHovering(true)}
+      onMouseLeave={() => {
+        setIsUserHovering(false);
+        setHovered(null);
+      }}
+    >
       <div className="relative flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#141414] text-white border border-[#262626] shadow-none">
         {dockItems.map((item) => {
           const Icon = item.icon;
@@ -95,7 +127,7 @@ export function LiveIslandDock() {
                 onClick={() => setActive(item.id)}
                 onMouseEnter={() => setHovered(item.id)}
                 onMouseLeave={() => setHovered(null)}
-                className={`relative w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-150 ${
+                className={`relative w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 ${
                   isActive
                     ? "bg-white text-[#141414]"
                     : "text-[#adadad] hover:text-white hover:bg-[#262626]"
@@ -110,7 +142,7 @@ export function LiveIslandDock() {
                 )}
               </button>
               {isHovered && (
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-white text-[#141414] text-[10px] font-semibold tracking-tight whitespace-nowrap shadow-none pointer-events-none">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-white text-[#141414] text-[10px] font-semibold tracking-tight whitespace-nowrap shadow-none pointer-events-none animate-in fade-in-50">
                   {item.label}
                 </div>
               )}
@@ -128,8 +160,52 @@ export function LiveSlideToConfirm() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
+  const [userInteracted, setUserInteracted] = useState(false);
+
+  // Auto-slide animation loop when idle
+  useEffect(() => {
+    if (userInteracted) return;
+
+    let animTimer: NodeJS.Timeout;
+    let stepTimer: NodeJS.Timeout;
+    let glideInterval: NodeJS.Timeout;
+
+    const runAutoSlide = () => {
+      setIsConfirmed(false);
+      setSliderPos(0);
+
+      animTimer = setTimeout(() => {
+        const track = trackRef.current?.getBoundingClientRect();
+        const maxOffset = track ? Math.max(120, track.width - 44) : 180;
+        let pos = 0;
+
+        glideInterval = setInterval(() => {
+          pos += Math.max(3, Math.round((maxOffset - pos) * 0.18));
+          if (pos >= maxOffset - 3) {
+            clearInterval(glideInterval);
+            setSliderPos(maxOffset);
+            setIsConfirmed(true);
+
+            // Hold confirmed for 2.2s then repeat
+            stepTimer = setTimeout(runAutoSlide, 2200);
+          } else {
+            setSliderPos(pos);
+          }
+        }, 16);
+      }, 1000);
+    };
+
+    runAutoSlide();
+
+    return () => {
+      clearTimeout(animTimer);
+      clearTimeout(stepTimer);
+      clearInterval(glideInterval);
+    };
+  }, [userInteracted]);
 
   const handlePointerDown = () => {
+    setUserInteracted(true);
     if (!isConfirmed) isDragging.current = true;
   };
 
@@ -200,7 +276,7 @@ export function LiveSlideToConfirm() {
           </button>
         )}
       </div>
-      <p className="text-[11px] text-[#707070]">Drag the pill across to complete action.</p>
+      <p className="text-[11px] text-[#707070]">Drag the pill across or watch auto-confirm loop.</p>
     </div>
   );
 }
@@ -209,8 +285,38 @@ export function LiveSlideToConfirm() {
 export function LiveMagneticSquircleButton() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [clicked, setClicked] = useState(false);
+  const [isUserHovering, setIsUserHovering] = useState(false);
+
+  // Auto magnetic drift and trigger pulse
+  useEffect(() => {
+    if (isUserHovering) return;
+
+    let frame = 0;
+    let animId: number;
+
+    const animate = () => {
+      frame += 0.04;
+      setOffset({
+        x: Math.sin(frame) * 7,
+        y: Math.cos(frame * 0.8) * 4,
+      });
+      animId = requestAnimationFrame(animate);
+    };
+    animId = requestAnimationFrame(animate);
+
+    const pulseInterval = setInterval(() => {
+      setClicked(true);
+      setTimeout(() => setClicked(false), 1000);
+    }, 3800);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      clearInterval(pulseInterval);
+    };
+  }, [isUserHovering]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsUserHovering(true);
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - (rect.left + rect.width / 2)) * 0.25;
     const y = (e.clientY - (rect.top + rect.height / 2)) * 0.25;
@@ -218,6 +324,7 @@ export function LiveMagneticSquircleButton() {
   };
 
   const handleMouseLeave = () => {
+    setIsUserHovering(false);
     setOffset({ x: 0, y: 0 });
   };
 
@@ -234,9 +341,9 @@ export function LiveMagneticSquircleButton() {
         className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#141414] text-white text-xs font-semibold tracking-tight transition-transform duration-75 active:scale-95 border border-[#141414]"
       >
         <span>{clicked ? "Triggered!" : "Deploy Reference"}</span>
-        <ArrowUpRight className="w-3.5 h-3.5 text-white/80" />
+        <ArrowUpRight className={`w-3.5 h-3.5 text-white/80 transition-transform ${clicked ? "rotate-45 text-[#0066ff]" : ""}`} />
       </button>
-      <span className="text-[11px] text-[#707070]">Hover and drag around to feel magnetic spring.</span>
+      <span className="text-[11px] text-[#707070]">Hover to feel magnetic spring or watch auto-drift.</span>
     </div>
   );
 }
@@ -244,7 +351,20 @@ export function LiveMagneticSquircleButton() {
 // 5. Segmented Filter Toggle
 export function LiveSegmentedToggle() {
   const [selected, setSelected] = useState("Screens");
+  const [userInteracted, setUserInteracted] = useState(false);
   const options = ["Screens", "Flows", "UI Kits", "Tokens"];
+
+  // Auto-cycle segmented options every 2.2s
+  useEffect(() => {
+    if (userInteracted) return;
+    const timer = setInterval(() => {
+      setSelected((prev) => {
+        const idx = options.indexOf(prev);
+        return options[(idx + 1) % options.length];
+      });
+    }, 2200);
+    return () => clearInterval(timer);
+  }, [userInteracted, options]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4">
@@ -254,8 +374,11 @@ export function LiveSegmentedToggle() {
           return (
             <button
               key={option}
-              onClick={() => setSelected(option)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all duration-150 ${
+              onClick={() => {
+                setUserInteracted(true);
+                setSelected(option);
+              }}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
                 isSelected
                   ? "bg-white text-[#141414] shadow-none"
                   : "text-[#707070] hover:text-[#141414]"
@@ -273,11 +396,29 @@ export function LiveSegmentedToggle() {
 
 // 6. Metrics Bento Tile
 export function LiveMetricsBentoTile() {
-  const [activeBar, setActiveBar] = useState<number | null>(null);
+  const [activeBar, setActiveBar] = useState<number | null>(40);
+  const [isUserHovering, setIsUserHovering] = useState(false);
   const data = [40, 55, 35, 60, 75, 65, 85, 95, 80, 100];
 
+  // Auto-cycle active sparkline bar highlight
+  useEffect(() => {
+    if (isUserHovering) return;
+    let idx = 0;
+    const timer = setInterval(() => {
+      idx = (idx + 1) % data.length;
+      setActiveBar(data[idx]);
+    }, 1200);
+    return () => clearInterval(timer);
+  }, [isUserHovering, data]);
+
   return (
-    <div className="w-full max-w-xs p-5 rounded-2xl bg-[#ffffff] border border-hairline-soft flex flex-col justify-between gap-4">
+    <div
+      className="w-full max-w-xs p-5 rounded-2xl bg-[#ffffff] border border-hairline-soft flex flex-col justify-between gap-4"
+      onMouseEnter={() => setIsUserHovering(true)}
+      onMouseLeave={() => {
+        setIsUserHovering(false);
+      }}
+    >
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wider text-[#707070]">
           Verified Screens
@@ -289,23 +430,30 @@ export function LiveMetricsBentoTile() {
       </div>
 
       <div>
-        <div className="text-3xl font-bold tracking-tight text-[#141414]">
-          {activeBar !== null ? `${activeBar * 320} refs` : "32,490"}
+        <div className="text-3xl font-bold tracking-tight text-[#141414] transition-all duration-150">
+          {activeBar !== null ? `${(activeBar * 320).toLocaleString()} refs` : "32,490"}
         </div>
-        <p className="text-xs text-[#707070] mt-0.5">Updated every 24 hours.</p>
+        <p className="text-xs text-[#707070] mt-0.5">Live updated metrics stream.</p>
       </div>
 
       {/* Mini SVG Sparkline */}
       <div className="h-10 w-full pt-2 border-t border-[#f0f0f0] flex items-end justify-between gap-1.5">
-        {data.map((val, idx) => (
-          <div
-            key={idx}
-            onMouseEnter={() => setActiveBar(val)}
-            onMouseLeave={() => setActiveBar(null)}
-            className="flex-1 rounded-sm bg-[#141414] transition-all hover:bg-[#0066ff] cursor-pointer"
-            style={{ height: `${val}%` }}
-          />
-        ))}
+        {data.map((val, idx) => {
+          const isHighlighted = activeBar === val;
+          return (
+            <div
+              key={idx}
+              onMouseEnter={() => {
+                setIsUserHovering(true);
+                setActiveBar(val);
+              }}
+              className={`flex-1 rounded-sm transition-all duration-200 cursor-pointer ${
+                isHighlighted ? "bg-[#0066ff] scale-y-105" : "bg-[#141414] hover:bg-[#0066ff]"
+              }`}
+              style={{ height: `${val}%` }}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -315,6 +463,14 @@ export function LiveMetricsBentoTile() {
 export function LiveSquircleProductCard() {
   const [saved, setSaved] = useState(false);
   const { showToast } = useLibrary();
+
+  // Auto-pulse save status every 3.2s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSaved((prev) => !prev);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleSave = () => {
     setSaved(!saved);
@@ -344,12 +500,12 @@ export function LiveSquircleProductCard() {
 
       <button
         onClick={handleSave}
-        className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-          saved ? "bg-[#141414] text-white" : "bg-[#f3f3f3] text-[#707070] hover:text-[#141414]"
+        className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+          saved ? "bg-[#141414] text-white scale-105" : "bg-[#f3f3f3] text-[#707070] hover:text-[#141414]"
         }`}
         aria-label="Save app"
       >
-        <Bookmark className={`w-3.5 h-3.5 ${saved ? "fill-current" : ""}`} />
+        <Bookmark className={`w-3.5 h-3.5 ${saved ? "fill-current text-[#0066ff]" : ""}`} />
       </button>
     </div>
   );
@@ -357,28 +513,73 @@ export function LiveSquircleProductCard() {
 
 // 8. Testimonial Ticker
 export function LiveTestimonialTicker() {
+  const [currentIdx, setCurrentIdx] = useState(0);
+
+  const testimonials = [
+    {
+      quote: "Weblocks completely replaced our chaotic Figma moodboards. The exact screen breakdowns save our design team hours every week.",
+      name: "Elena Rostova",
+      initial: "E",
+      role: "Lead Product Designer, Vercel",
+    },
+    {
+      quote: "The zero drop-shadow aesthetic and precise hairline borders match the caliber of the best digital products on the market today.",
+      name: "Marcus Vance",
+      initial: "M",
+      role: "Design Systems Engineer, Linear",
+    },
+    {
+      quote: "Copying ready-to-use production Tailwind components straight into our repository cut our MVP development time in half.",
+      name: "Sarah Chen",
+      initial: "S",
+      role: "Founding Engineer, Stripe Atlas",
+    },
+  ];
+
+  // Auto-cycle testimonial cards every 3.8s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % testimonials.length);
+    }, 3800);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  const t = testimonials[currentIdx];
+
   return (
-    <div className="w-full max-w-md p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3">
-      <div className="flex items-center gap-1 text-[#141414]">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-3.5 h-3.5 fill-[#141414]" />
-        ))}
+    <div className="w-full max-w-md p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3 min-h-[160px] justify-between transition-all duration-300">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-1 text-[#141414]">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-3.5 h-3.5 fill-[#141414]" />
+          ))}
+        </div>
+        <div className="flex items-center gap-1">
+          {testimonials.map((_, i) => (
+            <span
+              key={i}
+              className={`w-1.5 h-1.5 rounded-full transition-all ${
+                i === currentIdx ? "w-4 bg-[#141414]" : "bg-[#e0e0e0]"
+              }`}
+            />
+          ))}
+        </div>
       </div>
 
-      <p className="text-xs leading-relaxed text-[#141414] font-medium">
-        "Weblocks completely replaced our chaotic Figma moodboards. The exact screen breakdowns save our design team hours every week."
+      <p className="text-xs leading-relaxed text-[#141414] font-medium transition-all duration-300 line-clamp-3">
+        "{t.quote}"
       </p>
 
       <div className="flex items-center gap-2.5 pt-2 border-t border-[#f0f0f0]">
-        <div className="w-7 h-7 rounded-[30%] bg-[#141414] text-white flex items-center justify-center text-xs font-bold">
-          E
+        <div className="w-7 h-7 rounded-[30%] bg-[#141414] text-white flex items-center justify-center text-xs font-bold shrink-0">
+          {t.initial}
         </div>
         <div>
           <div className="flex items-center gap-1">
-            <span className="text-xs font-bold text-[#141414]">Elena Rostova</span>
+            <span className="text-xs font-bold text-[#141414]">{t.name}</span>
             <CheckCircle2 className="w-3 h-3 text-[#0066ff]" />
           </div>
-          <span className="text-[10px] text-[#707070]">Lead Product Designer, Vercel</span>
+          <span className="text-[10px] text-[#707070]">{t.role}</span>
         </div>
       </div>
     </div>
@@ -388,6 +589,52 @@ export function LiveTestimonialTicker() {
 // 9. Command Search Input
 export function LiveCommandSearchInput() {
   const [query, setQuery] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+
+  // Typewriter effect auto-typing search terms
+  useEffect(() => {
+    if (isFocused) return;
+
+    const phrases = [
+      "floating nav pill",
+      "dark mode dashboard",
+      "bento metrics grid",
+      "slide to confirm",
+      "mobile bottom sheet",
+    ];
+
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let timeout: NodeJS.Timeout;
+
+    const typeLoop = () => {
+      const current = phrases[phraseIdx];
+      if (!isDeleting) {
+        charIdx++;
+        setQuery(current.substring(0, charIdx));
+        if (charIdx === current.length) {
+          isDeleting = true;
+          timeout = setTimeout(typeLoop, 1600);
+          return;
+        }
+        timeout = setTimeout(typeLoop, 80);
+      } else {
+        charIdx--;
+        setQuery(current.substring(0, charIdx));
+        if (charIdx === 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          timeout = setTimeout(typeLoop, 400);
+          return;
+        }
+        timeout = setTimeout(typeLoop, 40);
+      }
+    };
+
+    timeout = setTimeout(typeLoop, 800);
+    return () => clearTimeout(timeout);
+  }, [isFocused]);
 
   return (
     <div className="w-full max-w-md p-4 flex flex-col items-center gap-2">
@@ -396,12 +643,25 @@ export function LiveCommandSearchInput() {
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => {
+            if (!query) setIsFocused(false);
+          }}
+          onChange={(e) => {
+            setIsFocused(true);
+            setQuery(e.target.value);
+          }}
           placeholder="Search components or patterns..."
           className="w-full bg-transparent text-xs font-medium text-[#141414] placeholder-[#707070] outline-none"
         />
         {query ? (
-          <button onClick={() => setQuery("")} className="text-[#707070] hover:text-[#141414]">
+          <button
+            onClick={() => {
+              setQuery("");
+              setIsFocused(false);
+            }}
+            className="text-[#707070] hover:text-[#141414]"
+          >
             <X className="w-3.5 h-3.5" />
           </button>
         ) : (
@@ -410,9 +670,9 @@ export function LiveCommandSearchInput() {
           </span>
         )}
       </div>
-      {query && (
-        <p className="text-[11px] text-[#707070]">Query: <span className="font-mono text-[#141414]">"{query}"</span></p>
-      )}
+      <p className="text-[11px] text-[#707070]">
+        Auto-typing: <span className="font-mono font-bold text-[#141414]">"{query || "..."}"</span>
+      </p>
     </div>
   );
 }
@@ -420,9 +680,51 @@ export function LiveCommandSearchInput() {
 // 10. OTP Verification Input
 export function LiveOTPVerificationInput() {
   const [digits, setDigits] = useState(["", "", "", "", "", ""]);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
+  // Auto-fill OTP simulation loop
+  useEffect(() => {
+    if (isUserInteracting) return;
+
+    const sampleCodes = [
+      ["8", "4", "2", "9", "1", "6"],
+      ["3", "7", "5", "0", "9", "2"],
+    ];
+
+    let codeIdx = 0;
+    let timer: NodeJS.Timeout;
+
+    const runOtpCycle = () => {
+      setDigits(["", "", "", "", "", ""]);
+      const targetCode = sampleCodes[codeIdx];
+      let step = 0;
+
+      const fillStep = () => {
+        if (step < targetCode.length) {
+          const s = step;
+          setDigits((prev) => {
+            const next = [...prev];
+            next[s] = targetCode[s];
+            return next;
+          });
+          step++;
+          timer = setTimeout(fillStep, 300);
+        } else {
+          codeIdx = (codeIdx + 1) % sampleCodes.length;
+          timer = setTimeout(runOtpCycle, 2400);
+        }
+      };
+
+      timer = setTimeout(fillStep, 800);
+    };
+
+    runOtpCycle();
+    return () => clearTimeout(timer);
+  }, [isUserInteracting]);
+
   const handleChange = (index: number, val: string) => {
+    setIsUserInteracting(true);
     if (!/^[0-9]?$/.test(val)) return;
     const next = [...digits];
     next[index] = val;
@@ -434,6 +736,7 @@ export function LiveOTPVerificationInput() {
   };
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
+    setIsUserInteracting(true);
     if (e.key === "Backspace" && !digits[index] && index > 0) {
       inputsRef.current[index - 1]?.focus();
     }
@@ -461,11 +764,11 @@ export function LiveOTPVerificationInput() {
       </div>
       <p className="text-[11px] text-[#707070]">
         {code.length === 6 ? (
-          <span className="font-bold text-[#141414] inline-flex items-center gap-1">
+          <span className="font-bold text-[#141414] inline-flex items-center gap-1 animate-in fade-in">
             <Check className="w-3 h-3 text-[#0066ff]" /> Code entered: {code}
           </span>
         ) : (
-          "Enter 6-digit authentication pin."
+          "Auto-verifying 6-digit pin..."
         )}
       </p>
     </div>
@@ -474,128 +777,120 @@ export function LiveOTPVerificationInput() {
 
 // 11. Bottom Action Sheet
 export function LiveBottomActionSheet() {
-  const [open, setOpen] = useState(false);
-  const { showToast } = useLibrary();
+  const [open, setOpen] = useState(true);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
-  const handleAction = (label: string) => {
-    setOpen(false);
-    showToast(`${label} performed.`, "info");
-  };
+  // Auto-slide sheet up/down cycle
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    let stepTimer: NodeJS.Timeout;
+
+    const runSheetLoop = () => {
+      setOpen(true);
+      setActiveItem(null);
+
+      timer = setTimeout(() => {
+        setActiveItem("Figma Tokens");
+        stepTimer = setTimeout(() => {
+          setOpen(false);
+          setTimeout(runSheetLoop, 1400);
+        }, 2000);
+      }, 1200);
+    };
+
+    runSheetLoop();
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(stepTimer);
+    };
+  }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center p-6">
-      <button
-        onClick={() => setOpen(true)}
-        className="px-5 py-2.5 rounded-full bg-[#141414] text-white text-xs font-semibold hover:bg-[#262626] transition-colors"
+    <div className="relative w-full max-w-xs h-[190px] rounded-2xl bg-[#f0f0f0] border border-hairline-soft overflow-hidden flex flex-col justify-end p-2 select-none">
+      {/* Background Simulated UI Wireframe */}
+      <div className="absolute inset-0 p-3 flex flex-col gap-2 opacity-50">
+        <div className="w-20 h-2 rounded-full bg-[#d0d0d0]" />
+        <div className="w-full h-10 rounded-xl bg-white border border-hairline-soft" />
+        <div className="w-2/3 h-2 rounded-full bg-[#d0d0d0]" />
+      </div>
+
+      {/* Dimmed backdrop */}
+      <div
+        className={`absolute inset-0 bg-black/25 transition-opacity duration-300 ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
+      {/* Slide-up Sheet */}
+      <div
+        className={`relative z-10 w-full bg-white rounded-2xl p-3 border border-hairline-soft flex flex-col gap-2 transition-transform duration-300 ${
+          open ? "translate-y-0" : "translate-y-full"
+        }`}
       >
-        Open Action Sheet
-      </button>
+        <div className="w-8 h-1 rounded-full bg-[#e0e0e0] mx-auto mb-0.5" />
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-[#141414]">Actions</span>
+          <button onClick={() => setOpen(false)} className="text-[#707070] hover:text-[#141414]">
+            <X className="w-3 h-3" />
+          </button>
+        </div>
 
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in"
-        >
+        <div className="flex flex-col gap-1">
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-sm bg-white rounded-3xl p-5 border border-hairline-soft flex flex-col gap-3 animate-in slide-in-from-bottom-4"
+            className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-[#141414] transition-all duration-200 ${
+              activeItem === "Figma Tokens" ? "bg-[#f0f0f0] text-[#0066ff]" : "hover:bg-[#f3f3f3]"
+            }`}
           >
-            <div className="w-10 h-1 rounded-full bg-[#e0e0e0] mx-auto mb-1" />
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-bold text-[#141414]">Reference Actions</h3>
-              <button onClick={() => setOpen(false)} className="text-[#707070] hover:text-[#141414]">
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="flex flex-col gap-1.5 mt-2">
-              <button
-                onClick={() => handleAction("Share Link")}
-                className="flex items-center gap-2.5 w-full px-3 py-2 rounded-full text-xs font-semibold text-[#141414] hover:bg-[#f3f3f3] text-left"
-              >
-                <Share2 className="w-3.5 h-3.5 text-[#707070]" /> Share Link
-              </button>
-              <button
-                onClick={() => handleAction("Copy Figma Tokens")}
-                className="flex items-center gap-2.5 w-full px-3 py-2 rounded-full text-xs font-semibold text-[#141414] hover:bg-[#f3f3f3] text-left"
-              >
-                <Copy className="w-3.5 h-3.5 text-[#707070]" /> Copy Figma Tokens
-              </button>
-              <button
-                onClick={() => handleAction("Export PNG")}
-                className="flex items-center gap-2.5 w-full px-3 py-2 rounded-full text-xs font-semibold text-[#141414] hover:bg-[#f3f3f3] text-left"
-              >
-                <Download className="w-3.5 h-3.5 text-[#707070]" /> Export High-Res PNG
-              </button>
-            </div>
+            <Copy className="w-3 h-3 text-[#707070]" /> Copy Figma Tokens
+          </div>
+          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-[#141414] hover:bg-[#f3f3f3]">
+            <Share2 className="w-3 h-3 text-[#707070]" /> Share Link
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
 
 // 12. Spotlight Dialog
 export function LiveSpotlightDialog() {
-  const [open, setOpen] = useState(false);
-  const { showToast } = useLibrary();
+  const [pulse, setPulse] = useState(false);
 
-  const handleConfirm = () => {
-    setOpen(false);
-    showToast("Item successfully deleted.", "info");
-  };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPulse(true);
+      setTimeout(() => setPulse(false), 900);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center p-6">
-      <button
-        onClick={() => setOpen(true)}
-        className="px-4 py-2 rounded-full border border-hairline-soft bg-white text-[#141414] text-xs font-semibold hover:bg-[#f3f3f3]"
-      >
-        Trigger Dialog
-      </button>
-
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-sm rounded-2xl bg-white border border-hairline-soft p-6 flex flex-col gap-4 animate-in zoom-in-95"
-          >
-            <div className="w-9 h-9 rounded-full bg-[#f0f0f0] flex items-center justify-center text-[#141414]">
-              <AlertCircle className="w-4 h-4" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold text-[#141414]">Delete collection?</h3>
-              <p className="text-xs text-[#707070] mt-1">
-                This will permanently remove 14 saved references. This action cannot be undone.
-              </p>
-            </div>
-            <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#f0f0f0]">
-              <button
-                onClick={() => setOpen(false)}
-                className="px-4 py-1.5 rounded-full text-xs font-semibold text-[#707070] hover:text-[#141414]"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleConfirm}
-                className="px-4 py-1.5 rounded-full bg-[#141414] text-white text-xs font-semibold"
-              >
-                Confirm Delete
-              </button>
-            </div>
-          </div>
+    <div className="w-full max-w-xs p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3">
+      <div className="flex items-center gap-2.5">
+        <div className={`w-8 h-8 rounded-full bg-[#f0f0f0] flex items-center justify-center text-[#141414] transition-transform duration-200 ${pulse ? "scale-110 bg-[#e8f0fe]" : ""}`}>
+          <AlertCircle className={`w-4 h-4 transition-colors ${pulse ? "text-[#0066ff]" : "text-[#141414]"}`} />
         </div>
-      )}
+        <div>
+          <h3 className="text-xs font-bold text-[#141414]">Delete collection?</h3>
+          <p className="text-[10px] text-[#707070]">This action cannot be undone.</p>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#f0f0f0]">
+        <button className="px-3 py-1 rounded-full text-[11px] font-semibold text-[#707070] hover:text-[#141414]">
+          Cancel
+        </button>
+        <button className={`px-3 py-1 rounded-full bg-[#141414] text-white text-[11px] font-semibold transition-all duration-200 ${pulse ? "bg-[#0066ff] scale-105" : ""}`}>
+          Confirm Delete
+        </button>
+      </div>
     </div>
   );
 }
 
 // 13. Audio Lyrics Scrubber
 export function LiveAudioLyricsScrubber() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
 
   const lyrics = [
@@ -612,8 +907,7 @@ export function LiveAudioLyricsScrubber() {
       timer = setInterval(() => {
         setCurrentTime((prev) => {
           if (prev >= 22) {
-            setIsPlaying(false);
-            return 0;
+            return 0; // Infinite loop
           }
           return prev + 1;
         });
@@ -697,6 +991,18 @@ export function LiveAudioLyricsScrubber() {
 export function LiveStatCounterTicker() {
   const [count, setCount] = useState(142);
   const target = 200;
+
+  // Auto-increment ticker
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((prev) => {
+        if (prev >= target) return 120;
+        return prev + 6;
+      });
+    }, 1400);
+    return () => clearInterval(timer);
+  }, [target]);
+
   const percentage = Math.min(100, Math.round((count / target) * 100));
 
   return (
@@ -714,7 +1020,7 @@ export function LiveStatCounterTicker() {
           <Minus className="w-3.5 h-3.5" />
         </button>
 
-        <span className="text-3xl font-bold font-mono text-[#141414] tracking-tight">
+        <span className="text-3xl font-bold font-mono text-[#141414] tracking-tight transition-all duration-150">
           {count}
         </span>
 
@@ -729,7 +1035,7 @@ export function LiveStatCounterTicker() {
       {/* Progress track */}
       <div className="w-full h-1.5 rounded-full bg-[#f0f0f0] overflow-hidden">
         <div
-          className="h-full bg-[#141414] transition-all duration-200"
+          className="h-full bg-[#141414] transition-all duration-300"
           style={{ width: `${percentage}%` }}
         />
       </div>
