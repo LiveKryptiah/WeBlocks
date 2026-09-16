@@ -49,7 +49,7 @@ export default function AccountPage() {
         {/* Left column: Overview Card & Quick links */}
         <div className="lg:col-span-4 space-y-6">
           {/* User badge card */}
-          <div className="bg-canvas-soft rounded-md p-6 border border-hairline-soft flex flex-col items-center text-center">
+          <div className="bg-canvas-soft rounded-md p-6 border-none flex flex-col items-center text-center">
             <div className="w-20 h-20 rounded-full bg-ink text-white flex items-center justify-center font-bold text-2xl mb-4">
               {user.avatarChar}
             </div>
@@ -63,7 +63,7 @@ export default function AccountPage() {
                   <span>Pro Member</span>
                 </div>
               ) : (
-                <div className="px-3 py-1 rounded-full bg-white border border-hairline text-caption font-semibold text-muted">
+                <div className="px-3 py-1 rounded-full bg-white border border-hairline-soft text-caption font-semibold text-muted">
                   Free Library Tier
                 </div>
               )}
@@ -83,26 +83,26 @@ export default function AccountPage() {
           <div className="grid grid-cols-2 gap-3">
             <Link
               href="/saved"
-              className="bg-white p-4 rounded-sm border border-hairline hover:border-ink transition-colors flex flex-col"
+              className="bg-white p-4 rounded-sm border border-hairline-soft hover:border-ink transition-colors flex flex-col"
             >
               <div className="flex items-center justify-between text-muted mb-2">
                 <Bookmark className="w-4 h-4" />
                 <span className="text-caption font-mono">Archive</span>
               </div>
-              <span className="text-2xl font-bold text-ink">{savedIds.length}</span>
-              <span className="text-caption text-muted">Saved screens</span>
+              <span className="text-h3 font-bold text-ink">{savedIds.length}</span>
+              <span className="text-caption text-muted mt-1">Saved screens</span>
             </Link>
 
             <Link
               href="/collections"
-              className="bg-white p-4 rounded-sm border border-hairline hover:border-ink transition-colors flex flex-col"
+              className="bg-white p-4 rounded-sm border border-hairline-soft hover:border-ink transition-colors flex flex-col"
             >
               <div className="flex items-center justify-between text-muted mb-2">
                 <FolderHeart className="w-4 h-4" />
-                <span className="text-caption font-mono">Folders</span>
+                <span className="text-caption font-mono">Boards</span>
               </div>
-              <span className="text-2xl font-bold text-ink">{collections.length}</span>
-              <span className="text-caption text-muted">Collections</span>
+              <span className="text-h3 font-bold text-ink">{collections.length}</span>
+              <span className="text-caption text-muted mt-1">Collections</span>
             </Link>
           </div>
         </div>
@@ -110,10 +110,10 @@ export default function AccountPage() {
         {/* Right column: Settings & Subscription Details */}
         <div className="lg:col-span-8 space-y-8">
           {/* Subscription Section */}
-          <div className="bg-canvas-soft rounded-md p-6 sm:p-8 border border-hairline-soft">
+          <div className="bg-canvas-soft rounded-md p-6 sm:p-8 border-none">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
-                <span className="text-label uppercase tracking-wider text-muted font-semibold">
+                <span className="text-label text-muted font-semibold">
                   Subscription & Billing
                 </span>
                 <h3 className="text-h4 font-bold text-ink mt-1">
@@ -143,7 +143,7 @@ export default function AccountPage() {
           </div>
 
           {/* Profile Form */}
-          <div className="bg-white rounded-md p-6 sm:p-8 border border-hairline">
+          <div className="bg-white rounded-md p-6 sm:p-8 border border-hairline-soft">
             <h3 className="text-h4 font-bold text-ink mb-2">Profile details.</h3>
             <p className="text-body-sm text-muted mb-6">
               Update your account details and display name.
@@ -151,7 +151,7 @@ export default function AccountPage() {
 
             <form onSubmit={handleUpdateProfile} className="space-y-4">
               <div>
-                <label className="text-label uppercase tracking-wider text-muted font-semibold block mb-1.5">
+                <label className="text-label text-muted font-semibold block mb-1.5">
                   Display name
                 </label>
                 <TextInput

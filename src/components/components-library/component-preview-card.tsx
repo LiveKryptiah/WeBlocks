@@ -39,7 +39,7 @@ export const ComponentPreviewCard: React.FC<ComponentPreviewCardProps> = ({
   };
 
   return (
-    <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-md p-6 border border-hairline-soft transition-all duration-200">
+    <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-md p-6 border-none transition-all duration-200">
       <div>
         {/* Card Top: Title, Tier, Controls */}
         <div className="flex items-start justify-between gap-3 mb-2">
@@ -62,14 +62,14 @@ export const ComponentPreviewCard: React.FC<ComponentPreviewCardProps> = ({
             </p>
           </div>
 
-          {/* Preview / Code Tab Switcher */}
-          <div className="inline-flex items-center p-0.5 rounded-full bg-field border border-hairline shrink-0">
+          {/* Preview / Code Tab Switcher (Minimal Pill, no stroke lines) */}
+          <div className="inline-flex items-center p-0.5 rounded-full bg-field shrink-0 select-none">
             <button
               onClick={() => setActiveTab("preview")}
               className={cn(
                 "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-caption font-semibold transition-all",
                 activeTab === "preview"
-                  ? "bg-white text-ink border border-hairline"
+                  ? "bg-white text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -81,7 +81,7 @@ export const ComponentPreviewCard: React.FC<ComponentPreviewCardProps> = ({
               className={cn(
                 "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-caption font-semibold transition-all",
                 activeTab === "code"
-                  ? "bg-white text-ink border border-hairline"
+                  ? "bg-white text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -94,7 +94,7 @@ export const ComponentPreviewCard: React.FC<ComponentPreviewCardProps> = ({
         {/* Display Area: Interactive Preview or Code */}
         <div className="mb-4">
           {activeTab === "preview" ? (
-            <div className="w-full min-h-[220px] rounded-sm bg-white border border-hairline-soft p-4 flex items-center justify-center overflow-hidden">
+            <div className="w-full min-h-[220px] rounded-sm bg-white p-4 flex items-center justify-center overflow-hidden">
               {LivePreview ? (
                 <div className="w-full flex items-center justify-center">
                   <LivePreview />
@@ -123,9 +123,9 @@ export const ComponentPreviewCard: React.FC<ComponentPreviewCardProps> = ({
       </div>
 
       {/* Card Footer matching collections/patterns meta */}
-      <div className="pt-4 border-t border-hairline flex items-center justify-between text-caption text-muted">
+      <div className="pt-4 border-t border-hairline-soft flex items-center justify-between text-caption text-muted">
         <div className="flex items-center gap-2">
-          <span className="text-label text-muted uppercase tracking-wider font-semibold">
+          <span className="text-label text-muted font-semibold">
             {component.category}
           </span>
           <button

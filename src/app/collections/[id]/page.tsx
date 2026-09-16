@@ -81,9 +81,9 @@ export default function CollectionDetailPage() {
       </div>
 
       {/* Collection Header */}
-      <div className="bg-canvas-soft rounded-md p-8 sm:p-12 border border-hairline-soft mb-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="bg-canvas-soft rounded-md p-8 sm:p-12 border-none mb-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
-          <div className="flex items-center gap-2 text-label uppercase tracking-wider text-muted font-semibold mb-2">
+          <div className="flex items-center gap-2 text-label text-muted font-semibold mb-2">
             <Folder className="w-3.5 h-3.5" />
             <span>Collection • {collection.screenshotIds.length} references</span>
           </div>
@@ -112,7 +112,7 @@ export default function CollectionDetailPage() {
           <button
             type="button"
             onClick={handleDelete}
-            className="w-10 h-10 rounded-full bg-white border border-hairline text-muted hover:text-red-600 hover:border-red-200 flex items-center justify-center transition-colors"
+            className="w-10 h-10 rounded-full bg-white border border-hairline-soft text-muted hover:text-red-600 hover:border-red-200 flex items-center justify-center transition-colors"
             title="Delete collection"
             aria-label="Delete collection"
           >

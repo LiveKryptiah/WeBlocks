@@ -17,7 +17,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
   return (
     <Link
       href={`/collections/${collection.id}`}
-      className="group flex flex-col justify-between bg-canvas-soft hover:bg-field rounded-md p-6 border border-hairline-soft transition-all duration-200"
+      className="group flex flex-col justify-between bg-canvas-soft hover:bg-field rounded-md p-6 border-none transition-all duration-200"
     >
       <div>
         {/* Visual Preview Collage */}
@@ -26,7 +26,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
             previewItems.map((item) => (
               <div
                 key={item.id}
-                className="aspect-[9/14] rounded-sm bg-white overflow-hidden border border-hairline-soft p-2 flex flex-col justify-between"
+                className="aspect-[9/14] rounded-sm bg-white overflow-hidden p-2 flex flex-col justify-between"
               >
                 <div className="flex items-center gap-1">
                   <AppIconSquircle
@@ -58,7 +58,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
 
         {/* Collection Meta */}
         <div className="flex items-center justify-between gap-2 mb-2">
-          <span className="text-label text-muted uppercase tracking-wider font-semibold">
+          <span className="text-label text-muted font-semibold">
             {collection.itemCount || collection.screenshotIds.length} references
           </span>
           <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
@@ -74,7 +74,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
         </p>
       </div>
 
-      <div className="pt-6 mt-6 border-t border-hairline flex items-center justify-between text-caption text-muted">
+      <div className="pt-6 mt-6 border-t border-hairline-soft flex items-center justify-between text-caption text-muted">
         <span>Curated by {collection.curator}</span>
         <span>Updated {collection.updatedAt}</span>
       </div>

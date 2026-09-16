@@ -59,10 +59,8 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
           role="navigation"
           aria-label="Main Navigation"
           className={cn(
-            "pointer-events-auto flex items-center justify-between gap-1 sm:gap-2 px-3 sm:px-4 py-2 rounded-full border transition-all duration-200 backdrop-blur-md max-w-5xl w-full",
-            isScrolled
-              ? "bg-white/95 border-hairline shadow-none"
-              : "bg-white/90 border-hairline-soft shadow-none"
+            "pointer-events-auto flex items-center justify-between gap-1 sm:gap-2 px-3 sm:px-4 py-2 rounded-full border border-hairline-soft transition-all duration-200 backdrop-blur-md max-w-5xl w-full shadow-none",
+            isScrolled ? "bg-white/95" : "bg-white/90"
           )}
         >
           {/* Logo / Brand Mark */}
@@ -172,7 +170,7 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-30 bg-ink/50 backdrop-blur-sm md:hidden pt-24 px-4 pb-6 overflow-y-auto">
-          <div className="bg-white rounded-md border border-hairline p-6 space-y-4">
+          <div className="bg-white rounded-md border border-hairline-soft p-6 space-y-4">
             <div className="space-y-1">
               {navLinks.map((link) => {
                 const Icon = link.icon;
@@ -196,7 +194,7 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
               })}
             </div>
 
-            <div className="pt-4 border-t border-hairline space-y-2">
+            <div className="pt-4 border-t border-hairline-soft space-y-2">
               <Link
                 href="/saved"
                 onClick={() => setMobileMenuOpen(false)}

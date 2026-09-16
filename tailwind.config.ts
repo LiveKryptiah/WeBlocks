@@ -5,52 +5,59 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/data/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
         ink: {
-          DEFAULT: "#141414",
-          soft: "#262626",
+          DEFAULT: "var(--color-ink, #141414)",
+          soft: "var(--color-ink-soft, #262626)",
         },
         canvas: {
-          DEFAULT: "#ffffff",
-          soft: "#f3f3f3",
+          DEFAULT: "var(--color-canvas, #ffffff)",
+          soft: "var(--color-canvas-soft, #f3f3f3)",
         },
         field: {
-          DEFAULT: "#f0f0f0",
+          DEFAULT: "var(--color-field, #f0f0f0)",
         },
         hairline: {
-          DEFAULT: "#e0e0e0",
-          soft: "#f0f0f0",
+          DEFAULT: "var(--color-hairline, #e0e0e0)",
+          soft: "var(--color-hairline-soft, #f0f0f0)",
         },
         muted: {
-          DEFAULT: "#707070",
+          DEFAULT: "var(--color-muted, #707070)",
         },
         faint: {
-          DEFAULT: "#adadad",
+          DEFAULT: "var(--color-faint, #adadad)",
         },
         electric: {
-          DEFAULT: "#0066ff",
+          DEFAULT: "var(--color-accent, #0066ff)",
         },
+        accent: {
+          DEFAULT: "var(--color-accent, #0066ff)",
+        },
+      },
+      borderColor: {
+        DEFAULT: "var(--color-hairline-soft, #f0f0f0)",
       },
       borderRadius: {
         none: "0px",
-        sm: "16px",
-        md: "24px",
-        full: "9999px",
+        sm: "var(--radius-sm, 16px)",
+        md: "var(--radius-md, 24px)",
+        full: "var(--radius-full, 9999px)",
         squircle: "30%",
       },
       spacing: {
-        xxs: "4px",
-        xs: "8px",
-        sm: "12px",
-        md: "16px",
-        lg: "24px",
-        xl: "32px",
-        xxl: "48px",
-        section: "80px",
-        "section-lg": "120px",
+        xxs: "var(--space-xxs, 4px)",
+        xs: "var(--space-xs, 8px)",
+        sm: "var(--space-sm, 12px)",
+        md: "var(--space-md, 16px)",
+        lg: "var(--space-lg, 24px)",
+        xl: "var(--space-xl, 32px)",
+        xxl: "var(--space-xxl, 48px)",
+        section: "var(--space-section, 80px)",
+        "section-lg": "var(--space-section-lg, 120px)",
       },
       fontFamily: {
         sans: [
@@ -73,7 +80,7 @@ const config: Config = {
       },
       boxShadow: {
         none: "none",
-        "inset-ring": "inset 0 0 0 1px #f0f0f0",
+        "inset-ring": "inset 0 0 0 1px var(--color-hairline-soft, #f0f0f0)",
       },
     },
   },

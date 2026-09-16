@@ -111,9 +111,9 @@ export default function ReferenceDetailPage() {
       {/* Main Grid: Screenshot presentation + Metadata Sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
         {/* Large Screenshot presentation */}
-        <div className="relative lg:col-span-8 bg-canvas-soft rounded-md p-6 sm:p-10 border border-hairline-soft flex items-center justify-center overflow-hidden min-h-[420px]">
+        <div className="relative lg:col-span-8 bg-canvas-soft rounded-md p-6 sm:p-10 border-none flex items-center justify-center overflow-hidden min-h-[420px]">
           {/* Zoom controls */}
-          <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
+          <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline-soft text-caption font-semibold select-none">
             <button
               type="button"
               onClick={() => setZoomLevel(1)}
@@ -157,7 +157,7 @@ export default function ReferenceDetailPage() {
         </div>
 
         {/* Metadata Details Column */}
-        <div className="lg:col-span-4 bg-white rounded-md p-6 sm:p-8 border border-hairline space-y-6">
+        <div className="lg:col-span-4 bg-white rounded-md p-6 sm:p-8 border border-hairline-soft space-y-6">
           {/* Header */}
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">

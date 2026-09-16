@@ -144,11 +144,11 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
         {/* Content area: Screenshot focus + Metadata column */}
         <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-0">
           {/* Main Visual Presentation with Zoom Pan & Canvas Lighting */}
-          <div className={cn("relative lg:col-span-8 p-6 sm:p-8 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-hairline overflow-hidden min-h-[380px] transition-colors duration-200", backdropBgClass)}>
+          <div className={cn("relative lg:col-span-8 p-6 sm:p-8 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-hairline-soft overflow-hidden min-h-[380px] transition-colors duration-200", backdropBgClass)}>
             {/* Top Floating Controls */}
             <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
               {/* Canvas Theme Selector */}
-              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
+              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline-soft text-caption font-semibold select-none">
                 <button
                   type="button"
                   onClick={() => setLocalTheme("light")}
@@ -182,7 +182,7 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
               </div>
 
               {/* Zoom Controls */}
-              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
+              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline-soft text-caption font-semibold select-none">
                 <button
                   type="button"
                   onClick={() => setZoomLevel(1)}

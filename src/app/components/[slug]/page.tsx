@@ -98,11 +98,11 @@ export default function ComponentDetailPage() {
       </div>
 
       {/* Component Header (Matching Patterns & Apps page styling) */}
-      <div className="bg-canvas-soft rounded-md p-8 sm:p-12 border border-hairline-soft mb-10">
+      <div className="bg-canvas-soft rounded-md p-8 sm:p-12 border-none mb-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-label text-muted uppercase tracking-wider font-semibold">
+              <span className="text-label text-muted font-semibold">
                 {component.category}
               </span>
               {component.tier === "pro" && (
@@ -117,7 +117,7 @@ export default function ComponentDetailPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 font-mono text-xs bg-white px-4 py-2.5 rounded-md border border-hairline-soft shrink-0">
+          <div className="flex items-center gap-2 font-mono text-xs bg-white px-4 py-2.5 rounded-full border border-hairline-soft shrink-0">
             <Terminal className="w-4 h-4 text-muted" />
             <span className="select-all">{component.cliCommand}</span>
             <button
@@ -132,17 +132,17 @@ export default function ComponentDetailPage() {
       </div>
 
       {/* Showcase Stage */}
-      <div className="bg-canvas-soft rounded-md p-6 sm:p-8 border border-hairline-soft mb-10">
+      <div className="bg-canvas-soft rounded-md p-6 sm:p-8 border-none mb-10">
         {/* Controls Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-hairline">
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-hairline-soft">
           {/* Mode Switcher */}
-          <div className="inline-flex items-center p-1 rounded-full bg-field border border-hairline">
+          <div className="inline-flex items-center p-1 rounded-full bg-field select-none">
             <button
               onClick={() => setActiveTab("preview")}
               className={cn(
                 "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-caption font-semibold transition-all",
                 activeTab === "preview"
-                  ? "bg-white text-ink border border-hairline"
+                  ? "bg-white text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -154,7 +154,7 @@ export default function ComponentDetailPage() {
               className={cn(
                 "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-caption font-semibold transition-all",
                 activeTab === "code"
-                  ? "bg-white text-ink border border-hairline"
+                  ? "bg-white text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -166,7 +166,7 @@ export default function ComponentDetailPage() {
               className={cn(
                 "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-caption font-semibold transition-all",
                 activeTab === "props"
-                  ? "bg-white text-ink border border-hairline"
+                  ? "bg-white text-ink shadow-none"
                   : "text-muted hover:text-ink"
               )}
             >
@@ -177,12 +177,12 @@ export default function ComponentDetailPage() {
 
           {/* Viewport Resizer */}
           {activeTab === "preview" && (
-            <div className="hidden sm:inline-flex items-center gap-1 p-1 rounded-full bg-field border border-hairline text-muted">
+            <div className="hidden sm:inline-flex items-center gap-1 p-1 rounded-full bg-field text-muted select-none">
               <button
                 onClick={() => setViewportWidth("mobile")}
                 className={cn(
                   "p-1.5 rounded-full transition-colors",
-                  viewportWidth === "mobile" ? "bg-white text-ink border border-hairline" : "hover:text-ink"
+                  viewportWidth === "mobile" ? "bg-white text-ink shadow-none" : "hover:text-ink"
                 )}
                 title="Mobile (380px)"
               >
@@ -192,7 +192,7 @@ export default function ComponentDetailPage() {
                 onClick={() => setViewportWidth("tablet")}
                 className={cn(
                   "p-1.5 rounded-full transition-colors",
-                  viewportWidth === "tablet" ? "bg-white text-ink border border-hairline" : "hover:text-ink"
+                  viewportWidth === "tablet" ? "bg-white text-ink shadow-none" : "hover:text-ink"
                 )}
                 title="Tablet (640px)"
               >
@@ -202,15 +202,16 @@ export default function ComponentDetailPage() {
                 onClick={() => setViewportWidth("desktop")}
                 className={cn(
                   "p-1.5 rounded-full transition-colors",
-                  viewportWidth === "desktop" ? "bg-white text-ink border border-hairline" : "hover:text-ink"
+                  viewportWidth === "desktop" ? "bg-white text-ink shadow-none" : "hover:text-ink"
                 )}
-                title="Desktop (Full)"
+                title="Desktop (100%)"
               >
                 <Monitor className="w-3.5 h-3.5" />
               </button>
             </div>
           )}
 
+          {/* Quick copy TSX button */}
           <button
             onClick={handleCopyCode}
             className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-ink text-white hover:bg-ink-soft text-caption font-semibold transition-colors"

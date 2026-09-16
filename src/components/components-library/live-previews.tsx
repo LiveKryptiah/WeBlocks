@@ -40,7 +40,7 @@ export function LiveFloatingNavPill() {
 
   return (
     <div className="flex items-center justify-center p-4">
-      <nav className="flex items-center gap-1.5 p-1.5 rounded-full bg-white border border-[#e0e0e0] shadow-none">
+      <nav className="flex items-center gap-1.5 p-1.5 rounded-full bg-white border border-hairline-soft shadow-none">
         <div className="w-7 h-7 rounded-lg bg-[#141414] text-white flex items-center justify-center font-bold text-xs">
           W
         </div>
@@ -168,7 +168,7 @@ export function LiveSlideToConfirm() {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
-        className="relative w-full max-w-xs h-12 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] flex items-center px-1 select-none overflow-hidden touch-none"
+        className="relative w-full max-w-xs h-12 rounded-full bg-[#f0f0f0] border border-hairline-soft flex items-center px-1 select-none overflow-hidden touch-none"
       >
         <div
           className="absolute left-0 top-0 bottom-0 bg-[#141414] transition-all"
@@ -248,7 +248,7 @@ export function LiveSegmentedToggle() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4">
-      <div className="inline-flex items-center p-1 rounded-full bg-[#f0f0f0] border border-[#e0e0e0]">
+      <div className="inline-flex items-center p-1 rounded-full bg-[#f0f0f0]">
         {options.map((option) => {
           const isSelected = selected === option;
           return (
@@ -257,7 +257,7 @@ export function LiveSegmentedToggle() {
               onClick={() => setSelected(option)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all duration-150 ${
                 isSelected
-                  ? "bg-white text-[#141414] border border-[#e0e0e0]"
+                  ? "bg-white text-[#141414] shadow-none"
                   : "text-[#707070] hover:text-[#141414]"
               }`}
             >
@@ -277,7 +277,7 @@ export function LiveMetricsBentoTile() {
   const data = [40, 55, 35, 60, 75, 65, 85, 95, 80, 100];
 
   return (
-    <div className="w-full max-w-xs p-5 rounded-2xl bg-[#ffffff] border border-[#e0e0e0] flex flex-col justify-between gap-4">
+    <div className="w-full max-w-xs p-5 rounded-2xl bg-[#ffffff] border border-hairline-soft flex flex-col justify-between gap-4">
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wider text-[#707070]">
           Verified Screens
@@ -322,7 +322,7 @@ export function LiveSquircleProductCard() {
   };
 
   return (
-    <div className="w-full max-w-sm p-4 rounded-2xl bg-white border border-[#e0e0e0] flex items-center justify-between gap-3 group">
+    <div className="w-full max-w-sm p-4 rounded-2xl bg-white border border-hairline-soft flex items-center justify-between gap-3 group">
       <div className="flex items-center gap-3">
         {/* 30% Squircle Icon */}
         <div className="w-12 h-12 rounded-[30%] bg-[#141414] text-white flex items-center justify-center font-bold text-base shrink-0">
@@ -358,7 +358,7 @@ export function LiveSquircleProductCard() {
 // 8. Testimonial Ticker
 export function LiveTestimonialTicker() {
   return (
-    <div className="w-full max-w-md p-5 rounded-2xl bg-white border border-[#e0e0e0] flex flex-col gap-3">
+    <div className="w-full max-w-md p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3">
       <div className="flex items-center gap-1 text-[#141414]">
         {[...Array(5)].map((_, i) => (
           <Star key={i} className="w-3.5 h-3.5 fill-[#141414]" />
@@ -391,7 +391,7 @@ export function LiveCommandSearchInput() {
 
   return (
     <div className="w-full max-w-md p-4 flex flex-col items-center gap-2">
-      <div className="relative flex items-center w-full px-3.5 py-2 rounded-full bg-[#f0f0f0] border border-[#e0e0e0] focus-within:border-[#141414] transition-colors">
+      <div className="relative flex items-center w-full px-3.5 py-2 rounded-full bg-[#f0f0f0] border border-hairline-soft focus-within:border-[#141414] transition-colors">
         <Search className="w-4 h-4 text-[#707070] shrink-0 mr-2" />
         <input
           type="text"
@@ -405,7 +405,7 @@ export function LiveCommandSearchInput() {
             <X className="w-3.5 h-3.5" />
           </button>
         ) : (
-          <span className="px-1.5 py-0.5 rounded-full bg-white border border-[#e0e0e0] text-[10px] font-mono font-semibold text-[#707070]">
+          <span className="px-1.5 py-0.5 rounded-full bg-white border border-hairline-soft text-[10px] font-mono font-semibold text-[#707070]">
             ⌘K
           </span>
         )}
@@ -455,7 +455,7 @@ export function LiveOTPVerificationInput() {
             value={digit}
             onChange={(e) => handleChange(idx, e.target.value)}
             onKeyDown={(e) => handleKeyDown(idx, e)}
-            className="w-10 h-12 rounded-xl text-center text-sm font-mono font-bold bg-[#f0f0f0] border border-[#e0e0e0] text-[#141414] focus:bg-white focus:border-[#141414] outline-none transition-colors"
+            className="w-10 h-12 rounded-xl text-center text-sm font-mono font-bold bg-[#f0f0f0] border border-hairline-soft text-[#141414] focus:bg-white focus:border-[#141414] outline-none transition-colors"
           />
         ))}
       </div>
@@ -498,7 +498,7 @@ export function LiveBottomActionSheet() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-sm bg-white rounded-3xl p-5 border border-[#e0e0e0] flex flex-col gap-3 animate-in slide-in-from-bottom-4"
+            className="w-full max-w-sm bg-white rounded-3xl p-5 border border-hairline-soft flex flex-col gap-3 animate-in slide-in-from-bottom-4"
           >
             <div className="w-10 h-1 rounded-full bg-[#e0e0e0] mx-auto mb-1" />
             <div className="flex items-center justify-between">
@@ -549,7 +549,7 @@ export function LiveSpotlightDialog() {
     <div className="flex flex-col items-center justify-center p-6">
       <button
         onClick={() => setOpen(true)}
-        className="px-4 py-2 rounded-full border border-[#e0e0e0] bg-white text-[#141414] text-xs font-semibold hover:bg-[#f3f3f3]"
+        className="px-4 py-2 rounded-full border border-hairline-soft bg-white text-[#141414] text-xs font-semibold hover:bg-[#f3f3f3]"
       >
         Trigger Dialog
       </button>
@@ -561,7 +561,7 @@ export function LiveSpotlightDialog() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-sm rounded-2xl bg-white border border-[#e0e0e0] p-6 flex flex-col gap-4 animate-in zoom-in-95"
+            className="w-full max-w-sm rounded-2xl bg-white border border-hairline-soft p-6 flex flex-col gap-4 animate-in zoom-in-95"
           >
             <div className="w-9 h-9 rounded-full bg-[#f0f0f0] flex items-center justify-center text-[#141414]">
               <AlertCircle className="w-4 h-4" />
@@ -700,7 +700,7 @@ export function LiveStatCounterTicker() {
   const percentage = Math.min(100, Math.round((count / target) * 100));
 
   return (
-    <div className="w-full max-w-xs p-5 rounded-2xl bg-white border border-[#e0e0e0] flex flex-col gap-3">
+    <div className="w-full max-w-xs p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-[#707070]">Goal Completion</span>
         <span className="text-xs font-bold text-[#141414]">{percentage}%</span>
