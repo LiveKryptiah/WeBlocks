@@ -1202,6 +1202,195 @@ export function PerspectiveRollerPicker({
   );
 }`,
   },
+  {
+    id: "comp-17",
+    slug: "spotlight-directory-card",
+    title: "Spotlight Directory Card",
+    description: "Team member directory card featuring a prominent elevated focus card, progressive defocus backdrop list, and interactive expand control adapted for Weblocks.",
+    category: "cards",
+    tier: "free",
+    cliCommand: "npx weblocks add spotlight-directory-card",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    tags: ["directory", "team", "members", "blur", "cards", "bento", "spotlight", "frosted"],
+    props: [
+      { name: "members", type: "Array<{ id: string; name: string; role: string; avatar: string; initials: string }>", description: "List of team member profiles" },
+      { name: "defaultExpanded", type: "boolean", default: "false", description: "Whether the directory list starts expanded" },
+      { name: "onMessage", type: "(member: any) => void", description: "Callback when the direct message action is triggered" },
+    ],
+    code: `"use client";
+
+import React, { useState, useEffect } from "react";
+import { Mail, BellOff, ChevronDown } from "lucide-react";
+
+export interface MemberProfile {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  initials: string;
+}
+
+const DEFAULT_MEMBERS: MemberProfile[] = [
+  {
+    id: "phil",
+    name: "Phil Foster",
+    role: "UI DESIGNER AT @GRIDSTUDIO.DESIGN",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+    initials: "PF",
+  },
+  {
+    id: "elena",
+    name: "Elena Rostova",
+    role: "DESIGN SYSTEMS LEAD AT @WEBLOCKS",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80",
+    initials: "ER",
+  },
+  {
+    id: "marcus",
+    name: "Marcus Vance",
+    role: "SYSTEMS ARCHITECT AT @LINEAR.APP",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
+    initials: "MV",
+  },
+  {
+    id: "sarah",
+    name: "Sarah Chen",
+    role: "PRINCIPAL ENGINEER AT @STRIPE.ATLAS",
+    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80",
+    initials: "SC",
+  },
+  {
+    id: "liam",
+    name: "Liam Davies",
+    role: "FRONTEND LEAD AT @VERCEL.COM",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80",
+    initials: "LD",
+  },
+];
+
+export function SpotlightDirectoryCard({
+  members = DEFAULT_MEMBERS,
+  defaultExpanded = false,
+  onMessage,
+}: {
+  members?: MemberProfile[];
+  defaultExpanded?: boolean;
+  onMessage?: (member: MemberProfile) => void;
+}) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+
+  useEffect(() => {
+    if (isExpanded) return;
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % members.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [isExpanded, members.length]);
+
+  const active = members[activeIdx];
+  const otherMembers = members.filter((_, idx) => idx !== activeIdx);
+
+  return (
+    <div className="relative w-full max-w-[320px] rounded-3xl bg-white border border-hairline-soft p-3 flex flex-col justify-between select-none overflow-hidden transition-all duration-300">
+      {/* 1. Elevated Spotlight Featured Member Card */}
+      <div className="relative z-20 w-full rounded-2xl bg-white border border-hairline-soft p-2.5 sm:p-3 flex items-center justify-between gap-2.5 shadow-none transition-all duration-200">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-hairline-soft bg-field flex items-center justify-center">
+            <img
+              src={active.avatar}
+              alt={active.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
+            <span className="text-xs font-bold text-ink">{active.initials}</span>
+          </div>
+
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5">
+              <h4 className="text-xs sm:text-sm font-bold text-ink tracking-tight truncate">
+                {active.name}
+              </h4>
+              <BellOff className="w-3 h-3 text-[#adadad] shrink-0" />
+              <ChevronDown className="w-3 h-3 text-[#adadad] shrink-0" />
+            </div>
+            <p className="text-[9px] uppercase tracking-wider text-[#707070] font-semibold truncate mt-0.5">
+              {active.role}
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => onMessage?.(active)}
+          className="w-8 h-8 rounded-xl bg-field hover:bg-canvas-soft flex items-center justify-center text-ink shrink-0 transition-colors cursor-pointer"
+          title={\`Message \${active.name}\`}
+        >
+          <Mail className="w-3.5 h-3.5" />
+        </button>
+      </div>
+
+      {/* 2. Blurred / Frosted Members List Beneath Spotlight */}
+      <div
+        className={\`relative flex flex-col gap-1.5 py-1.5 px-0.5 transition-all duration-300 \${
+          isExpanded
+            ? "filter-none opacity-100 max-h-44 overflow-y-auto"
+            : "blur-[2.5px] opacity-35 pointer-events-none max-h-16 overflow-hidden"
+        }\`}
+      >
+        {otherMembers.map((m) => (
+          <div
+            key={m.id}
+            onClick={() => {
+              if (isExpanded) {
+                const idx = members.findIndex((x) => x.id === m.id);
+                if (idx !== -1) setActiveIdx(idx);
+              }
+            }}
+            className="flex items-center justify-between gap-2 p-1.5 rounded-xl hover:bg-field/50 transition-colors cursor-pointer"
+          >
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-6 h-6 rounded-full overflow-hidden bg-field shrink-0 border border-hairline-soft flex items-center justify-center">
+                <img
+                  src={m.avatar}
+                  alt={m.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+                <span className="text-[9px] font-bold text-ink">{m.initials}</span>
+              </div>
+              <div className="min-w-0">
+                <div className="text-[11px] font-semibold text-ink truncate">{m.name}</div>
+                <div className="text-[8px] uppercase tracking-wider text-[#707070] truncate">
+                  {m.role}
+                </div>
+              </div>
+            </div>
+            <div className="w-5 h-5 rounded-lg bg-field flex items-center justify-center text-[#707070] shrink-0">
+              <Mail className="w-2.5 h-2.5" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 3. Bottom Pill Button: View more members */}
+      <div className="flex items-center justify-center pt-1">
+        <button
+          type="button"
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="px-4 py-1.5 rounded-full bg-[#141414] hover:bg-[#262626] text-white text-[11px] font-semibold tracking-tight transition-all cursor-pointer shadow-none"
+        >
+          {isExpanded ? "Collapse members" : "View more members"}
+        </button>
+      </div>
+    </div>
+  );
+}`,
+  },
 ];
 
 export function getComponentDesignMd(component: UIComponentEntity): string {
