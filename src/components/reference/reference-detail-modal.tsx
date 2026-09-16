@@ -29,6 +29,8 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
   const { activeLightboxRef, closeLightbox, isSaved, toggleSave, openLightbox } =
     useLibrary();
   const [copied, setCopied] = useState(false);
+  const [copiedFigma, setCopiedFigma] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
 
   if (!activeLightboxRef) return null;
 
@@ -46,6 +48,33 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleCopyFigma = () => {
+    if (typeof window !== "undefined") {
+      const figmaTokenJson = JSON.stringify(
+        {
+          weblocksReference: {
+            title: activeLightboxRef.title,
+            app: activeLightboxRef.appName,
+            pattern: activeLightboxRef.pattern,
+            platform: activeLightboxRef.platform,
+            dimensions: activeLightboxRef.aspectRatio === "portrait" ? "390x844" : "1280x800",
+            tokens: {
+              borderRadius: "16px",
+              elevation: "none",
+              colorCanvas: "#ffffff",
+              colorInk: "#141414",
+            },
+          },
+        },
+        null,
+        2
+      );
+      navigator.clipboard.writeText(figmaTokenJson);
+      setCopiedFigma(true);
+      setTimeout(() => setCopiedFigma(false), 2500);
     }
   };
 
@@ -104,9 +133,48 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
 
         {/* Content area: Screenshot focus + Metadata column */}
         <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-0">
-          {/* Main Visual Presentation */}
-          <div className="lg:col-span-8 p-6 sm:p-8 flex items-center justify-center bg-canvas-soft border-b lg:border-b-0 lg:border-r border-hairline">
-            <div className="w-full max-w-md rounded-sm overflow-hidden border border-hairline-soft bg-white">
+          {/* Main Visual Presentation with Zoom Pan */}
+          <div className="relative lg:col-span-8 p-6 sm:p-8 flex items-center justify-center bg-canvas-soft border-b lg:border-b-0 lg:border-r border-hairline overflow-hidden min-h-[380px]">
+            {/* Zoom Controls Pill Floating */}
+            <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
+              <button
+                type="button"
+                onClick={() => setZoomLevel(1)}
+                className={cn(
+                  "px-2.5 py-1 rounded-full transition-colors",
+                  zoomLevel === 1 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                )}
+              >
+                Fit
+              </button>
+              <button
+                type="button"
+                onClick={() => setZoomLevel(1.4)}
+                className={cn(
+                  "px-2.5 py-1 rounded-full transition-colors",
+                  zoomLevel === 1.4 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                )}
+              >
+                1.4x
+              </button>
+              <button
+                type="button"
+                onClick={() => setZoomLevel(2)}
+                className={cn(
+                  "px-2.5 py-1 rounded-full transition-colors",
+                  zoomLevel === 2 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                )}
+              >
+                2x
+              </button>
+            </div>
+
+            <div
+              className="w-full max-w-md rounded-sm overflow-hidden border border-hairline-soft bg-white transition-transform duration-200 cursor-zoom-in"
+              style={{ transform: `scale(${zoomLevel})` }}
+              onClick={() => setZoomLevel((prev) => (prev === 1 ? 1.4 : prev === 1.4 ? 2 : 1))}
+              title="Click to toggle zoom magnification"
+            >
               <ScreenshotMockup screenshot={activeLightboxRef} />
             </div>
           </div>
@@ -135,6 +203,25 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
                     Add to Collection
                   </ButtonOutline>
                 )}
+
+                {/* Copy for Figma Action */}
+                <button
+                  type="button"
+                  onClick={handleCopyFigma}
+                  className="w-full h-11 px-4 rounded-full border border-hairline bg-white hover:bg-canvas-soft text-ink font-semibold text-body-sm flex items-center justify-center gap-2 transition-colors"
+                >
+                  {copiedFigma ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-600" />
+                      <span className="text-emerald-600">Copied for Figma</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="w-2 h-2 rounded-full bg-[#F24E1E]" />
+                      <span>Copy for Figma</span>
+                    </>
+                  )}
+                </button>
               </div>
 
               {/* Description */}

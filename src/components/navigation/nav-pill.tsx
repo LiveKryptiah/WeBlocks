@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
+  Search,
   Bookmark,
   User,
   Sparkles,
@@ -17,7 +18,11 @@ import { useLibrary } from "@/context/library-context";
 import { ButtonPrimary, ButtonSoft } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const NavPill: React.FC = () => {
+interface NavPillProps {
+  onOpenCommandPalette?: () => void;
+}
+
+export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
   const pathname = usePathname();
   const { user, savedIds } = useLibrary();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -96,6 +101,21 @@ export const NavPill: React.FC = () => {
 
           {/* Right Action Items */}
           <div className="flex items-center gap-2">
+            {/* Quick Command Palette Trigger */}
+            <button
+              type="button"
+              onClick={onOpenCommandPalette}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-field hover:bg-canvas-soft text-muted hover:text-ink text-caption font-semibold transition-colors border border-hairline-soft"
+              title="Quick Search (⌘K / Ctrl+K)"
+              aria-label="Open command palette"
+            >
+              <Search className="w-3.5 h-3.5 text-muted" />
+              <span>Search</span>
+              <kbd className="font-mono text-[10px] bg-white px-1.5 py-0.5 rounded border border-hairline text-muted">
+                ⌘K
+              </kbd>
+            </button>
+
             {/* Saved shortcut */}
             <Link
               href="/saved"

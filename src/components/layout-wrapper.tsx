@@ -1,21 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavPill } from "./navigation/nav-pill";
 import { Footer } from "./navigation/footer";
 import { ReferenceDetailModal } from "./reference/reference-detail-modal";
 import { AddToCollectionModal } from "./collection/add-to-collection-modal";
+import { CommandPalette } from "./navigation/command-palette";
 
 export const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [collectionScreenshotId, setCollectionScreenshotId] = useState<string | null>(null);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+
+  // Global Cmd+K / Ctrl+K keyboard shortcut
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCommandPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-ink">
-      <NavPill />
+      <NavPill onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />
       <main className="flex-1 pt-24 sm:pt-28">{children}</main>
       <Footer />
+
+      {/* Global Command-K spotlight palette */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+      />
 
       {/* Global reference detail lightbox */}
       <ReferenceDetailModal

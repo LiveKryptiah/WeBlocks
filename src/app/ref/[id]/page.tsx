@@ -26,6 +26,8 @@ export default function ReferenceDetailPage() {
   const router = useRouter();
   const { isSaved, toggleSave } = useLibrary();
   const [copied, setCopied] = useState(false);
+  const [copiedFigma, setCopiedFigma] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
   const [collectionModalId, setCollectionModalId] = useState<string | null>(null);
 
   const refId = params?.id as string;
@@ -63,6 +65,33 @@ export default function ReferenceDetailPage() {
     }
   };
 
+  const handleCopyFigma = () => {
+    if (typeof window !== "undefined") {
+      const figmaTokenJson = JSON.stringify(
+        {
+          weblocksReference: {
+            title: screenshot.title,
+            app: screenshot.appName,
+            pattern: screenshot.pattern,
+            platform: screenshot.platform,
+            dimensions: screenshot.aspectRatio === "portrait" ? "390x844" : "1280x800",
+            tokens: {
+              borderRadius: "16px",
+              elevation: "none",
+              colorCanvas: "#ffffff",
+              colorInk: "#141414",
+            },
+          },
+        },
+        null,
+        2
+      );
+      navigator.clipboard.writeText(figmaTokenJson);
+      setCopiedFigma(true);
+      setTimeout(() => setCopiedFigma(false), 2500);
+    }
+  };
+
   return (
     <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
       {/* Back button */}
@@ -80,8 +109,47 @@ export default function ReferenceDetailPage() {
       {/* Main Grid: Screenshot presentation + Metadata Sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
         {/* Large Screenshot presentation */}
-        <div className="lg:col-span-8 bg-canvas-soft rounded-md p-6 sm:p-10 border border-hairline-soft flex items-center justify-center">
-          <div className="w-full max-w-xl rounded-sm overflow-hidden bg-white border border-hairline-soft">
+        <div className="relative lg:col-span-8 bg-canvas-soft rounded-md p-6 sm:p-10 border border-hairline-soft flex items-center justify-center overflow-hidden min-h-[420px]">
+          {/* Zoom controls */}
+          <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
+            <button
+              type="button"
+              onClick={() => setZoomLevel(1)}
+              className={cn(
+                "px-2.5 py-1 rounded-full transition-colors",
+                zoomLevel === 1 ? "bg-ink text-white" : "text-muted hover:text-ink"
+              )}
+            >
+              Fit
+            </button>
+            <button
+              type="button"
+              onClick={() => setZoomLevel(1.4)}
+              className={cn(
+                "px-2.5 py-1 rounded-full transition-colors",
+                zoomLevel === 1.4 ? "bg-ink text-white" : "text-muted hover:text-ink"
+              )}
+            >
+              1.4x
+            </button>
+            <button
+              type="button"
+              onClick={() => setZoomLevel(2)}
+              className={cn(
+                "px-2.5 py-1 rounded-full transition-colors",
+                zoomLevel === 2 ? "bg-ink text-white" : "text-muted hover:text-ink"
+              )}
+            >
+              2x
+            </button>
+          </div>
+
+          <div
+            className="w-full max-w-xl rounded-sm overflow-hidden bg-white border border-hairline-soft transition-transform duration-200 cursor-zoom-in"
+            style={{ transform: `scale(${zoomLevel})` }}
+            onClick={() => setZoomLevel((prev) => (prev === 1 ? 1.4 : prev === 1.4 ? 2 : 1))}
+            title="Click to toggle magnification"
+          >
             <ScreenshotMockup screenshot={screenshot} />
           </div>
         </div>
@@ -138,6 +206,25 @@ export default function ReferenceDetailPage() {
               <FolderPlus className="w-4 h-4 mr-1.5" />
               Add to Collection
             </ButtonOutline>
+
+            {/* Copy for Figma Button */}
+            <button
+              type="button"
+              onClick={handleCopyFigma}
+              className="w-full h-11 px-4 rounded-full border border-hairline bg-white hover:bg-canvas-soft text-ink font-semibold text-body-sm flex items-center justify-center gap-2 transition-colors"
+            >
+              {copiedFigma ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-600" />
+                  <span className="text-emerald-600">Copied for Figma</span>
+                </>
+              ) : (
+                <>
+                  <span className="w-2 h-2 rounded-full bg-[#F24E1E]" />
+                  <span>Copy for Figma</span>
+                </>
+              )}
+            </button>
           </div>
 
           {/* Description */}
