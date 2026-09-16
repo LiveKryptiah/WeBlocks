@@ -61,21 +61,15 @@ export default function ComponentsDirectoryPage() {
     <div className="min-h-screen pt-24 sm:pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Header Section */}
       <section className="mb-10 sm:mb-12">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-field text-ink text-xs font-semibold">
-            <Layers className="w-3.5 h-3.5" />
-            Component Blocks
-          </span>
-          <span className="px-2.5 py-0.5 rounded-full bg-[#0066ff]/10 text-[#0066ff] text-xs font-bold">
-            14 Production Blocks
-          </span>
-        </div>
+        <span className="text-label uppercase tracking-wider text-muted font-semibold">
+          Components
+        </span>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-4 max-w-3xl">
-          Copy-paste interactive interface components.
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink mt-1 mb-2 max-w-3xl">
+          Interactive component blocks.
         </h1>
-        <p className="text-sm sm:text-base text-muted max-w-2xl leading-relaxed">
-          Crafted with pure React, Tailwind CSS, zero drop shadows, hairline borders, and strict typographic hierarchy. Fully interactive in preview, ready to paste into your codebase.
+        <p className="text-body text-muted max-w-xl font-light">
+          Production React and Tailwind UI components with live interactive playgrounds.
         </p>
 
         {/* CLI Quick Starter Banner */}

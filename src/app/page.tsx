@@ -45,21 +45,19 @@ export default function HomePage() {
       {/* SECTION 1: WHITESPACE-HEAVY HERO LOCKUP */}
       <section className="w-full max-w-5xl px-6 sm:px-8 pt-12 sm:pt-20 pb-16 sm:pb-24 text-center flex flex-col items-center">
         {/* Subtle pill kicker */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-canvas-soft border border-hairline-soft text-body-sm font-semibold text-ink mb-6 select-none">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-canvas-soft border border-hairline-soft text-caption font-semibold text-ink mb-6 select-none">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Curated UI/UX reference library for makers</span>
+          <span>Curated interface references & component blocks</span>
         </div>
 
         {/* Display headline (Sentence case + terminal period) */}
-        <h1 className="text-4xl sm:text-6xl lg:text-[80px] font-bold tracking-tight text-ink leading-[1.0] max-w-4xl mb-6">
+        <h1 className="text-4xl sm:text-6xl lg:text-[76px] font-bold tracking-tight text-ink leading-[1.05] max-w-4xl mb-5">
           Discover real-world design inspiration.
         </h1>
 
-        {/* Body Large subtitle (Weight 300) */}
-        <p className="text-body-large text-muted font-light max-w-2xl leading-relaxed mb-10">
-          A calm, searchable index of production screenshots, interaction
-          patterns, and mobile flows from the world’s most thoughtful digital
-          products.
+        {/* Minimal Subtitle */}
+        <p className="text-body-large text-muted font-light max-w-xl leading-relaxed mb-8">
+          Production screenshots, UI patterns, and interactive component blocks.
         </p>
 
         {/* Hero Interactive Search Form */}
@@ -255,19 +253,15 @@ export default function HomePage() {
       <section className="w-full max-w-7xl px-6 sm:px-8 py-16 sm:py-24 border-t border-hairline">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-field text-ink text-xs font-semibold mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#0066ff]" />
-              New Feature
-            </div>
-            <h2 className="text-h2 text-ink font-bold">
+            <span className="text-label uppercase tracking-wider text-muted font-semibold">
+              Components
+            </span>
+            <h2 className="text-h2 text-ink font-bold mt-1">
               Interactive component blocks.
             </h2>
-            <p className="text-body text-muted mt-2 max-w-xl font-light">
-              Copy-paste production React + Tailwind blocks with live interactive playgrounds, zero drop shadows, and clean code tabs.
-            </p>
           </div>
           <Link href="/components">
-            <ButtonOutline size="sm">Explore all 14 components</ButtonOutline>
+            <ButtonOutline size="sm">Browse all components</ButtonOutline>
           </Link>
         </div>
 
