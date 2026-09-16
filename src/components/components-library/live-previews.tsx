@@ -2274,12 +2274,12 @@ export function LiveShareModalDialog() {
   }
 
   return (
-    <div className="flex items-center justify-center pt-8 pb-4 px-4 select-none font-sans">
-      <div className="relative w-full max-w-[360px] rounded-[32px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] pt-9 pb-6 px-6 transition-all animate-in fade-in zoom-in-95 duration-150">
+    <div className="flex items-center justify-center pt-6 pb-2 px-3 select-none font-sans">
+      <div className="relative w-full max-w-[310px] rounded-[26px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] shadow-[0_16px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_16px_40px_-10px_rgba(0,0,0,0.6)] pt-7 pb-4 px-4.5 transition-all animate-in fade-in zoom-in-95 duration-150">
         {/* Protruding Top Center Emblem: Interconnected Chain Links */}
-        <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-white dark:bg-[#161718] border-4 border-[#f4f4f5] dark:border-[#0e0f11] shadow-sm flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#94a3b8] to-[#cbd5e1] dark:from-[#334155] dark:to-[#64748b] flex items-center justify-center shadow-inner">
-            <Link2 className="w-4 h-4 text-white -rotate-45" />
+        <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-white dark:bg-[#161718] border-[3px] border-[#f4f4f5] dark:border-[#0e0f11] shadow-xs flex items-center justify-center">
+          <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#94a3b8] to-[#cbd5e1] dark:from-[#334155] dark:to-[#64748b] flex items-center justify-center shadow-inner">
+            <Link2 className="w-3.5 h-3.5 text-white -rotate-45" />
           </div>
         </div>
 
@@ -2290,29 +2290,29 @@ export function LiveShareModalDialog() {
             setIsOpen(false);
             showToast("Share modal closed", "info");
           }}
-          className="absolute top-4 right-4 w-7 h-7 rounded-full border border-black/[0.06] dark:border-white/10 flex items-center justify-center text-[#9ca3af] hover:text-[#111827] dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+          className="absolute top-3 right-3 w-6 h-6 rounded-full border border-black/[0.06] dark:border-white/10 flex items-center justify-center text-[#9ca3af] hover:text-[#111827] dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
           title="Close dialog"
         >
-          <X className="w-3.5 h-3.5" />
+          <X className="w-3 h-3" />
         </button>
 
         {/* Title & Subtitle */}
-        <div className="text-center mb-6">
-          <h3 className="text-xl font-bold text-[#111827] dark:text-white tracking-tight leading-tight">
+        <div className="text-center mb-4">
+          <h3 className="text-[17px] font-bold text-[#111827] dark:text-white tracking-tight leading-tight">
             Share with Friends
           </h3>
-          <p className="text-[13px] text-[#6b7280] dark:text-[#9ca3af] max-w-[260px] mx-auto mt-2 leading-relaxed">
+          <p className="text-[11.5px] text-[#6b7280] dark:text-[#9ca3af] max-w-[230px] mx-auto mt-1 leading-relaxed">
             Trading is more effective when you connect with friends!
           </p>
         </div>
 
         {/* Section 1: Share you link */}
-        <div className="mb-5">
-          <label className="block text-[13px] font-bold text-[#111827] dark:text-white mb-2">
+        <div className="mb-3.5">
+          <label className="block text-[11.5px] font-bold text-[#111827] dark:text-white mb-1.5">
             Share your link
           </label>
-          <div className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#f8f9fa] dark:bg-[#202226] border border-black/[0.04] dark:border-white/[0.06] text-[13px] text-[#374151] dark:text-[#d1d5db]">
-            <span className="truncate pr-2 select-all font-sans text-[12.5px]">
+          <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-[#f8f9fa] dark:bg-[#202226] border border-black/[0.04] dark:border-white/[0.06] text-[12px] text-[#374151] dark:text-[#d1d5db]">
+            <span className="truncate pr-2 select-all font-sans text-[11.5px]">
               {shareUrl}
             </span>
             <button
@@ -2322,9 +2322,9 @@ export function LiveShareModalDialog() {
               title="Copy link"
             >
               {copied ? (
-                <Check className="w-4 h-4 text-emerald-500" />
+                <Check className="w-3.5 h-3.5 text-emerald-500" />
               ) : (
-                <Copy className="w-4 h-4" />
+                <Copy className="w-3.5 h-3.5" />
               )}
             </button>
           </div>
@@ -2332,7 +2332,7 @@ export function LiveShareModalDialog() {
 
         {/* Section 2: Share to Social Network Icons */}
         <div>
-          <label className="block text-[13px] font-bold text-[#111827] dark:text-white mb-3">
+          <label className="block text-[11.5px] font-bold text-[#111827] dark:text-white mb-2">
             Share to
           </label>
           <div className="flex items-center justify-between gap-1">
@@ -2341,14 +2341,14 @@ export function LiveShareModalDialog() {
                 key={channel.name}
                 type="button"
                 onClick={() => handleSocialClick(channel.name)}
-                className="flex flex-col items-center gap-1.5 group cursor-pointer focus:outline-none"
+                className="flex flex-col items-center gap-1 group cursor-pointer focus:outline-none"
               >
                 <div
-                  className={`w-11 h-11 rounded-full flex items-center justify-center text-white shadow-xs transition-transform duration-150 group-hover:scale-105 group-active:scale-95 ${channel.bgClass}`}
+                  className={`w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs transition-transform duration-150 group-hover:scale-105 group-active:scale-95 ${channel.bgClass}`}
                 >
                   {channel.icon}
                 </div>
-                <span className="text-[10.5px] font-medium text-[#6b7280] dark:text-[#9ca3af] group-hover:text-[#111827] dark:group-hover:text-white transition-colors">
+                <span className="text-[9.5px] font-medium text-[#6b7280] dark:text-[#9ca3af] group-hover:text-[#111827] dark:group-hover:text-white transition-colors">
                   {channel.name}
                 </span>
               </button>
@@ -2381,10 +2381,10 @@ export function LiveAIReasoningStream() {
   };
 
   return (
-    <div className="w-full max-w-[440px] flex flex-col font-sans select-none p-4">
+    <div className="w-full max-w-[370px] flex flex-col font-sans select-none p-2 sm:p-3">
       {/* Optional Mode Switcher Header */}
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-black/[0.04] dark:border-white/[0.06]">
-        <span className="text-[11px] font-semibold tracking-tight text-ink uppercase">
+      <div className="flex items-center justify-between mb-3 pb-1.5 border-b border-black/[0.04] dark:border-white/[0.06]">
+        <span className="text-[10.5px] font-semibold tracking-tight text-ink uppercase">
           {mode === "fashion" ? "Aesthetic Exploration Trace" : "Design System Synthesis"}
         </span>
         <button
@@ -2394,135 +2394,135 @@ export function LiveAIReasoningStream() {
             setMode(nextMode);
             showToast(`Switched trace to ${nextMode} context`, "info");
           }}
-          className="text-[10.5px] text-[#707070] dark:text-[#8a8f98] hover:text-ink dark:hover:text-white transition-colors cursor-pointer"
+          className="text-[10px] text-[#707070] dark:text-[#8a8f98] hover:text-ink dark:hover:text-white transition-colors cursor-pointer"
         >
           Toggle: {mode === "fashion" ? "Weblocks UI" : "Fashion"}
         </button>
       </div>
 
       {/* 1. Reasoning Steps List */}
-      <div className="flex flex-col gap-3.5 mb-6">
+      <div className="flex flex-col gap-2.5 mb-4">
         {mode === "fashion" ? (
           <>
             {/* Step 1: 6 dots (3x2) */}
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 grid grid-cols-3 gap-0.5 items-center justify-center shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 grid grid-cols-3 gap-0.5 items-center justify-center shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
                 </div>
 
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Exploring your</span>
                   <div className="flex items-center -space-x-1 shrink-0">
-                    <span className="w-4 h-4 rounded-full bg-black text-white text-[8px] flex items-center justify-center font-bold">●</span>
-                    <span className="w-4 h-4 rounded-full bg-[#e60023] text-white text-[8px] flex items-center justify-center font-bold">P</span>
+                    <span className="w-3.5 h-3.5 rounded-full bg-black text-white text-[7px] flex items-center justify-center font-bold">●</span>
+                    <span className="w-3.5 h-3.5 rounded-full bg-[#e60023] text-white text-[7px] flex items-center justify-center font-bold">P</span>
                   </div>
                   <span className="truncate font-medium">Cosmos, Pinterest, & more</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">2m 39s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">2m 39s</span>
             </div>
 
             {/* Step 2: 4 dots scatter */}
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 relative shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 right-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 right-0.5" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 relative shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 right-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 right-0.5" />
                 </div>
 
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Browsing your</span>
                   <div className="flex items-center -space-x-1 shrink-0">
-                    <span className="px-1 py-0.2 rounded-full bg-[#f0f0f0] dark:bg-[#262626] text-[8px] font-medium text-black dark:text-white">SSENSE</span>
-                    <span className="w-4 h-4 rounded-full bg-[#5c3cfa] text-white text-[8px] flex items-center justify-center font-bold">shop</span>
+                    <span className="px-1 py-0.2 rounded-full bg-[#f0f0f0] dark:bg-[#262626] text-[7px] font-medium text-black dark:text-white">SSENSE</span>
+                    <span className="w-3.5 h-3.5 rounded-full bg-[#5c3cfa] text-white text-[7px] flex items-center justify-center font-bold">shop</span>
                   </div>
                   <span className="truncate font-medium">wishlists</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">1m 14s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">1m 14s</span>
             </div>
 
             {/* Step 3: 3 dots diagonal */}
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 relative shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 right-0.5" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 relative shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 right-0.5" />
                 </div>
 
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Defining</span>
                   <div className="flex items-center -space-x-1 shrink-0">
-                    <span className="w-4 h-4 rounded-full bg-neutral-800 text-white text-[8px] flex items-center justify-center">🧥</span>
-                    <span className="w-4 h-4 rounded-full bg-rose-900 text-white text-[8px] flex items-center justify-center">🧣</span>
+                    <span className="w-3.5 h-3.5 rounded-full bg-neutral-800 text-white text-[7px] flex items-center justify-center">🧥</span>
+                    <span className="w-3.5 h-3.5 rounded-full bg-rose-900 text-white text-[7px] flex items-center justify-center">🧣</span>
                   </div>
                   <span className="truncate font-medium">your aesthetic</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">48s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">48s</span>
             </div>
 
             {/* Step 4: 3 horizontal dots */}
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 flex items-center justify-center gap-0.5 shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 flex items-center justify-center gap-0.5 shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
                 </div>
 
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Exploring</span>
-                  <span className="w-4 h-4 rounded-full bg-stone-700 text-white text-[8px] flex items-center justify-center shrink-0">🧥</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-stone-700 text-white text-[7px] flex items-center justify-center shrink-0">🧥</span>
                   <span className="truncate font-medium">Outerwear options</span>
                 </div>
               </div>
               <div className="flex items-center gap-1 shrink-0">
                 <div className="flex items-center -space-x-1">
-                  <span className="w-3.5 h-3.5 rounded-full bg-black text-white text-[6px] flex items-center justify-center">●</span>
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#fca5a5]" />
+                  <span className="w-3 h-3 rounded-full bg-black text-white text-[5px] flex items-center justify-center">●</span>
+                  <span className="w-3 h-3 rounded-full bg-[#fca5a5]" />
                 </div>
-                <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a]">+3 more</span>
+                <span className="text-[10.5px] text-[#9ca3af] dark:text-[#71717a]">+3 more</span>
               </div>
             </div>
 
             {/* Step 5: 2 dots */}
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 relative shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-1 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-1 right-0.5" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 relative shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 right-0.5" />
                 </div>
 
                 <span className="truncate font-medium">Filtering finds by price, size, & relevance &gt;</span>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">15s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">15s</span>
             </div>
 
             {/* Step 6: 1 pulsing dot */}
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 flex items-center justify-center shrink-0">
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 flex items-center justify-center shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-current animate-ping opacity-75 absolute" />
                   <span className="w-1.5 h-1.5 rounded-full bg-current relative" />
                 </div>
 
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Curating</span>
-                  <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[8px] flex items-center justify-center shrink-0">👔</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-blue-600 text-white text-[7px] flex items-center justify-center shrink-0">👔</span>
                   <span className="truncate font-medium">Chore jackets</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 italic animate-pulse">
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 italic animate-pulse">
                 {isThinking ? "Thinking..." : "Noodling..."}
               </span>
             </div>
@@ -2530,98 +2530,98 @@ export function LiveAIReasoningStream() {
         ) : (
           <>
             {/* Weblocks Adapted Steps */}
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 grid grid-cols-3 gap-0.5 items-center justify-center shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 grid grid-cols-3 gap-0.5 items-center justify-center shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
                 </div>
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Scanning your</span>
-                  <span className="w-4 h-4 rounded-full bg-[#0d99ff] text-white text-[8px] flex items-center justify-center font-bold">F</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#0d99ff] text-white text-[7px] flex items-center justify-center font-bold">F</span>
                   <span className="truncate font-medium">Figma tokens & codebase</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">2m 40s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">2m 40s</span>
             </div>
 
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 relative shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 right-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 right-0.5" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 relative shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 right-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 right-0.5" />
                 </div>
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Browsing your</span>
-                  <span className="w-4 h-4 rounded-full bg-[#38bdf8] text-white text-[8px] flex items-center justify-center font-bold">⚛</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#38bdf8] text-white text-[7px] flex items-center justify-center font-bold">⚛</span>
                   <span className="truncate font-medium">Tailwind & React component presets</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">1m 12s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">1m 12s</span>
             </div>
 
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 relative shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 right-0.5" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 relative shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 right-0.5" />
                 </div>
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Defining</span>
-                  <span className="w-4 h-4 rounded-full bg-emerald-600 text-white text-[8px] flex items-center justify-center">✨</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white text-[7px] flex items-center justify-center">✨</span>
                   <span className="truncate font-medium">your design system aesthetics</span>
                 </div>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">45s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">45s</span>
             </div>
 
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 flex items-center justify-center gap-0.5 shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
-                  <span className="w-1 h-1 rounded-full bg-current" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 flex items-center justify-center gap-0.5 shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current" />
                 </div>
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Exploring</span>
-                  <span className="w-4 h-4 rounded-full bg-indigo-600 text-white text-[8px] flex items-center justify-center shrink-0">🎨</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-indigo-600 text-white text-[7px] flex items-center justify-center shrink-0">🎨</span>
                   <span className="truncate font-medium">Interactive blocks layout</span>
                 </div>
               </div>
-              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a]">+4 blocks</span>
+              <span className="text-[10.5px] text-[#9ca3af] dark:text-[#71717a]">+4 blocks</span>
             </div>
 
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 relative shrink-0 opacity-60">
-                  <span className="w-1 h-1 rounded-full bg-current absolute top-1 left-0.5" />
-                  <span className="w-1 h-1 rounded-full bg-current absolute bottom-1 right-0.5" />
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 relative shrink-0 opacity-60">
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute top-0.5 left-0.5" />
+                  <span className="w-0.5 h-0.5 rounded-full bg-current absolute bottom-0.5 right-0.5" />
                 </div>
                 <span className="truncate font-medium">Validating dark mode contrast & accessibility &gt;</span>
               </div>
-              <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">18s</span>
+              <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">18s</span>
             </div>
 
-            <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-4 h-4 flex items-center justify-center shrink-0">
+            <div className="flex items-center justify-between gap-2.5 text-[12.5px] text-[#111827] dark:text-[#f3f4f6]">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-3.5 h-3.5 flex items-center justify-center shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping opacity-75 absolute" />
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 relative" />
                 </div>
                 <div className="flex items-center gap-1.5 truncate">
                   <span>Synthesizing</span>
-                  <span className="w-4 h-4 rounded-full bg-purple-600 text-white text-[8px] flex items-center justify-center shrink-0">TS</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-purple-600 text-white text-[7px] flex items-center justify-center shrink-0">TS</span>
                   <span className="truncate font-medium">Production TypeScript code</span>
                 </div>
               </div>
-              <span className="text-[12px] text-emerald-600 dark:text-emerald-400 shrink-0 font-medium italic animate-pulse">
+              <span className="text-[11px] text-emerald-600 dark:text-emerald-400 shrink-0 font-medium italic animate-pulse">
                 {isThinking ? "Refining..." : "Synthesizing..."}
               </span>
             </div>
@@ -2632,15 +2632,15 @@ export function LiveAIReasoningStream() {
       {/* 2. Floating Ask Anything Input Pill */}
       <form
         onSubmit={handleSubmit}
-        className="w-full rounded-full bg-[#f4f4f6] dark:bg-[#1a1b1e] border border-black/[0.04] dark:border-white/[0.06] p-1.5 flex items-center gap-2 shadow-xs transition-all focus-within:ring-1 focus-within:ring-black/10 dark:focus-within:ring-white/10"
+        className="w-full rounded-full bg-[#f4f4f6] dark:bg-[#1a1b1e] border border-black/[0.04] dark:border-white/[0.06] p-1 flex items-center gap-1.5 shadow-xs transition-all focus-within:ring-1 focus-within:ring-black/10 dark:focus-within:ring-white/10"
       >
         <button
           type="button"
           onClick={() => showToast("Context attachment added", "info")}
-          className="w-8 h-8 rounded-full bg-white dark:bg-[#25272c] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center text-[#707070] dark:text-[#a1a1aa] hover:text-ink dark:hover:text-white transition-all shadow-xs cursor-pointer active:scale-95 shrink-0"
+          className="w-7 h-7 rounded-full bg-white dark:bg-[#25272c] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center text-[#707070] dark:text-[#a1a1aa] hover:text-ink dark:hover:text-white transition-all shadow-xs cursor-pointer active:scale-95 shrink-0"
           title="Add attachment"
         >
-          <Plus className="w-3.5 h-3.5" />
+          <Plus className="w-3 h-3" />
         </button>
 
         <input
@@ -2648,16 +2648,16 @@ export function LiveAIReasoningStream() {
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
           placeholder="Ask anything..."
-          className="flex-1 bg-transparent border-none text-[13.5px] text-[#111827] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#71717a] outline-none px-2 font-normal"
+          className="flex-1 bg-transparent border-none text-[12.5px] text-[#111827] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#71717a] outline-none px-1.5 font-normal"
         />
 
         <button
           type="submit"
           disabled={!inputVal.trim()}
-          className="w-8 h-8 rounded-full bg-white dark:bg-[#25272c] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center text-[#111] dark:text-white transition-all shadow-xs cursor-pointer active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+          className="w-7 h-7 rounded-full bg-white dark:bg-[#25272c] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center text-[#111] dark:text-white transition-all shadow-xs cursor-pointer active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
           title="Send query"
         >
-          <ArrowUp className="w-3.5 h-3.5" />
+          <ArrowUp className="w-3 h-3" />
         </button>
       </form>
     </div>
@@ -2733,89 +2733,89 @@ export function LiveStackedTaskCard() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 select-none font-sans">
-      <div className="relative w-full max-w-[420px] pt-3 pb-7">
+    <div className="flex flex-col items-center justify-center p-3 sm:p-4 select-none font-sans">
+      <div className="relative w-full max-w-[340px] sm:max-w-[360px] pt-2 pb-5">
         {/* 1. Main Front Card */}
         <div
-          className={`relative z-10 w-full rounded-[30px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] p-6 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)] transition-all duration-200 ${
+          className={`relative z-10 w-full rounded-[24px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] p-4 sm:p-5 shadow-[0_16px_40px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_16px_40px_-10px_rgba(0,0,0,0.5)] transition-all duration-200 ${
             isSwiping ? "-translate-y-3 opacity-0 scale-95" : "translate-y-0 opacity-100 scale-100"
           }`}
         >
           {/* Floating Top Right Pill Buttons */}
-          <div className="absolute -top-3.5 right-6 flex items-center gap-1.5 z-20">
+          <div className="absolute -top-3 right-5 flex items-center gap-1.5 z-20">
             <button
               type="button"
               onClick={() => showToast("Card options", "info")}
-              className="w-7 h-7 rounded-full bg-[#8c9199] hover:bg-[#737882] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-6 h-6 rounded-full bg-[#8c9199] hover:bg-[#737882] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
               title="Options"
             >
-              <MoreHorizontal className="w-3.5 h-3.5" />
+              <MoreHorizontal className="w-3 h-3" />
             </button>
             <button
               type="button"
               onClick={handleDismiss}
-              className="w-7 h-7 rounded-full bg-[#8c9199] hover:bg-[#737882] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-6 h-6 rounded-full bg-[#8c9199] hover:bg-[#737882] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
               title="Dismiss"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="w-3 h-3" />
             </button>
           </div>
 
           {/* Task Content Row */}
-          <div className="flex items-start gap-3.5 mb-6">
+          <div className="flex items-start gap-3 mb-4">
             {/* Document Receipt Icon with Plus Badge */}
-            <div className="relative w-9 h-11 shrink-0 text-[#737882] dark:text-[#9ca3af] mt-0.5">
+            <div className="relative w-7 h-9 shrink-0 text-[#737882] dark:text-[#9ca3af] mt-0.5">
               <svg className="w-full h-full" viewBox="0 0 24 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 2h16a2 2 0 0 1 2 2v20l-3-1.5-3 1.5-3-1.5-3 1.5-3-1.5-3 1.5V4a2 2 0 0 1 2-2z" fill="currentColor" fillOpacity="0.06" />
                 <line x1="8" y1="7" x2="16" y2="7" />
                 <line x1="8" y1="11" x2="16" y2="11" />
                 <line x1="8" y1="15" x2="13" y2="15" />
               </svg>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white dark:bg-[#161718] border border-black/10 dark:border-white/10 flex items-center justify-center text-[10px] font-bold text-[#737882] dark:text-[#9ca3af]">
+              <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-white dark:bg-[#161718] border border-black/10 dark:border-white/10 flex items-center justify-center text-[9px] font-bold text-[#737882] dark:text-[#9ca3af]">
                 +
               </div>
             </div>
 
             <div className="min-w-0 flex-1">
-              <div className="text-[13px] font-medium text-[#737882] dark:text-[#9ca3af] mb-1 truncate">
+              <div className="text-[11.5px] font-medium text-[#737882] dark:text-[#9ca3af] mb-0.5 truncate">
                 {activeTask?.meta}
               </div>
-              <h3 className="text-[22px] font-bold text-[#111827] dark:text-white tracking-tight leading-tight truncate">
+              <h3 className="text-[17px] sm:text-[18px] font-bold text-[#111827] dark:text-white tracking-tight leading-tight truncate">
                 {activeTask?.title}
               </h3>
             </div>
           </div>
 
           {/* Action Buttons Row */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={handleRemindLater}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-white dark:bg-[#202226] hover:bg-[#f9fafb] dark:hover:bg-[#282a30] text-[#737882] dark:text-[#9ca3af] hover:text-[#111827] dark:hover:text-white text-[13px] font-semibold tracking-tight shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-black/[0.04] dark:border-white/[0.06] transition-all cursor-pointer active:scale-95"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-full bg-white dark:bg-[#202226] hover:bg-[#f9fafb] dark:hover:bg-[#282a30] text-[#737882] dark:text-[#9ca3af] hover:text-[#111827] dark:hover:text-white text-[12px] font-semibold tracking-tight shadow-[0_2px_6px_rgba(0,0,0,0.05)] border border-black/[0.04] dark:border-white/[0.06] transition-all cursor-pointer active:scale-95"
             >
-              <Bell className="w-4 h-4 text-[#737882] dark:text-[#9ca3af]" />
-              <span>Remind Me Later</span>
+              <Bell className="w-3.5 h-3.5 text-[#737882] dark:text-[#9ca3af]" />
+              <span className="truncate">Remind Me Later</span>
             </button>
 
             <button
               type="button"
               onClick={handleMarkDone}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#22c55e] hover:bg-[#16a34a] text-white text-[13px] font-semibold tracking-tight shadow-[0_4px_14px_rgba(34,197,94,0.35)] transition-all cursor-pointer active:scale-95"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full bg-[#22c55e] hover:bg-[#16a34a] text-white text-[12px] font-semibold tracking-tight shadow-[0_4px_12px_rgba(34,197,94,0.3)] transition-all cursor-pointer active:scale-95"
             >
-              <CheckCircle2 className="w-4 h-4 text-white" />
-              <span>Mark as Done</span>
+              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+              <span className="truncate">Mark as Done</span>
             </button>
           </div>
         </div>
 
         {/* 2. Stacked Layer Underneath (Middle Card) */}
-        <div className="absolute -bottom-2.5 inset-x-3 h-12 rounded-[28px] bg-white/95 dark:bg-[#1c1d20] border border-black/[0.05] dark:border-[#23252a] -z-10 shadow-sm" />
+        <div className="absolute -bottom-2 inset-x-2.5 h-8 rounded-[22px] bg-white/95 dark:bg-[#1c1d20] border border-black/[0.05] dark:border-[#23252a] -z-10 shadow-xs" />
 
         {/* 3. Deepest Stacked Layer (Bottom Card) */}
-        <div className="absolute -bottom-5 inset-x-6 h-12 rounded-[26px] bg-white/80 dark:bg-[#222428] border border-black/[0.04] dark:border-[#23252a] -z-20 shadow-xs" />
+        <div className="absolute -bottom-4 inset-x-5 h-8 rounded-[20px] bg-white/80 dark:bg-[#222428] border border-black/[0.04] dark:border-[#23252a] -z-20 shadow-xs" />
       </div>
 
-      <div className="text-[11px] text-[#737882] dark:text-[#9ca3af] mt-2">
+      <div className="text-[10.5px] text-[#737882] dark:text-[#9ca3af] mt-1.5">
         {tasks.length} tasks remaining in queue • Click actions to cycle deck
       </div>
     </div>
