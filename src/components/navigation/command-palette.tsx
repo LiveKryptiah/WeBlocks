@@ -11,9 +11,11 @@ import {
   CornerDownLeft,
   X,
   Code2,
+  LayoutTemplate,
 } from "lucide-react";
 import { APPS, PATTERNS, SCREENSHOTS, COLLECTIONS } from "@/data/mock-data";
 import { UI_COMPONENTS } from "@/data/components-data";
+import { SECTIONS } from "@/data/sections-data";
 import { useLibrary } from "@/context/library-context";
 import { AppIconSquircle } from "@/components/ui/app-icon";
 import { cn } from "@/lib/utils";
@@ -50,12 +52,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     if (!q) {
       return [
         {
-          id: "nav-explore",
+          id: "nav-sections",
           type: "nav" as const,
-          title: "Explore Reference Library",
-          subtitle: "Browse all 32+ screens and design flows",
-          icon: <Layers className="w-4 h-4 text-muted" />,
-          action: () => router.push("/explore"),
+          title: "Section Showcase",
+          subtitle: "Hero sections, footers, contact forms, and pricing",
+          icon: <LayoutTemplate className="w-4 h-4 text-muted" />,
+          action: () => router.push("/sections"),
         },
         {
           id: "nav-components",
@@ -94,12 +96,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
     const results: Array<{
       id: string;
-      type: "screen" | "app" | "pattern" | "collection" | "component";
+      type: "screen" | "app" | "pattern" | "collection" | "component" | "section";
       title: string;
       subtitle: string;
       icon: React.ReactNode;
       action: () => void;
     }> = [];
+
+    // Matched Sections
+    SECTIONS.filter(
+      (s) =>
+        s.title.toLowerCase().includes(q) ||
+        s.description.toLowerCase().includes(q) ||
+        s.category.toLowerCase().includes(q) ||
+        s.tags.some((t) => t.toLowerCase().includes(q))
+    )
+      .slice(0, 3)
+      .forEach((sec) => {
+        results.push({
+          id: `sec-${sec.id}`,
+          type: "section",
+          title: sec.title,
+          subtitle: `${sec.category.toUpperCase()} • Section Block`,
+          icon: <LayoutTemplate className="w-4 h-4 text-muted" />,
+          action: () => router.push(`/sections?cat=${sec.category}`),
+        });
+      });
 
     // Matched Components
     UI_COMPONENTS.filter(

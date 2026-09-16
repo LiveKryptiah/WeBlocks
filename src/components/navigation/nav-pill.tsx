@@ -8,7 +8,7 @@ import {
   X,
   User,
   Sparkles,
-  Compass,
+  LayoutTemplate,
   Grid,
   FolderHeart,
   Code2,
@@ -36,7 +36,7 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
   }, []);
 
   const navLinks = [
-    { href: "/explore", label: "Explore", icon: Compass },
+    { href: "/sections", label: "Sections", icon: LayoutTemplate },
     { href: "/components", label: "Components", icon: Code2 },
     { href: "/patterns", label: "Patterns", icon: Grid },
     { href: "/apps", label: "Apps", icon: Sparkles },

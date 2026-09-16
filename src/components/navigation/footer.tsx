@@ -30,12 +30,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-white/10 text-body-sm">
           <div>
             <h4 className="text-label text-white uppercase tracking-wider font-semibold mb-4">
-              Explore
+              Showcase
             </h4>
             <ul className="space-y-2.5 text-faint">
               <li>
-                <Link href="/explore" className="hover:text-white transition-colors">
-                  All References
+                <Link href="/sections" className="hover:text-white transition-colors">
+                  Section Showcase
                 </Link>
               </li>
               <li>
