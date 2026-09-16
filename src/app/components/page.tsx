@@ -71,8 +71,8 @@ export default function ComponentsDirectoryPage() {
         </div>
       </div>
 
-      {/* Components Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Components Grid - 3 cards per row on desktop */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredComponents.map((comp) => (
           <ComponentPreviewCard key={comp.id} component={comp} />
         ))}
