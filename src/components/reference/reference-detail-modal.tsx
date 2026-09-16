@@ -26,11 +26,12 @@ interface ReferenceDetailModalProps {
 export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
   onOpenCollectionModal,
 }) => {
-  const { activeLightboxRef, closeLightbox, isSaved, toggleSave, openLightbox } =
+  const { activeLightboxRef, closeLightbox, isSaved, toggleSave, openLightbox, canvasTheme } =
     useLibrary();
   const [copied, setCopied] = useState(false);
   const [copiedFigma, setCopiedFigma] = useState(false);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
+  const [localTheme, setLocalTheme] = useState<"light" | "neutral" | "dark">(canvasTheme);
 
   if (!activeLightboxRef) return null;
 
@@ -77,6 +78,13 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
       setTimeout(() => setCopiedFigma(false), 2500);
     }
   };
+
+  const backdropBgClass =
+    localTheme === "dark"
+      ? "bg-[#141414]"
+      : localTheme === "neutral"
+      ? "bg-[#e5e5e5]"
+      : "bg-canvas-soft";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
@@ -133,44 +141,81 @@ export const ReferenceDetailModal: React.FC<ReferenceDetailModalProps> = ({
 
         {/* Content area: Screenshot focus + Metadata column */}
         <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-0">
-          {/* Main Visual Presentation with Zoom Pan */}
-          <div className="relative lg:col-span-8 p-6 sm:p-8 flex items-center justify-center bg-canvas-soft border-b lg:border-b-0 lg:border-r border-hairline overflow-hidden min-h-[380px]">
-            {/* Zoom Controls Pill Floating */}
-            <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
-              <button
-                type="button"
-                onClick={() => setZoomLevel(1)}
-                className={cn(
-                  "px-2.5 py-1 rounded-full transition-colors",
-                  zoomLevel === 1 ? "bg-ink text-white" : "text-muted hover:text-ink"
-                )}
-              >
-                Fit
-              </button>
-              <button
-                type="button"
-                onClick={() => setZoomLevel(1.4)}
-                className={cn(
-                  "px-2.5 py-1 rounded-full transition-colors",
-                  zoomLevel === 1.4 ? "bg-ink text-white" : "text-muted hover:text-ink"
-                )}
-              >
-                1.4x
-              </button>
-              <button
-                type="button"
-                onClick={() => setZoomLevel(2)}
-                className={cn(
-                  "px-2.5 py-1 rounded-full transition-colors",
-                  zoomLevel === 2 ? "bg-ink text-white" : "text-muted hover:text-ink"
-                )}
-              >
-                2x
-              </button>
+          {/* Main Visual Presentation with Zoom Pan & Canvas Lighting */}
+          <div className={cn("relative lg:col-span-8 p-6 sm:p-8 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-hairline overflow-hidden min-h-[380px] transition-colors duration-200", backdropBgClass)}>
+            {/* Top Floating Controls */}
+            <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
+              {/* Canvas Theme Selector */}
+              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
+                <button
+                  type="button"
+                  onClick={() => setLocalTheme("light")}
+                  className={cn(
+                    "px-2 py-0.5 rounded-full transition-colors text-[11px]",
+                    localTheme === "light" ? "bg-ink text-white" : "text-muted hover:text-ink"
+                  )}
+                >
+                  Light
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLocalTheme("neutral")}
+                  className={cn(
+                    "px-2 py-0.5 rounded-full transition-colors text-[11px]",
+                    localTheme === "neutral" ? "bg-ink text-white" : "text-muted hover:text-ink"
+                  )}
+                >
+                  Neutral
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLocalTheme("dark")}
+                  className={cn(
+                    "px-2 py-0.5 rounded-full transition-colors text-[11px]",
+                    localTheme === "dark" ? "bg-ink text-white" : "text-muted hover:text-ink"
+                  )}
+                >
+                  Dark
+                </button>
+              </div>
+
+              {/* Zoom Controls */}
+              <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline text-caption font-semibold select-none">
+                <button
+                  type="button"
+                  onClick={() => setZoomLevel(1)}
+                  className={cn(
+                    "px-2.5 py-1 rounded-full transition-colors",
+                    zoomLevel === 1 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                  )}
+                >
+                  Fit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setZoomLevel(1.4)}
+                  className={cn(
+                    "px-2.5 py-1 rounded-full transition-colors",
+                    zoomLevel === 1.4 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                  )}
+                >
+                  1.4x
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setZoomLevel(2)}
+                  className={cn(
+                    "px-2.5 py-1 rounded-full transition-colors",
+                    zoomLevel === 2 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                  )}
+                >
+                  2x
+                </button>
+              </div>
             </div>
 
             <div
-              className="w-full max-w-md rounded-sm overflow-hidden border border-hairline-soft bg-white transition-transform duration-200 cursor-zoom-in"
+              className="w-full max-w-md rounded-sm overflow-hidden border border-hairline-soft bg-white transition-transform duration-200 cursor-zoom-in mt-6"
               style={{ transform: `scale(${zoomLevel})` }}
               onClick={() => setZoomLevel((prev) => (prev === 1 ? 1.4 : prev === 1.4 ? 2 : 1))}
               title="Click to toggle zoom magnification"

@@ -13,6 +13,9 @@ import {
   Compass,
   Grid,
   FolderHeart,
+  Sun,
+  Moon,
+  Contrast,
 } from "lucide-react";
 import { useLibrary } from "@/context/library-context";
 import { ButtonPrimary, ButtonSoft } from "@/components/ui/button";
@@ -24,7 +27,7 @@ interface NavPillProps {
 
 export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
   const pathname = usePathname();
-  const { user, savedIds } = useLibrary();
+  const { user, savedIds, canvasTheme, setCanvasTheme } = useLibrary();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -114,6 +117,22 @@ export const NavPill: React.FC<NavPillProps> = ({ onOpenCommandPalette }) => {
               <kbd className="font-mono text-[10px] bg-white px-1.5 py-0.5 rounded border border-hairline text-muted">
                 ⌘K
               </kbd>
+            </button>
+
+            {/* Canvas Theme Switcher */}
+            <button
+              type="button"
+              onClick={() => {
+                const nextTheme = canvasTheme === "light" ? "neutral" : canvasTheme === "neutral" ? "dark" : "light";
+                setCanvasTheme(nextTheme);
+              }}
+              className="p-2 rounded-full text-muted hover:text-ink hover:bg-canvas-soft transition-colors border border-hairline-soft"
+              title={`Canvas Lighting: ${canvasTheme.toUpperCase()} (Click to toggle)`}
+              aria-label="Toggle canvas lighting theme"
+            >
+              {canvasTheme === "light" && <Sun className="w-4 h-4 text-amber-600" />}
+              {canvasTheme === "neutral" && <Contrast className="w-4 h-4 text-ink" />}
+              {canvasTheme === "dark" && <Moon className="w-4 h-4 text-indigo-400" />}
             </button>
 
             {/* Saved shortcut */}

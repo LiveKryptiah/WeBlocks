@@ -8,6 +8,8 @@ import {
   COLLECTIONS,
 } from "@/data/mock-data";
 
+export type CanvasTheme = "light" | "neutral" | "dark";
+
 export interface UserProfile {
   name: string;
   email: string;
@@ -36,6 +38,8 @@ interface LibraryContextType {
   searchHistory: string[];
   addSearchQuery: (query: string) => void;
   clearSearchHistory: () => void;
+  canvasTheme: CanvasTheme;
+  setCanvasTheme: (theme: CanvasTheme) => void;
 }
 
 const defaultUser: UserProfile = {
@@ -61,6 +65,7 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     "Wise currency calculator",
     "Checkout sheet",
   ]);
+  const [canvasTheme, setCanvasThemeState] = useState<CanvasTheme>("light");
 
   // Load from localStorage if client-side
   useEffect(() => {
@@ -76,6 +81,10 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
       const storedUser = localStorage.getItem("weblocks_user");
       if (storedUser) {
         setUser(JSON.parse(storedUser));
+      }
+      const storedTheme = localStorage.getItem("weblocks_canvas_theme") as CanvasTheme | null;
+      if (storedTheme && ["light", "neutral", "dark"].includes(storedTheme)) {
+        setCanvasThemeState(storedTheme);
       }
     } catch (e) {
       console.warn("Storage access failed", e);
@@ -219,6 +228,11 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
     setSearchHistory([]);
   };
 
+  const setCanvasTheme = (theme: CanvasTheme) => {
+    setCanvasThemeState(theme);
+    saveToStorage("weblocks_canvas_theme", theme);
+  };
+
   return (
     <LibraryContext.Provider
       value={{
@@ -241,6 +255,8 @@ export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({
         searchHistory,
         addSearchQuery,
         clearSearchHistory,
+        canvasTheme,
+        setCanvasTheme,
       }}
     >
       {children}
