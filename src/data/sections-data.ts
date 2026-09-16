@@ -832,3 +832,36 @@ export function HighImpactBannerCTA() {
 }`,
   },
 ];
+
+export function getSectionDesignMd(section: SectionEntity): string {
+  const tagsStr = section.tags.map((t) => "#" + t).join(" ");
+  return [
+    `# ${section.title} — design.md`,
+    "",
+    "## 1. Overview",
+    section.description,
+    "",
+    "## 2. Typography Tokens",
+    "- **Headlines / Titles**: M Saans / Inter Variable • Weight: 652 • Tight tracking (-0.02em)",
+    "- **Subheadings**: Weight 600 • Slight negative tracking (-0.005em)",
+    "- **Body & Text**: Weight 456 • Line-height: 1.38",
+    "- **Pill Buttons**: Weight 600 • Full rounded-full (9999px)",
+    "",
+    "## 3. Surface & Color System",
+    "- Canvas: var(--color-canvas)",
+    "- Surface 1 (Level 1 Elevation): var(--color-canvas-soft) (borderless contrast)",
+    "- Ink: var(--color-ink)",
+    "- Hairlines: var(--color-hairline-soft)",
+    "- Shadows: None (strict zero drop shadow policy)",
+    "",
+    "## 4. Metadata",
+    `- **Category**: ${section.category}`,
+    `- **Slug**: ${section.slug}`,
+    `- **Tags**: ${tagsStr}`,
+    "",
+    "## 5. React + Tailwind Implementation",
+    "```tsx",
+    section.code,
+    "```",
+  ].join("\n");
+}
