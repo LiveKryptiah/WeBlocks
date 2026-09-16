@@ -32,6 +32,132 @@ export const SECTION_CATEGORIES: { id: SectionCategory; label: string }[] = [
 export const SECTIONS: SectionEntity[] = [
   // --- HERO SECTIONS ---
   {
+    id: "sec-hero-0",
+    slug: "dark-parametric-hero",
+    title: "Dark Parametric Studio Hero",
+    description: "High-contrast dark studio hero featuring dual-tone typography, metallic pill button, 500K user social proof, and an automatically animated 3D iridescent parametric ribbon sculpture.",
+    category: "hero",
+    tags: ["hero", "dark", "parametric", "3d", "animated", "studio"],
+    code: `"use client";
+
+import React from "react";
+import { ArrowRight, Sparkles } from "lucide-react";
+
+export function DarkParametricHero() {
+  return (
+    <section className="relative w-full bg-[#050505] text-white overflow-hidden py-16 sm:py-24 px-6 sm:px-12 rounded-3xl border border-white/5">
+      {/* Background radial atmosphere */}
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-purple-900/20 via-indigo-900/30 to-blue-900/10 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Top Floating Navigation */}
+      <div className="flex items-center justify-between pb-12 border-b border-white/10 max-w-6xl mx-auto">
+        <div className="flex items-center gap-2">
+          <span className="font-bold text-lg tracking-tight text-white">.weblocks</span>
+        </div>
+        <nav className="hidden md:flex items-center gap-8 text-sm text-gray-400 font-normal">
+          <a href="#" className="hover:text-white transition-colors">Home</a>
+          <a href="#" className="hover:text-white transition-colors">Sections</a>
+          <a href="#" className="hover:text-white transition-colors">Inspirations</a>
+          <a href="#" className="hover:text-white transition-colors">About</a>
+        </nav>
+        <button
+          type="button"
+          className="h-9 px-5 rounded-full bg-white text-black text-xs font-semibold hover:bg-gray-100 transition-colors"
+        >
+          Register
+        </button>
+      </div>
+
+      {/* Main Hero Content Grid */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-12">
+        {/* Left Column: Copy & Actions */}
+        <div className="lg:col-span-7 space-y-6 z-10">
+          {/* Badge Pill */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">
+            <span className="px-1.5 py-0.5 rounded-full bg-white text-black text-[10px] font-bold">NEW</span>
+            <span>Flat 40% off for all users</span>
+          </div>
+
+          {/* Dual-Tone Headline */}
+          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.08]">
+            <span className="text-gray-400 font-semibold block mb-1">Design basics with</span>
+            <span className="text-white font-bold">principles and laws.</span>
+          </h1>
+
+          {/* Body Description */}
+          <p className="text-gray-400 text-sm sm:text-base max-w-lg leading-relaxed font-light">
+            Production-ready interface sections, verified design references, and typography tokens crafted for engineering teams who care about craft.
+          </p>
+
+          {/* Action CTAs */}
+          <div className="flex items-center gap-4 pt-2">
+            <button
+              type="button"
+              className="h-11 px-7 rounded-full bg-gradient-to-b from-gray-100 to-gray-300 text-black text-sm font-semibold hover:from-white hover:to-gray-200 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.1)] active:scale-95"
+            >
+              Visit Store
+            </button>
+            <a
+              href="#explore"
+              className="text-sm text-gray-400 hover:text-white transition-colors font-medium tracking-tight"
+            >
+              explore.
+            </a>
+          </div>
+
+          {/* Stats & Social Proof */}
+          <div className="pt-8 flex items-center gap-5">
+            <div>
+              <p className="text-3xl sm:text-4xl font-bold text-white tracking-tight">500K</p>
+              <p className="text-xs text-gray-400 font-light">worldwide users</p>
+            </div>
+            <div className="flex -space-x-3 overflow-hidden pl-2">
+              <img className="inline-block h-10 w-10 rounded-full ring-2 ring-black object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop" alt="" />
+              <img className="inline-block h-10 w-10 rounded-full ring-2 ring-black object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop" alt="" />
+              <img className="inline-block h-10 w-10 rounded-full ring-2 ring-black object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop" alt="" />
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: 3D Iridescent Parametric Sculpture with Automatic Animation */}
+        <div className="lg:col-span-5 relative flex items-center justify-center min-h-[360px]">
+          <div className="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center animate-[pulse_4s_ease-in-out_infinite]">
+            <svg
+              viewBox="0 0 400 400"
+              className="w-full h-full drop-shadow-[0_0_50px_rgba(147,197,253,0.25)] animate-[spin_30s_linear_infinite]"
+            >
+              <defs>
+                <linearGradient id="heroIridescent" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#c084fc" />
+                  <stop offset="35%" stopColor="#818cf8" />
+                  <stop offset="70%" stopColor="#67e8f9" />
+                  <stop offset="100%" stopColor="#f472b6" />
+                </linearGradient>
+              </defs>
+
+              {Array.from({ length: 24 }).map((_, i) => (
+                <ellipse
+                  key={i}
+                  cx="200"
+                  cy="200"
+                  rx={140 + Math.sin(i * 0.5) * 25}
+                  ry={90 + Math.cos(i * 0.5) * 20}
+                  fill="none"
+                  stroke="url(#heroIridescent)"
+                  strokeWidth={1.2}
+                  strokeOpacity={0.25 + (i % 4) * 0.15}
+                  transform={\`rotate(\${i * 15}, 200, 200)\`}
+                />
+              ))}
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`,
+  },
+  {
     id: "sec-hero-1",
     slug: "minimal-saas-hero",
     title: "Minimal SaaS Hero",

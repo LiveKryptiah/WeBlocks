@@ -14,6 +14,132 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+// --- HERO 0: Dark Parametric Studio Hero ---
+export function DarkParametricHeroPreview() {
+  return (
+    <div className="w-full bg-[#070707] text-white rounded-xl p-3.5 sm:p-4 border border-white/10 relative overflow-hidden shadow-2xl">
+      {/* Background ambient glow */}
+      <div className="absolute -top-12 -right-12 w-48 h-48 bg-purple-600/15 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute -bottom-12 left-1/4 w-40 h-40 bg-cyan-600/10 rounded-full blur-2xl pointer-events-none" />
+
+      {/* Mini top nav */}
+      <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10 text-[10px]">
+        <span className="font-bold tracking-tight text-white flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          .weblocks
+        </span>
+        <div className="hidden sm:flex items-center gap-3 text-white/50 text-[9px]">
+          <span className="text-white hover:text-white cursor-pointer font-medium">Home</span>
+          <span className="hover:text-white cursor-pointer">Sections</span>
+          <span className="hover:text-white cursor-pointer">Inspirations</span>
+          <span className="hover:text-white cursor-pointer">About</span>
+        </div>
+        <button
+          type="button"
+          className="h-5 px-2.5 rounded-full bg-white text-black text-[9px] font-semibold hover:bg-gray-200 transition-colors"
+        >
+          Register
+        </button>
+      </div>
+
+      {/* Hero Content Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+        {/* Left Column: Copy & Actions */}
+        <div className="sm:col-span-7 space-y-2 z-10">
+          {/* Release Badge */}
+          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[9px] text-gray-300">
+            <span className="px-1 py-0.2 rounded-full bg-white text-black text-[8px] font-bold leading-none">
+              NEW
+            </span>
+            <span className="truncate">Flat 40% off for all users</span>
+          </div>
+
+          {/* Dual-Tone Headline */}
+          <h4 className="text-xs sm:text-sm font-bold tracking-tight leading-snug">
+            <span className="text-gray-400 font-semibold block">Design basics with</span>
+            <span className="text-white font-bold">principles and laws.</span>
+          </h4>
+
+          {/* Body */}
+          <p className="text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-light">
+            Production-ready interface sections, verified design references, and typography tokens crafted for craft-focused engineering teams.
+          </p>
+
+          {/* Action CTAs */}
+          <div className="flex items-center gap-2.5 pt-0.5">
+            <button
+              type="button"
+              className="h-6 px-3 rounded-full bg-gradient-to-b from-gray-100 to-gray-300 text-black text-[10px] font-semibold shadow-[0_2px_10px_rgba(255,255,255,0.15)] hover:from-white hover:to-gray-200 transition-all"
+            >
+              Visit Store
+            </button>
+            <span className="text-[10px] text-gray-400 hover:text-white transition-colors cursor-pointer font-medium">
+              explore.
+            </span>
+          </div>
+
+          {/* Stats & Social Proof */}
+          <div className="flex items-center gap-3 pt-1 border-t border-white/5">
+            <div>
+              <p className="text-xs sm:text-sm font-bold text-white tracking-tight leading-none">500K</p>
+              <p className="text-[8px] text-gray-400 leading-tight">worldwide users</p>
+            </div>
+            <div className="flex -space-x-1.5 overflow-hidden pl-1">
+              <span className="inline-block h-5 w-5 rounded-full ring-1 ring-black bg-gradient-to-br from-purple-400 to-indigo-600 text-[8px] font-bold flex items-center justify-center text-white">
+                JD
+              </span>
+              <span className="inline-block h-5 w-5 rounded-full ring-1 ring-black bg-gradient-to-br from-pink-500 to-rose-400 text-[8px] font-bold flex items-center justify-center text-white">
+                AK
+              </span>
+              <span className="inline-block h-5 w-5 rounded-full ring-1 ring-black bg-gradient-to-br from-cyan-400 to-blue-500 text-[8px] font-bold flex items-center justify-center text-white">
+                MR
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Automatic Animating 3D Iridescent Parametric Ribbon Sculpture */}
+        <div className="sm:col-span-5 relative flex items-center justify-center min-h-[130px] sm:min-h-[150px]">
+          <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center animate-[pulse_4s_ease-in-out_infinite]">
+            <svg
+              viewBox="0 0 400 400"
+              className="w-full h-full drop-shadow-[0_0_25px_rgba(168,85,247,0.35)] animate-[spin_25s_linear_infinite]"
+            >
+              <defs>
+                <linearGradient id="previewIridescent" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#c084fc" />
+                  <stop offset="30%" stopColor="#818cf8" />
+                  <stop offset="60%" stopColor="#22d3ee" />
+                  <stop offset="100%" stopColor="#f43f5e" />
+                </linearGradient>
+              </defs>
+              {Array.from({ length: 24 }).map((_, i) => {
+                const angle = i * 15;
+                const rx = 140 + Math.sin(i * 0.5) * 22;
+                const ry = 85 + Math.cos(i * 0.5) * 18;
+                return (
+                  <ellipse
+                    key={i}
+                    cx="200"
+                    cy="200"
+                    rx={rx}
+                    ry={ry}
+                    fill="none"
+                    stroke="url(#previewIridescent)"
+                    strokeWidth={1.4}
+                    strokeOpacity={0.25 + (i % 4) * 0.15}
+                    transform={`rotate(${angle}, 200, 200)`}
+                  />
+                );
+              })}
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // --- HERO 1: Minimal SaaS Hero ---
 export function MinimalSaaSHeroPreview() {
   return (
@@ -387,6 +513,8 @@ export function HighImpactBannerCTAPreview() {
 // Master Dispatcher
 export function RenderSectionPreview({ slug }: { slug: string }) {
   switch (slug) {
+    case "dark-parametric-hero":
+      return <DarkParametricHeroPreview />;
     case "minimal-saas-hero":
       return <MinimalSaaSHeroPreview />;
     case "split-waitlist-hero":
