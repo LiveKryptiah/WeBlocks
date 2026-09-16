@@ -27,17 +27,35 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
   };
 
   return (
-    <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-xl p-5 sm:p-7 border-none transition-all duration-200">
-      {/* Display Area: Interactive Preview or design.md */}
-      <div className="mb-4">
+    <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/60 rounded-xl p-3.5 sm:p-5 border-none transition-all duration-200">
+      {/* Display Area: Desktop Window Viewport or design.md */}
+      <div className="mb-3">
         {activeTab === "preview" ? (
-          <div className="w-full min-h-[360px] sm:min-h-[460px] rounded-lg bg-canvas p-2 sm:p-4 flex items-center justify-center overflow-hidden">
-            <div className="w-full flex items-center justify-center">
-              <RenderSectionPreview slug={section.slug} />
+          <div className="w-full rounded-lg bg-canvas border border-hairline-soft overflow-hidden flex flex-col shadow-sm">
+            {/* Desktop Window Chrome Titlebar */}
+            <div className="h-7 px-3 bg-canvas-soft/80 border-b border-hairline-soft flex items-center justify-between text-[11px] text-muted shrink-0 select-none">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]/80" />
+              </div>
+              <div className="flex items-center gap-1 px-3 py-0.5 rounded-full bg-field/80 text-[10px] text-muted font-mono max-w-[240px] truncate">
+                <span>weblocks.design</span>
+                <span className="opacity-40">/</span>
+                <span className="text-ink font-medium">{section.slug}</span>
+              </div>
+              <div className="w-10" />
+            </div>
+
+            {/* Desktop Viewport Canvas (16:10 / 16:9 Screen Proportions) */}
+            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] max-h-[420px] overflow-hidden flex items-center justify-center bg-canvas">
+              <div className="w-full h-full flex items-center justify-center">
+                <RenderSectionPreview slug={section.slug} />
+              </div>
             </div>
           </div>
         ) : (
-          <div className="relative w-full h-[360px] sm:h-[460px] overflow-auto rounded-lg bg-[#141414] text-[#f0f0f0] p-4 sm:p-6 text-xs font-mono">
+          <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] max-h-[420px] overflow-auto rounded-lg bg-[#141414] text-[#f0f0f0] p-4 sm:p-5 text-xs font-mono">
             <div className="sticky top-0 float-right z-10 mb-2">
               <button
                 type="button"
@@ -57,7 +75,7 @@ export const SectionPreviewCard: React.FC<SectionPreviewCardProps> = ({ section 
 
       {/* Card Bottom: Bold Title & Controls */}
       <div className="flex items-center justify-between gap-3 pt-1">
-        <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
+        <h2 className="text-lg sm:text-xl font-bold text-ink tracking-tight">
           {section.title}
         </h2>
 

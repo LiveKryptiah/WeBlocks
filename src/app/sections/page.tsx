@@ -44,7 +44,7 @@ function SectionShowcaseContent() {
   }, [selectedCategory, query]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       {/* Header */}
       <div className="mb-10">
         <h1 className="text-h2 font-bold text-ink mb-2">Section showcase.</h1>

@@ -23,24 +23,24 @@ import {
 // --- HERO: Celestial Horizon Hero ---
 export function CelestialHorizonHeroPreview() {
   return (
-    <div className="w-full bg-[#02040a] text-white rounded-2xl p-5 sm:p-8 lg:p-10 border border-white/10 relative overflow-hidden shadow-2xl min-h-[380px] sm:min-h-[440px] flex flex-col justify-between">
+    <div className="w-full h-full bg-[#02040a] text-white p-4 sm:p-5 lg:p-6 relative overflow-hidden flex flex-col justify-between select-none">
       {/* Background Perspective Wireframe Grid */}
       <div
         className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+          backgroundSize: "36px 36px",
           maskImage: "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
         }}
       />
 
       {/* Right Aurora Light Ray */}
-      <div className="absolute top-0 right-0 w-80 sm:w-96 h-[400px] bg-gradient-to-bl from-blue-600/25 via-blue-500/10 to-transparent blur-3xl pointer-events-none animate-[pulse_7s_ease-in-out_infinite]" />
+      <div className="absolute top-0 right-0 w-64 sm:w-80 h-[280px] bg-gradient-to-bl from-blue-600/25 via-blue-500/10 to-transparent blur-3xl pointer-events-none animate-[pulse_7s_ease-in-out_infinite]" />
 
       {/* Top Floating Navigation */}
-      <div className="relative flex items-center justify-between pb-4 border-b border-white/10 z-10">
-        <div className="flex items-center gap-2 font-bold tracking-tight text-white">
+      <div className="relative flex items-center justify-between pb-2.5 border-b border-white/10 z-10 text-xs">
+        <div className="flex items-center gap-1.5 font-bold tracking-tight text-white">
           <div className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
             <div className="flex flex-col gap-0.5">
@@ -49,10 +49,10 @@ export function CelestialHorizonHeroPreview() {
             </div>
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
           </div>
-          <span className="text-sm pl-1">.weblocks</span>
+          <span className="text-xs sm:text-sm pl-1">.weblocks</span>
         </div>
 
-        <nav className="hidden md:flex items-center gap-6 text-white/60 text-xs font-normal">
+        <nav className="hidden md:flex items-center gap-5 text-white/60 text-[11px] font-normal">
           <span className="text-white hover:text-white cursor-pointer font-medium">Platform</span>
           <span className="hover:text-white cursor-pointer transition-colors">How It Works</span>
           <span className="hover:text-white cursor-pointer transition-colors">Developers</span>
@@ -62,16 +62,16 @@ export function CelestialHorizonHeroPreview() {
 
         <button
           type="button"
-          className="h-7 px-3.5 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-xs font-semibold transition-all shadow-[0_0_15px_rgba(0,85,255,0.45)] hover:shadow-[0_0_20px_rgba(0,85,255,0.6)]"
+          className="h-6 px-3 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-[11px] font-semibold transition-all shadow-[0_0_15px_rgba(0,85,255,0.45)]"
         >
           Get Started
         </button>
       </div>
 
       {/* Main Centered Hero Content */}
-      <div className="relative max-w-3xl mx-auto text-center flex flex-col items-center py-8 sm:py-12 z-10">
+      <div className="relative max-w-lg mx-auto text-center flex flex-col items-center my-auto py-1 z-10">
         {/* Metallic Gradient Dual-Tone Headline */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-4">
+        <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight leading-[1.1] mb-2">
           <span className="bg-gradient-to-b from-white via-gray-200 to-gray-400 bg-clip-text text-transparent block">
             Decentralized Design,
           </span>
@@ -81,40 +81,40 @@ export function CelestialHorizonHeroPreview() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xs sm:text-sm lg:text-base text-gray-400 max-w-lg mx-auto leading-relaxed font-light mb-6">
+        <p className="text-[11px] sm:text-xs text-gray-400 max-w-sm mx-auto leading-relaxed font-light mb-3 line-clamp-2">
           A Web3-native UI platform where design intelligence is transparent, permissionless, and user-owned — not locked inside centralized frameworks.
         </p>
 
         {/* Action CTAs */}
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-2.5">
           <button
             type="button"
-            className="h-9 sm:h-10 px-6 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-xs sm:text-sm font-semibold transition-all shadow-[0_0_20px_rgba(0,85,255,0.5)] active:scale-95"
+            className="h-7 px-4 rounded-full bg-[#0055ff] hover:bg-blue-600 text-white text-xs font-semibold transition-all shadow-[0_0_15px_rgba(0,85,255,0.5)] active:scale-95"
           >
             Launch App
           </button>
           <button
             type="button"
-            className="inline-flex items-center gap-1.5 h-9 sm:h-10 px-5 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-medium border border-white/15 backdrop-blur transition-all"
+            className="inline-flex items-center gap-1 h-7 px-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs font-medium border border-white/15 backdrop-blur transition-all"
           >
             <span>Explore</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-gray-300" />
+            <ArrowUpRight className="w-3 h-3 text-gray-300" />
           </button>
         </div>
       </div>
 
       {/* Celestial Horizon Curve & Atmosphere Glow with Automatic Animation */}
-      <div className="absolute -bottom-36 sm:-bottom-48 left-1/2 -translate-x-1/2 w-[150%] sm:w-[125%] h-[280px] sm:h-[360px] rounded-[100%] bg-[#010204] border-t-2 border-blue-400/80 shadow-[0_-20px_60px_rgba(37,99,235,0.5),0_-40px_100px_rgba(59,130,246,0.25)] pointer-events-none animate-[pulse_5s_ease-in-out_infinite]">
+      <div className="absolute -bottom-24 sm:-bottom-32 left-1/2 -translate-x-1/2 w-[140%] sm:w-[120%] h-[180px] sm:h-[220px] rounded-[100%] bg-[#010204] border-t-2 border-blue-400/80 shadow-[0_-15px_45px_rgba(37,99,235,0.5),0_-30px_80px_rgba(59,130,246,0.25)] pointer-events-none animate-[pulse_5s_ease-in-out_infinite]">
         {/* Bright rim line */}
         <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-cyan-300 to-transparent blur-[1px]" />
       </div>
 
       {/* Floating Stardust Particles */}
-      <div className="absolute bottom-20 left-[44%] w-1 h-1 bg-cyan-400 rounded-full animate-ping pointer-events-none" />
-      <div className="absolute bottom-24 left-[47%] w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse pointer-events-none" />
-      <div className="absolute bottom-16 left-[52%] w-1 h-1 bg-cyan-300 rounded-full animate-pulse pointer-events-none" />
-      <div className="absolute bottom-22 left-[55%] w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping pointer-events-none" />
-      <div className="absolute bottom-14 left-[59%] w-1 h-1 bg-blue-300 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-10 left-[44%] w-1 h-1 bg-cyan-400 rounded-full animate-ping pointer-events-none" />
+      <div className="absolute bottom-14 left-[47%] w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-8 left-[52%] w-1 h-1 bg-cyan-300 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-12 left-[55%] w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping pointer-events-none" />
+      <div className="absolute bottom-7 left-[59%] w-1 h-1 bg-blue-300 rounded-full animate-pulse pointer-events-none" />
     </div>
   );
 }
@@ -122,43 +122,41 @@ export function CelestialHorizonHeroPreview() {
 // --- HERO: Dark Perspective Dashboard Hero ---
 export function DarkPerspectiveDashboardHeroPreview() {
   return (
-    <div className="w-full bg-[#050608] text-white rounded-2xl p-5 sm:p-8 lg:p-10 border border-white/10 relative overflow-hidden shadow-2xl">
+    <div className="w-full h-full bg-[#050608] text-white p-4 sm:p-5 lg:p-6 relative overflow-hidden flex flex-col justify-between select-none">
       {/* Background ambient stars / glow */}
-      <div className="absolute top-0 right-1/4 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-10 left-10 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-56 h-56 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-10 left-10 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Twinkling ambient star particles */}
-      <div className="absolute top-6 left-1/4 w-1.5 h-1.5 bg-white/40 rounded-full animate-ping pointer-events-none" />
-      <div className="absolute top-16 left-12 w-1.5 h-1.5 bg-white/20 rounded-full animate-pulse pointer-events-none" />
-      <div className="absolute bottom-12 left-1/3 w-2 h-2 bg-white/25 rounded-full animate-pulse pointer-events-none" />
-      <div className="absolute top-1/2 left-8 w-1 h-1 bg-white/30 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute top-4 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-ping pointer-events-none" />
+      <div className="absolute top-12 left-10 w-1.5 h-1.5 bg-white/20 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-10 left-1/3 w-1.5 h-1.5 bg-white/25 rounded-full animate-pulse pointer-events-none" />
 
       {/* Mini top nav */}
-      <div className="flex items-center justify-between pb-4 mb-6 sm:mb-8 border-b border-white/10 text-xs">
-        <div className="flex items-center gap-2 font-bold tracking-tight text-white">
-          <div className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center border border-white/20 shadow-sm">
-            <Sparkles className="w-3 h-3 text-white" />
+      <div className="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs">
+        <div className="flex items-center gap-1.5 font-bold tracking-tight text-white">
+          <div className="w-4 h-4 rounded-full bg-white/15 flex items-center justify-center border border-white/20 shadow-sm">
+            <Sparkles className="w-2.5 h-2.5 text-white" />
           </div>
-          <span className="text-sm">.weblocks</span>
+          <span className="text-xs sm:text-sm">.weblocks</span>
         </div>
-        <div className="hidden md:flex items-center gap-6 text-white/60 text-xs font-normal">
+        <div className="hidden md:flex items-center gap-5 text-white/60 text-[11px] font-normal">
           <span className="text-white hover:text-white cursor-pointer font-medium">Product</span>
           <span className="hover:text-white cursor-pointer transition-colors">Customers</span>
           <span className="hover:text-white cursor-pointer transition-colors">Log</span>
           <span className="hover:text-white cursor-pointer transition-colors">Pricing</span>
-          <span className="hover:text-white cursor-pointer transition-colors">Company</span>
           <span className="hover:text-white cursor-pointer transition-colors">Contact</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             type="button"
-            className="h-7 px-3 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs font-medium border border-white/10 transition-colors"
+            className="h-6 px-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white text-[10px] font-medium border border-white/10 transition-colors"
           >
             Login
           </button>
           <button
             type="button"
-            className="h-7 px-3.5 rounded-full bg-white text-black text-xs font-semibold hover:bg-gray-200 transition-colors shadow-sm"
+            className="h-6 px-3 rounded-full bg-white text-black text-[10px] font-semibold hover:bg-gray-200 transition-colors shadow-sm"
           >
             Sign Up
           </button>
@@ -166,162 +164,143 @@ export function DarkPerspectiveDashboardHeroPreview() {
       </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 lg:gap-6 items-center my-auto z-10 py-1">
         {/* Left Column: Copy & Actions */}
-        <div className="lg:col-span-6 space-y-4 sm:space-y-5 z-10">
+        <div className="sm:col-span-6 space-y-2 sm:space-y-3">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-gray-300">
+            <Sparkles className="w-3 h-3 text-white" />
             <span className="font-medium">Introducing V2.0</span>
           </div>
 
           {/* Dual-style Headline */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.12]">
+          <h1 className="text-base sm:text-xl lg:text-2xl font-bold tracking-tight leading-[1.15]">
             Upgrade your productivity to <br />
-            <span className="font-serif italic font-normal text-white text-3xl sm:text-5xl lg:text-6xl block mt-1">
+            <span className="font-serif italic font-normal text-white text-lg sm:text-2xl lg:text-3xl block mt-0.5">
               the next level
             </span>
           </h1>
 
           {/* Body */}
-          <p className="text-xs sm:text-sm text-gray-400 max-w-md leading-relaxed font-light">
+          <p className="text-[11px] text-gray-400 max-w-xs leading-relaxed font-light line-clamp-2">
             Manage your tasks with zero overhead and keep your focus where it belongs — on the work itself.
           </p>
 
           {/* CTAs */}
-          <div className="flex items-center gap-3 pt-1">
+          <div className="flex items-center gap-2 pt-0.5">
             <button
               type="button"
-              className="h-9 sm:h-10 px-6 rounded-full bg-white text-black text-xs sm:text-sm font-semibold shadow-md hover:bg-gray-100 transition-all active:scale-95"
+              className="h-7 px-4 rounded-full bg-white text-black text-[11px] font-semibold shadow-md hover:bg-gray-100 transition-all active:scale-95"
             >
               Get Started
             </button>
             <button
               type="button"
-              className="h-9 sm:h-10 px-5 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-medium border border-white/10 transition-colors"
+              className="h-7 px-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white text-[11px] font-medium border border-white/10 transition-colors"
             >
               Learn More
             </button>
           </div>
 
           {/* Customer Logos Row */}
-          <div className="pt-6 border-t border-white/10 space-y-2">
-            <p className="text-xs text-gray-500 font-medium">Meet our customers</p>
-            <div className="flex items-center gap-5 sm:gap-7 text-gray-400 text-xs">
-              <span className="font-bold tracking-wider opacity-70">LOGOIPSUM</span>
-              <span className="font-semibold opacity-70">◆ LOGOIPSUM</span>
-              <span className="font-light tracking-widest uppercase opacity-70">Logoipsum</span>
-              <span className="font-mono opacity-70">● logoipsum</span>
-            </div>
+          <div className="pt-2 border-t border-white/10 flex items-center gap-3 text-gray-400 text-[9px]">
+            <span className="font-bold tracking-wider opacity-70">LOGOIPSUM</span>
+            <span className="font-semibold opacity-70">◆ LOGOIPSUM</span>
+            <span className="font-mono opacity-70">● logoipsum</span>
           </div>
         </div>
 
-        {/* Right Column: 3D Perspective Floating Dashboard Mockup with Automatic Float Animation */}
-        <div className="lg:col-span-6 relative flex items-center justify-center min-h-[260px] sm:min-h-[340px] py-2">
+        {/* Right Column: 3D Perspective Floating Dashboard Mockup */}
+        <div className="sm:col-span-6 relative flex items-center justify-center py-1">
           <div
-            className="w-full max-w-md lg:max-w-lg animate-[pulse_5s_ease-in-out_infinite]"
+            className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[350px] animate-[pulse_5s_ease-in-out_infinite]"
             style={{
-              perspective: "900px",
+              perspective: "800px",
             }}
           >
             <div
-              className="w-full bg-[#111216] border border-white/15 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden transition-transform duration-500 hover:rotate-0"
+              className="w-full bg-[#111216] border border-white/15 rounded-xl shadow-[0_15px_35px_rgba(0,0,0,0.8)] overflow-hidden transition-transform duration-500 hover:rotate-0"
               style={{
-                transform: "rotateY(-15deg) rotateX(10deg) rotateZ(2deg)",
+                transform: "rotateY(-14deg) rotateX(10deg) rotateZ(2deg)",
                 transformStyle: "preserve-3d",
               }}
             >
               {/* Header Bar */}
-              <div className="h-7 bg-[#17181e] border-b border-white/10 px-3 flex items-center justify-between text-[10px] text-gray-400">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-red-500/70" />
-                  <div className="w-2 h-2 rounded-full bg-yellow-500/70" />
-                  <div className="w-2 h-2 rounded-full bg-green-500/70" />
+              <div className="h-5 bg-[#17181e] border-b border-white/10 px-2 flex items-center justify-between text-[8px] text-gray-400">
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-500/70" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/70" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500/70" />
                 </div>
-                <span className="text-[10px] text-gray-400 font-mono truncate px-2">Projects &gt; Task Management - SaaS</span>
-                <span className="text-[9px] text-gray-500 font-mono">⌘K</span>
+                <span className="text-[8px] text-gray-400 font-mono truncate px-1">Projects &gt; SaaS</span>
+                <span className="text-[7px] text-gray-500 font-mono">⌘K</span>
               </div>
 
               {/* Grid content */}
-              <div className="grid grid-cols-12 min-h-[200px]">
+              <div className="grid grid-cols-12 min-h-[140px]">
                 {/* Rail */}
-                <div className="col-span-2 bg-[#0c0d10] border-r border-white/10 p-2 flex flex-col items-center justify-between py-3">
-                  <div className="space-y-3 flex flex-col items-center">
-                    <div className="w-6 h-6 rounded-lg bg-white/15 flex items-center justify-center">
-                      <Sparkles className="w-3 h-3 text-white" />
+                <div className="col-span-2 bg-[#0c0d10] border-r border-white/10 p-1.5 flex flex-col items-center justify-between py-2">
+                  <div className="space-y-2 flex flex-col items-center">
+                    <div className="w-4 h-4 rounded bg-white/15 flex items-center justify-center">
+                      <Sparkles className="w-2.5 h-2.5 text-white" />
                     </div>
-                    <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center text-white">
-                      <Users className="w-3 h-3" />
+                    <div className="w-4 h-4 rounded bg-white/10 flex items-center justify-center text-white">
+                      <Users className="w-2.5 h-2.5" />
                     </div>
-                    <div className="w-6 h-6 rounded-lg hover:bg-white/5 flex items-center justify-center text-gray-400">
-                      <Folder className="w-3 h-3" />
-                    </div>
-                    <div className="w-6 h-6 rounded-lg hover:bg-white/5 flex items-center justify-center text-gray-400">
-                      <Mail className="w-3 h-3" />
+                    <div className="w-4 h-4 rounded hover:bg-white/5 flex items-center justify-center text-gray-400">
+                      <Folder className="w-2.5 h-2.5" />
                     </div>
                   </div>
-                  <div className="w-6 h-6 rounded-lg hover:bg-white/5 flex items-center justify-center text-gray-400">
-                    <Settings className="w-3 h-3" />
+                  <div className="w-4 h-4 rounded hover:bg-white/5 flex items-center justify-center text-gray-400">
+                    <Settings className="w-2.5 h-2.5" />
                   </div>
                 </div>
 
                 {/* Subnav */}
-                <div className="col-span-5 bg-[#131419] border-r border-white/10 p-3 space-y-2">
-                  <div className="flex items-center justify-between text-xs font-semibold text-white">
+                <div className="col-span-5 bg-[#131419] border-r border-white/10 p-2 space-y-1.5">
+                  <div className="flex items-center justify-between text-[10px] font-semibold text-white">
                     <span>Projects</span>
-                    <span className="text-[10px] text-gray-500">&laquo;</span>
+                    <span className="text-[8px] text-gray-500">&laquo;</span>
                   </div>
-                  <div className="flex bg-[#0a0a0d] p-0.5 rounded text-[10px]">
+                  <div className="flex bg-[#0a0a0d] p-0.5 rounded text-[8px]">
                     <span className="flex-1 text-center py-0.5 rounded bg-white/10 text-white font-medium">Team</span>
                     <span className="flex-1 text-center py-0.5 text-gray-400">Personal</span>
                   </div>
-                  <div className="relative">
-                    <Search className="w-3 h-3 text-gray-500 absolute left-2 top-2" />
-                    <input
-                      readOnly
-                      placeholder="Search..."
-                      className="w-full bg-[#0a0a0d] border border-white/5 rounded px-2 pl-6 py-1 text-[10px] text-gray-300 focus:outline-none"
-                    />
-                  </div>
-                  <div className="space-y-1 pt-1">
-                    <span className="text-[9px] text-gray-500 font-medium">Recent</span>
-                    <div className="p-1.5 rounded bg-white/10 border border-white/10 flex items-center justify-between text-[10px] text-white">
-                      <span className="truncate">Dashboard Project - SaaS</span>
-                      <span className="w-3.5 h-3.5 rounded-full bg-white/20 text-[8px] flex items-center justify-center font-bold">8</span>
+                  <div className="space-y-0.5 pt-0.5">
+                    <div className="p-1 rounded bg-white/10 border border-white/10 flex items-center justify-between text-[9px] text-white">
+                      <span className="truncate">Dashboard</span>
+                      <span className="w-3 h-3 rounded-full bg-white/20 text-[7px] flex items-center justify-center font-bold">8</span>
                     </div>
-                    <div className="p-1.5 rounded hover:bg-white/5 flex items-center justify-between text-[10px] text-gray-400">
-                      <span className="truncate">Landing Page - Redesign</span>
+                    <div className="p-1 rounded hover:bg-white/5 flex items-center justify-between text-[9px] text-gray-400">
+                      <span className="truncate">Landing Page</span>
                     </div>
-                    <div className="p-1.5 rounded hover:bg-white/5 flex items-center justify-between text-[10px] text-gray-400">
-                      <span className="truncate">App Development</span>
-                      <span className="w-3.5 h-3.5 rounded-full bg-white/10 text-[8px] flex items-center justify-center font-bold">3</span>
+                    <div className="p-1 rounded hover:bg-white/5 flex items-center justify-between text-[9px] text-gray-400">
+                      <span className="truncate">App Dev</span>
+                      <span className="w-3 h-3 rounded-full bg-white/10 text-[7px] flex items-center justify-center font-bold">3</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Canvas */}
-                <div className="col-span-5 bg-[#0e0f13] p-3 space-y-2">
-                  <div className="flex items-center justify-between text-[11px] font-semibold text-white">
-                    <span>Dashboard Project</span>
-                    <Plus className="w-3 h-3 text-gray-400 cursor-pointer" />
+                <div className="col-span-5 bg-[#0e0f13] p-2 space-y-1.5">
+                  <div className="flex items-center justify-between text-[10px] font-semibold text-white">
+                    <span>Task List</span>
+                    <Plus className="w-2.5 h-2.5 text-gray-400" />
                   </div>
-                  <div className="space-y-2 pt-1">
-                    <div className="text-[10px] font-medium text-gray-400">To Do</div>
-                    <div className="p-2 rounded-lg bg-[#181920] border border-white/10 space-y-1.5 shadow-sm">
-                      <div className="h-2 w-16 bg-white/25 rounded" />
-                      <div className="h-1.5 w-full bg-white/10 rounded" />
-                      <div className="h-1.5 w-4/5 bg-white/10 rounded" />
-                      <div className="flex items-center justify-between text-[9px] text-gray-400 pt-1">
+                  <div className="space-y-1 pt-0.5">
+                    <div className="p-1.5 rounded bg-[#181920] border border-white/10 space-y-1 shadow-sm">
+                      <div className="h-1.5 w-12 bg-white/25 rounded" />
+                      <div className="h-1 w-full bg-white/10 rounded" />
+                      <div className="flex items-center justify-between text-[7px] text-gray-400 pt-0.5">
                         <div className="flex items-center gap-1">
-                          <Clock className="w-2.5 h-2.5" />
+                          <Clock className="w-2 h-2" />
                           <span>Today</span>
                         </div>
-                        <span className="w-3 h-3 rounded-full bg-purple-500/40 text-[7px] flex items-center justify-center">●</span>
                       </div>
                     </div>
-                    <div className="p-2 rounded-lg bg-[#181920] border border-white/10 space-y-1.5 shadow-sm">
-                      <div className="h-2 w-12 bg-white/20 rounded" />
-                      <div className="h-1.5 w-3/4 bg-white/10 rounded" />
+                    <div className="p-1.5 rounded bg-[#181920] border border-white/10 space-y-1 shadow-sm">
+                      <div className="h-1.5 w-10 bg-white/20 rounded" />
+                      <div className="h-1 w-3/4 bg-white/10 rounded" />
                     </div>
                   </div>
                 </div>
@@ -337,18 +316,18 @@ export function DarkPerspectiveDashboardHeroPreview() {
 // --- HERO 0: Dark Parametric Studio Hero ---
 export function DarkParametricHeroPreview() {
   return (
-    <div className="w-full bg-[#070707] text-white rounded-2xl p-5 sm:p-8 lg:p-10 border border-white/10 relative overflow-hidden shadow-2xl">
+    <div className="w-full h-full bg-[#070707] text-white p-4 sm:p-5 lg:p-6 relative overflow-hidden flex flex-col justify-between select-none">
       {/* Background ambient glow */}
-      <div className="absolute -top-12 -right-12 w-64 h-64 bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-12 left-1/4 w-60 h-60 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-12 -right-12 w-56 h-56 bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-12 left-1/4 w-48 h-48 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Mini top nav */}
-      <div className="flex items-center justify-between pb-4 mb-6 sm:mb-8 border-b border-white/10 text-xs">
-        <span className="font-bold tracking-tight text-white flex items-center gap-1.5 text-sm">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+      <div className="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs">
+        <span className="font-bold tracking-tight text-white flex items-center gap-1.5 text-xs sm:text-sm">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
           .weblocks
         </span>
-        <div className="hidden md:flex items-center gap-6 text-white/60 text-xs font-normal">
+        <div className="hidden md:flex items-center gap-5 text-white/60 text-[11px] font-normal">
           <span className="text-white hover:text-white cursor-pointer font-medium">Home</span>
           <span className="hover:text-white cursor-pointer transition-colors">Sections</span>
           <span className="hover:text-white cursor-pointer transition-colors">Inspirations</span>
@@ -356,62 +335,62 @@ export function DarkParametricHeroPreview() {
         </div>
         <button
           type="button"
-          className="h-7 px-3.5 rounded-full bg-white text-black text-xs font-semibold hover:bg-gray-200 transition-colors shadow-sm"
+          className="h-6 px-3 rounded-full bg-white text-black text-[11px] font-semibold hover:bg-gray-200 transition-colors shadow-sm"
         >
           Register
         </button>
       </div>
 
       {/* Hero Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 lg:gap-6 items-center my-auto z-10 py-1">
         {/* Left Column: Copy & Actions */}
-        <div className="lg:col-span-7 space-y-4 sm:space-y-5 z-10">
+        <div className="sm:col-span-7 space-y-2 sm:space-y-3">
           {/* Release Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">
-            <span className="px-1.5 py-0.5 rounded-full bg-white text-black text-[9px] font-bold leading-none">
+          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-gray-300">
+            <span className="px-1.5 py-0.2 rounded-full bg-white text-black text-[8px] font-bold leading-none">
               NEW
             </span>
             <span>Flat 40% off for all users</span>
           </div>
 
           {/* Dual-Tone Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08]">
-            <span className="text-gray-400 font-semibold block mb-1">Design basics with</span>
+          <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight leading-[1.12]">
+            <span className="text-gray-400 font-semibold block mb-0.5">Design basics with</span>
             <span className="text-white font-bold">principles and laws.</span>
           </h1>
 
           {/* Body */}
-          <p className="text-xs sm:text-sm lg:text-base text-gray-400 max-w-lg leading-relaxed font-light">
+          <p className="text-[11px] text-gray-400 max-w-sm leading-relaxed font-light line-clamp-2">
             Production-ready interface sections, verified design references, and typography tokens crafted for craft-focused engineering teams.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-3 pt-1">
+          <div className="flex items-center gap-2.5 pt-0.5">
             <button
               type="button"
-              className="h-9 sm:h-10 px-6 rounded-full bg-gradient-to-b from-gray-100 to-gray-300 text-black text-xs sm:text-sm font-semibold shadow-[0_2px_15px_rgba(255,255,255,0.15)] hover:from-white hover:to-gray-200 transition-all active:scale-95"
+              className="h-7 px-4 rounded-full bg-gradient-to-b from-gray-100 to-gray-300 text-black text-xs font-semibold shadow-[0_2px_10px_rgba(255,255,255,0.15)] hover:from-white hover:to-gray-200 transition-all active:scale-95"
             >
               Visit Store
             </button>
-            <span className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors cursor-pointer font-medium">
+            <span className="text-xs text-gray-400 hover:text-white transition-colors cursor-pointer font-medium">
               explore.
             </span>
           </div>
 
           {/* Stats & Social Proof */}
-          <div className="flex items-center gap-5 pt-4 border-t border-white/10">
+          <div className="flex items-center gap-4 pt-2 border-t border-white/10">
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-none">500K</p>
-              <p className="text-xs text-gray-400 leading-tight mt-0.5">worldwide users</p>
+              <p className="text-lg sm:text-xl font-bold text-white tracking-tight leading-none">500K</p>
+              <p className="text-[9px] text-gray-400 leading-tight">worldwide users</p>
             </div>
-            <div className="flex -space-x-2 overflow-hidden pl-2">
-              <span className="inline-block h-8 w-8 rounded-full ring-2 ring-black bg-gradient-to-br from-purple-400 to-indigo-600 text-xs font-bold flex items-center justify-center text-white shadow-sm">
+            <div className="flex -space-x-1.5 overflow-hidden pl-1">
+              <span className="inline-block h-6 w-6 rounded-full ring-1 ring-black bg-gradient-to-br from-purple-400 to-indigo-600 text-[9px] font-bold flex items-center justify-center text-white">
                 JD
               </span>
-              <span className="inline-block h-8 w-8 rounded-full ring-2 ring-black bg-gradient-to-br from-pink-500 to-rose-400 text-xs font-bold flex items-center justify-center text-white shadow-sm">
+              <span className="inline-block h-6 w-6 rounded-full ring-1 ring-black bg-gradient-to-br from-pink-500 to-rose-400 text-[9px] font-bold flex items-center justify-center text-white">
                 AK
               </span>
-              <span className="inline-block h-8 w-8 rounded-full ring-2 ring-black bg-gradient-to-br from-cyan-400 to-blue-500 text-xs font-bold flex items-center justify-center text-white shadow-sm">
+              <span className="inline-block h-6 w-6 rounded-full ring-1 ring-black bg-gradient-to-br from-cyan-400 to-blue-500 text-[9px] font-bold flex items-center justify-center text-white">
                 MR
               </span>
             </div>
@@ -419,11 +398,11 @@ export function DarkParametricHeroPreview() {
         </div>
 
         {/* Right Column: Automatic Animating 3D Iridescent Parametric Ribbon Sculpture */}
-        <div className="lg:col-span-5 relative flex items-center justify-center min-h-[240px] sm:min-h-[300px]">
-          <div className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-72 lg:h-72 flex items-center justify-center animate-[pulse_4s_ease-in-out_infinite]">
+        <div className="sm:col-span-5 relative flex items-center justify-center py-1">
+          <div className="relative w-36 h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 flex items-center justify-center animate-[pulse_4s_ease-in-out_infinite]">
             <svg
               viewBox="0 0 400 400"
-              className="w-full h-full drop-shadow-[0_0_35px_rgba(168,85,247,0.4)] animate-[spin_25s_linear_infinite]"
+              className="w-full h-full drop-shadow-[0_0_25px_rgba(168,85,247,0.4)] animate-[spin_25s_linear_infinite]"
             >
               <defs>
                 <linearGradient id="previewIridescent" x1="0%" y1="0%" x2="100%" y2="100%">
