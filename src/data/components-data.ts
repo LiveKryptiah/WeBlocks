@@ -2401,6 +2401,212 @@ export function ShareModalDialog({
   );
 }`,
   },
+  {
+    id: "comp-23",
+    slug: "ai-reasoning-stream",
+    title: "AI Reasoning Thought Stream",
+    description: "Interactive AI reasoning and execution trace stream featuring progressive dot matrix density icons, embedded resource thumbnail badges, live countdown timers, and a floating prompt bar adapted for Weblocks.",
+    category: "inputs",
+    tier: "free",
+    cliCommand: "npx weblocks add ai-reasoning-stream",
+    dependencies: ["lucide-react", "clsx", "tailwind-merge"],
+    tags: ["inputs", "forms", "ai", "reasoning", "stream", "prompt", "chat", "timeline"],
+    props: [
+      { name: "placeholder", type: "string", default: '"Ask anything..."', description: "Placeholder string in floating prompt bar" },
+      { name: "statusText", type: "string", default: '"Noodling..."', description: "Label for the in-progress stream step" },
+      { name: "onSend", type: "(prompt: string) => void", description: "Callback triggered when user submits a query" },
+      { name: "onAddAttachment", type: "() => void", description: "Callback when clicking the + button" },
+    ],
+    code: `"use client";
+
+import React, { useState } from "react";
+import { Plus, ArrowUp } from "lucide-react";
+
+export interface AIReasoningStreamProps {
+  placeholder?: string;
+  statusText?: string;
+  onSend?: (prompt: string) => void;
+  onAddAttachment?: () => void;
+}
+
+export function AIReasoningStream({
+  placeholder = "Ask anything...",
+  statusText = "Noodling...",
+  onSend,
+  onAddAttachment,
+}: AIReasoningStreamProps) {
+  const [inputVal, setInputVal] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputVal.trim()) return;
+    onSend?.(inputVal);
+    setInputVal("");
+  };
+
+  return (
+    <div className="w-full max-w-[460px] flex flex-col font-sans select-none">
+      {/* 1. Reasoning Steps List */}
+      <div className="flex flex-col gap-3.5 mb-6">
+        {/* Step 1: 6 dots (3x2) */}
+        <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-4 h-4 grid grid-cols-3 gap-0.5 items-center justify-center shrink-0 opacity-60">
+              <span className="w-1 h-1 rounded-full bg-current" />
+              <span className="w-1 h-1 rounded-full bg-current" />
+              <span className="w-1 h-1 rounded-full bg-current" />
+              <span className="w-1 h-1 rounded-full bg-current" />
+              <span className="w-1 h-1 rounded-full bg-current" />
+              <span className="w-1 h-1 rounded-full bg-current" />
+            </div>
+
+            <div className="flex items-center gap-1.5 truncate">
+              <span>Exploring your</span>
+              <div className="flex items-center -space-x-1 shrink-0">
+                <span className="w-4 h-4 rounded-full bg-black text-white text-[8px] flex items-center justify-center font-bold">●</span>
+                <span className="w-4 h-4 rounded-full bg-[#e60023] text-white text-[8px] flex items-center justify-center font-bold">P</span>
+              </div>
+              <span className="truncate">Cosmos, Pinterest, & more</span>
+            </div>
+          </div>
+          <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">2m 39s</span>
+        </div>
+
+        {/* Step 2: 4 dots scatter */}
+        <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-4 h-4 relative shrink-0 opacity-60">
+              <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 left-0.5" />
+              <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 right-0.5" />
+              <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 left-0.5" />
+              <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 right-0.5" />
+            </div>
+
+            <div className="flex items-center gap-1.5 truncate">
+              <span>Browsing your</span>
+              <div className="flex items-center -space-x-1 shrink-0">
+                <span className="px-1 py-0.2 rounded-full bg-[#f0f0f0] dark:bg-[#262626] text-[8px] font-medium text-black dark:text-white">SSENSE</span>
+                <span className="w-4 h-4 rounded-full bg-[#5c3cfa] text-white text-[8px] flex items-center justify-center font-bold">shop</span>
+              </div>
+              <span className="truncate">wishlists</span>
+            </div>
+          </div>
+          <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">1m 14s</span>
+        </div>
+
+        {/* Step 3: 3 dots diagonal */}
+        <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-4 h-4 relative shrink-0 opacity-60">
+              <span className="w-1 h-1 rounded-full bg-current absolute top-0.5 left-0.5" />
+              <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 left-0.5" />
+              <span className="w-1 h-1 rounded-full bg-current absolute bottom-0.5 right-0.5" />
+            </div>
+
+            <div className="flex items-center gap-1.5 truncate">
+              <span>Defining</span>
+              <div className="flex items-center -space-x-1 shrink-0">
+                <span className="w-4 h-4 rounded-full bg-neutral-800 text-white text-[8px] flex items-center justify-center">🧥</span>
+                <span className="w-4 h-4 rounded-full bg-rose-900 text-white text-[8px] flex items-center justify-center">🧣</span>
+              </div>
+              <span className="truncate">your aesthetic</span>
+            </div>
+          </div>
+          <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">48s</span>
+        </div>
+
+        {/* Step 4: 3 horizontal dots */}
+        <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-4 h-4 flex items-center justify-center gap-0.5 shrink-0 opacity-60">
+              <span className="w-1 h-1 rounded-full bg-current" />
+              <span className="w-1 h-1 rounded-full bg-current" />
+              <span className="w-1 h-1 rounded-full bg-current" />
+            </div>
+
+            <div className="flex items-center gap-1.5 truncate">
+              <span>Exploring</span>
+              <span className="w-4 h-4 rounded-full bg-stone-700 text-white text-[8px] flex items-center justify-center shrink-0">🧥</span>
+              <span className="truncate">Outerwear options</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-1 shrink-0">
+            <div className="flex items-center -space-x-1">
+              <span className="w-3.5 h-3.5 rounded-full bg-black text-white text-[6px] flex items-center justify-center">●</span>
+              <span className="w-3.5 h-3.5 rounded-full bg-[#fca5a5]" />
+            </div>
+            <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a]">+3 more</span>
+          </div>
+        </div>
+
+        {/* Step 5: 2 dots */}
+        <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-4 h-4 relative shrink-0 opacity-60">
+              <span className="w-1 h-1 rounded-full bg-current absolute top-1 left-0.5" />
+              <span className="w-1 h-1 rounded-full bg-current absolute bottom-1 right-0.5" />
+            </div>
+
+            <span className="truncate">Filtering finds by price, size, & relevance &gt;</span>
+          </div>
+          <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 tabular-nums">15s</span>
+        </div>
+
+        {/* Step 6: 1 pulsing dot */}
+        <div className="flex items-center justify-between gap-3 text-[13px] text-[#111827] dark:text-[#f3f4f6]">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-4 h-4 flex items-center justify-center shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-current animate-ping opacity-75 absolute" />
+              <span className="w-1.5 h-1.5 rounded-full bg-current relative" />
+            </div>
+
+            <div className="flex items-center gap-1.5 truncate">
+              <span>Curating</span>
+              <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[8px] flex items-center justify-center shrink-0">👔</span>
+              <span className="truncate">Chore jackets</span>
+            </div>
+          </div>
+          <span className="text-[12px] text-[#9ca3af] dark:text-[#71717a] shrink-0 italic animate-pulse">
+            {statusText}
+          </span>
+        </div>
+      </div>
+
+      {/* 2. Floating Ask Anything Input Pill */}
+      <form
+        onSubmit={handleSubmit}
+        className="w-full rounded-full bg-[#f4f4f6] dark:bg-[#1a1b1e] border border-black/[0.04] dark:border-white/[0.06] p-1.5 flex items-center gap-2 shadow-xs transition-all focus-within:ring-1 focus-within:ring-black/10 dark:focus-within:ring-white/10"
+      >
+        <button
+          type="button"
+          onClick={onAddAttachment}
+          className="w-8 h-8 rounded-full bg-white dark:bg-[#25272c] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center text-[#707070] dark:text-[#a1a1aa] hover:text-ink dark:hover:text-white transition-all shadow-xs cursor-pointer active:scale-95 shrink-0"
+          title="Add attachment"
+        >
+          <Plus className="w-3.5 h-3.5" />
+        </button>
+
+        <input
+          type="text"
+          value={inputVal}
+          onChange={(e) => setInputVal(e.target.value)}
+          placeholder={placeholder}
+          className="flex-1 bg-transparent border-none text-[13.5px] text-[#111827] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#71717a] outline-none px-2 font-normal"
+        />
+
+        <button
+          type="submit"
+          disabled={!inputVal.trim()}
+          className="w-8 h-8 rounded-full bg-white dark:bg-[#25272c] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center text-[#111] dark:text-white transition-all shadow-xs cursor-pointer active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+          title="Send query"
+        >
+          <ArrowUp className="w-3.5 h-3.5" />
+        </button>
+      </form>
+    </div>
+  );
+}`,
+  },
 ];
 
 export function getComponentDesignMd(component: UIComponentEntity): string {
