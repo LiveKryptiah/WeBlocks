@@ -31,7 +31,7 @@ export const ComponentPreviewCard: React.FC<ComponentPreviewCardProps> = ({
     <div className="group flex flex-col justify-between bg-canvas-soft hover:bg-field/70 rounded-md p-6 border border-transparent dark:border-[#23252a] transition-all duration-200">
       {/* Display Area: Interactive Live Preview */}
       <div className="mb-4">
-        <div className="w-full min-h-[250px] rounded-sm bg-white dark:bg-[#08090a] border border-transparent dark:border-[#23252a] py-6 px-3 sm:px-4 flex items-center justify-center overflow-hidden">
+        <div className="w-full min-h-[290px] sm:min-h-[310px] rounded-sm bg-white dark:bg-[#08090a] border border-transparent dark:border-[#23252a] py-7 px-2 sm:px-4 flex items-center justify-center overflow-hidden">
           {LivePreview ? (
             <div className="w-full flex items-center justify-center">
               <LivePreview />

@@ -2274,13 +2274,11 @@ export function LiveShareModalDialog() {
   }
 
   return (
-    <div className="flex items-center justify-center pt-6 pb-2 px-3 select-none font-sans">
-      <div className="relative w-full max-w-[310px] rounded-[26px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] shadow-[0_16px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_16px_40px_-10px_rgba(0,0,0,0.6)] pt-7 pb-4 px-4.5 transition-all animate-in fade-in zoom-in-95 duration-150">
+    <div className="flex items-center justify-center pt-8 pb-4 px-3 select-none font-sans">
+      <div className="relative w-full max-w-[340px] sm:max-w-[360px] rounded-[30px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] pt-8 pb-6 px-5 sm:px-6 transition-all animate-in fade-in zoom-in-95 duration-150">
         {/* Protruding Top Center Emblem: Interconnected Chain Links */}
-        <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-white dark:bg-[#161718] border-[3px] border-[#f4f4f5] dark:border-[#0e0f11] shadow-xs flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#94a3b8] to-[#cbd5e1] dark:from-[#334155] dark:to-[#64748b] flex items-center justify-center shadow-inner">
-            <Link2 className="w-3.5 h-3.5 text-white -rotate-45" />
-          </div>
+        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white dark:bg-[#18191c] border border-black/[0.05] dark:border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.5)] flex items-center justify-center">
+          <Link2 className="w-6 h-6 text-neutral-700 dark:text-neutral-200 -rotate-45" strokeWidth={2.2} />
         </div>
 
         {/* Top Right Close Button */}
@@ -2290,41 +2288,41 @@ export function LiveShareModalDialog() {
             setIsOpen(false);
             showToast("Share modal closed", "info");
           }}
-          className="absolute top-3 right-3 w-6 h-6 rounded-full border border-black/[0.06] dark:border-white/10 flex items-center justify-center text-[#9ca3af] hover:text-[#111827] dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+          className="absolute top-4 right-4 w-7 h-7 rounded-full border border-black/[0.06] dark:border-white/10 flex items-center justify-center text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
           title="Close dialog"
         >
-          <X className="w-3 h-3" />
+          <X className="w-3.5 h-3.5" />
         </button>
 
         {/* Title & Subtitle */}
-        <div className="text-center mb-4">
-          <h3 className="text-[17px] font-bold text-[#111827] dark:text-white tracking-tight leading-tight">
+        <div className="text-center mb-5">
+          <h3 className="text-[19px] sm:text-[20px] font-bold text-neutral-900 dark:text-white tracking-tight leading-tight">
             Share with Friends
           </h3>
-          <p className="text-[11.5px] text-[#6b7280] dark:text-[#9ca3af] max-w-[230px] mx-auto mt-1 leading-relaxed">
+          <p className="text-[12.5px] text-[#6b7280] dark:text-[#9ca3af] max-w-[240px] mx-auto mt-1.5 leading-relaxed">
             Trading is more effective when you connect with friends!
           </p>
         </div>
 
         {/* Section 1: Share you link */}
-        <div className="mb-3.5">
-          <label className="block text-[11.5px] font-bold text-[#111827] dark:text-white mb-1.5">
+        <div className="mb-5">
+          <label className="block text-[12.5px] font-bold text-neutral-900 dark:text-white mb-2">
             Share your link
           </label>
-          <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-[#f8f9fa] dark:bg-[#202226] border border-black/[0.04] dark:border-white/[0.06] text-[12px] text-[#374151] dark:text-[#d1d5db]">
-            <span className="truncate pr-2 select-all font-sans text-[11.5px]">
+          <div className="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-[#f4f5f7] dark:bg-[#202226] border border-black/[0.03] dark:border-white/[0.05] text-[12.5px] text-neutral-700 dark:text-neutral-300">
+            <span className="truncate pr-2 select-all font-sans text-[12px] sm:text-[12.5px] text-neutral-800 dark:text-neutral-200">
               {shareUrl}
             </span>
             <button
               type="button"
               onClick={handleCopy}
-              className="p-1 rounded-md text-[#6b7280] dark:text-[#9ca3af] hover:text-ink dark:hover:text-white transition-colors cursor-pointer shrink-0"
+              className="p-1 rounded-md text-neutral-400 hover:text-neutral-800 dark:hover:text-white transition-colors cursor-pointer shrink-0"
               title="Copy link"
             >
               {copied ? (
-                <Check className="w-3.5 h-3.5 text-emerald-500" />
+                <Check className="w-4 h-4 text-emerald-500" />
               ) : (
-                <Copy className="w-3.5 h-3.5" />
+                <Copy className="w-4 h-4" />
               )}
             </button>
           </div>
@@ -2332,7 +2330,7 @@ export function LiveShareModalDialog() {
 
         {/* Section 2: Share to Social Network Icons */}
         <div>
-          <label className="block text-[11.5px] font-bold text-[#111827] dark:text-white mb-2">
+          <label className="block text-[12.5px] font-bold text-neutral-900 dark:text-white mb-2.5">
             Share to
           </label>
           <div className="flex items-center justify-between gap-1">
@@ -2344,11 +2342,11 @@ export function LiveShareModalDialog() {
                 className="flex flex-col items-center gap-1 group cursor-pointer focus:outline-none"
               >
                 <div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xs transition-transform duration-150 group-hover:scale-105 group-active:scale-95 ${channel.bgClass}`}
+                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-white shadow-xs transition-transform duration-150 group-hover:scale-105 group-active:scale-95 ${channel.bgClass}`}
                 >
                   {channel.icon}
                 </div>
-                <span className="text-[9.5px] font-medium text-[#6b7280] dark:text-[#9ca3af] group-hover:text-[#111827] dark:group-hover:text-white transition-colors">
+                <span className="text-[10px] sm:text-[10.5px] font-medium text-[#6b7280] dark:text-[#9ca3af] group-hover:text-neutral-900 dark:group-hover:text-white transition-colors mt-1">
                   {channel.name}
                 </span>
               </button>
@@ -2733,89 +2731,90 @@ export function LiveStackedTaskCard() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-3 sm:p-4 select-none font-sans">
-      <div className="relative w-full max-w-[340px] sm:max-w-[360px] pt-2 pb-5">
+    <div className="flex flex-col items-center justify-center pt-4 pb-6 px-3 select-none font-sans">
+      <div className="relative w-full max-w-[420px] sm:max-w-[450px] pt-3 pb-8">
         {/* 1. Main Front Card */}
         <div
-          className={`relative z-10 w-full rounded-[24px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] p-4 sm:p-5 shadow-[0_16px_40px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_16px_40px_-10px_rgba(0,0,0,0.5)] transition-all duration-200 ${
+          className={`relative z-10 w-full rounded-[26px] sm:rounded-[30px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] p-4.5 sm:p-5.5 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)] transition-all duration-200 ${
             isSwiping ? "-translate-y-3 opacity-0 scale-95" : "translate-y-0 opacity-100 scale-100"
           }`}
         >
           {/* Floating Top Right Pill Buttons */}
-          <div className="absolute -top-3 right-5 flex items-center gap-1.5 z-20">
+          <div className="absolute -top-3.5 right-6 flex items-center gap-1.5 z-20">
             <button
               type="button"
               onClick={() => showToast("Card options", "info")}
-              className="w-6 h-6 rounded-full bg-[#8c9199] hover:bg-[#737882] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-7 h-7 rounded-full bg-[#7a818c] hover:bg-[#686f7a] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
               title="Options"
             >
-              <MoreHorizontal className="w-3 h-3" />
+              <MoreHorizontal className="w-3.5 h-3.5" />
             </button>
             <button
               type="button"
               onClick={handleDismiss}
-              className="w-6 h-6 rounded-full bg-[#8c9199] hover:bg-[#737882] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-7 h-7 rounded-full bg-[#7a818c] hover:bg-[#686f7a] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
               title="Dismiss"
             >
-              <X className="w-3 h-3" />
+              <X className="w-3.5 h-3.5" />
             </button>
           </div>
 
           {/* Task Content Row */}
-          <div className="flex items-start gap-3 mb-4">
+          <div className="flex items-start gap-3.5 mb-5">
             {/* Document Receipt Icon with Plus Badge */}
-            <div className="relative w-7 h-9 shrink-0 text-[#737882] dark:text-[#9ca3af] mt-0.5">
+            <div className="relative w-8 h-10 sm:w-9 sm:h-11 shrink-0 text-[#7a818c] dark:text-[#9ca3af] mt-0.5">
               <svg className="w-full h-full" viewBox="0 0 24 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 2h16a2 2 0 0 1 2 2v20l-3-1.5-3 1.5-3-1.5-3 1.5-3-1.5-3 1.5V4a2 2 0 0 1 2-2z" fill="currentColor" fillOpacity="0.06" />
-                <line x1="8" y1="7" x2="16" y2="7" />
-                <line x1="8" y1="11" x2="16" y2="11" />
-                <line x1="8" y1="15" x2="13" y2="15" />
+                <path d="M4 2h16a2 2 0 0 1 2 2v20l-2.5-1.5-2.5 1.5-2.5-1.5-2.5 1.5-2.5-1.5-2.5 1.5-2.5-1.5L4 24V4a2 2 0 0 1 2-2z" fill="currentColor" fillOpacity="0.06" />
+                <line x1="7" y1="7" x2="17" y2="7" />
+                <line x1="7" y1="11" x2="17" y2="11" />
+                <line x1="7" y1="15" x2="17" y2="15" />
+                <line x1="7" y1="19" x2="13" y2="19" />
               </svg>
-              <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-white dark:bg-[#161718] border border-black/10 dark:border-white/10 flex items-center justify-center text-[9px] font-bold text-[#737882] dark:text-[#9ca3af]">
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white dark:bg-[#161718] border border-[#7a818c]/30 flex items-center justify-center text-[10px] font-bold text-[#7a818c] dark:text-[#9ca3af] shadow-xs">
                 +
               </div>
             </div>
 
             <div className="min-w-0 flex-1">
-              <div className="text-[11.5px] font-medium text-[#737882] dark:text-[#9ca3af] mb-0.5 truncate">
+              <div className="text-[12px] sm:text-[12.5px] font-medium text-[#7a818c] dark:text-[#9ca3af] mb-1 truncate">
                 {activeTask?.meta}
               </div>
-              <h3 className="text-[17px] sm:text-[18px] font-bold text-[#111827] dark:text-white tracking-tight leading-tight truncate">
+              <h3 className="text-[19px] sm:text-[22px] font-bold text-[#111827] dark:text-white tracking-tight leading-tight truncate">
                 {activeTask?.title}
               </h3>
             </div>
           </div>
 
           {/* Action Buttons Row */}
-          <div className="flex items-center gap-2.5">
+          <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
               onClick={handleRemindLater}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-full bg-white dark:bg-[#202226] hover:bg-[#f9fafb] dark:hover:bg-[#282a30] text-[#737882] dark:text-[#9ca3af] hover:text-[#111827] dark:hover:text-white text-[12px] font-semibold tracking-tight shadow-[0_2px_6px_rgba(0,0,0,0.05)] border border-black/[0.04] dark:border-white/[0.06] transition-all cursor-pointer active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-full bg-white dark:bg-[#202226] hover:bg-[#f9fafb] dark:hover:bg-[#282a30] text-[#555a64] dark:text-[#d1d5db] hover:text-neutral-900 dark:hover:text-white text-[12.5px] sm:text-[13px] font-semibold tracking-tight shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] border border-black/[0.04] dark:border-white/[0.06] transition-all cursor-pointer active:scale-95"
             >
-              <Bell className="w-3.5 h-3.5 text-[#737882] dark:text-[#9ca3af]" />
+              <Bell className="w-4 h-4 text-[#7a818c] shrink-0" />
               <span className="truncate">Remind Me Later</span>
             </button>
 
             <button
               type="button"
               onClick={handleMarkDone}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full bg-[#22c55e] hover:bg-[#16a34a] text-white text-[12px] font-semibold tracking-tight shadow-[0_4px_12px_rgba(34,197,94,0.3)] transition-all cursor-pointer active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-full bg-[#22c55e] hover:bg-[#16a34a] text-white text-[12.5px] sm:text-[13px] font-semibold tracking-tight shadow-[0_4px_14px_rgba(34,197,94,0.35)] transition-all cursor-pointer active:scale-95"
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+              <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
               <span className="truncate">Mark as Done</span>
             </button>
           </div>
         </div>
 
         {/* 2. Stacked Layer Underneath (Middle Card) */}
-        <div className="absolute -bottom-2 inset-x-2.5 h-8 rounded-[22px] bg-white/95 dark:bg-[#1c1d20] border border-black/[0.05] dark:border-[#23252a] -z-10 shadow-xs" />
+        <div className="absolute -bottom-2.5 inset-x-3.5 sm:inset-x-4 h-10 rounded-[24px] sm:rounded-[26px] bg-white/95 dark:bg-[#1c1d20] border border-black/[0.04] dark:border-[#23252a] -z-10 shadow-sm" />
 
         {/* 3. Deepest Stacked Layer (Bottom Card) */}
-        <div className="absolute -bottom-4 inset-x-5 h-8 rounded-[20px] bg-white/80 dark:bg-[#222428] border border-black/[0.04] dark:border-[#23252a] -z-20 shadow-xs" />
+        <div className="absolute -bottom-5 inset-x-7 sm:inset-x-8 h-10 rounded-[22px] sm:rounded-[24px] bg-white/80 dark:bg-[#222428] border border-black/[0.03] dark:border-[#23252a] -z-20 shadow-xs" />
       </div>
 
-      <div className="text-[10.5px] text-[#737882] dark:text-[#9ca3af] mt-1.5">
+      <div className="text-[11px] text-[#7a818c] dark:text-[#9ca3af] mt-2">
         {tasks.length} tasks remaining in queue • Click actions to cycle deck
       </div>
     </div>
