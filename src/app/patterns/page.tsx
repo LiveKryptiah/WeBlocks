@@ -45,10 +45,10 @@ export default function PatternsDirectoryPage() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink shrink-0">
+                <div className="w-10 h-10 rounded-full bg-canvas dark:bg-[#161718] border border-hairline dark:border-[#23252a] flex items-center justify-center text-ink shrink-0">
                   <Layers className="w-5 h-5" />
                 </div>
-                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-muted group-hover:text-ink group-hover:translate-x-0.5 transition-all">
+                <div className="w-8 h-8 rounded-full bg-canvas dark:bg-[#161718] border border-hairline dark:border-[#23252a] flex items-center justify-center text-muted dark:text-[#8a8f98] group-hover:text-ink group-hover:translate-x-0.5 transition-all">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </div>

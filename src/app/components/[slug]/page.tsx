@@ -258,7 +258,7 @@ export default function ComponentDetailPage() {
           )}
 
           {activeTab === "props" && (
-            <div className="w-full bg-white rounded-md border border-hairline-soft p-6">
+            <div className="w-full bg-white dark:bg-[#0f1011] rounded-md border border-hairline-soft dark:border-[#23252a] p-6">
               <h3 className="text-title font-bold text-ink mb-2">Component API & Props</h3>
               <p className="text-body-sm text-muted mb-4">
                 Configuration properties accepted by the {component.title} component.
@@ -267,14 +267,14 @@ export default function ComponentDetailPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
-                    <tr className="border-b border-hairline text-muted">
+                    <tr className="border-b border-hairline dark:border-[#23252a] text-muted">
                       <th className="py-2.5 pr-4 font-semibold">Prop</th>
                       <th className="py-2.5 pr-4 font-semibold">Type</th>
                       <th className="py-2.5 pr-4 font-semibold">Default</th>
                       <th className="py-2.5 font-semibold">Description</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-hairline">
+                  <tbody className="divide-y divide-hairline dark:divide-[#23252a]">
                     {component.props.map((prop) => (
                       <tr key={prop.name} className="hover:bg-canvas-soft">
                         <td className="py-2.5 pr-4 font-mono font-bold text-ink">
@@ -301,7 +301,7 @@ export default function ComponentDetailPage() {
 
       {/* Installation and Dependencies Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <div className="bg-canvas-soft rounded-md p-6 border border-hairline-soft flex flex-col justify-between gap-3">
+        <div className="bg-canvas-soft rounded-md p-6 border border-hairline-soft dark:border-[#23252a] flex flex-col justify-between gap-3">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Terminal className="w-4 h-4 text-ink" />
@@ -311,7 +311,7 @@ export default function ComponentDetailPage() {
               Add this block directly into your project's component directory.
             </p>
           </div>
-          <div className="flex items-center justify-between p-3 rounded-sm bg-white border border-hairline font-mono text-xs">
+          <div className="flex items-center justify-between p-3 rounded-sm bg-white dark:bg-[#161718] border border-hairline dark:border-[#23252a] font-mono text-xs">
             <span className="text-ink select-all">{component.cliCommand}</span>
             <button onClick={handleCopyCli} className="text-muted hover:text-ink ml-2">
               {copiedCli ? <Check className="w-4 h-4 text-[#0066ff]" /> : <Copy className="w-4 h-4" />}
@@ -319,7 +319,7 @@ export default function ComponentDetailPage() {
           </div>
         </div>
 
-        <div className="bg-canvas-soft rounded-md p-6 border border-hairline-soft flex flex-col justify-between gap-3">
+        <div className="bg-canvas-soft rounded-md p-6 border border-hairline-soft dark:border-[#23252a] flex flex-col justify-between gap-3">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Package className="w-4 h-4 text-ink" />
@@ -329,7 +329,7 @@ export default function ComponentDetailPage() {
               Required npm packages to support icons and style utilities.
             </p>
           </div>
-          <div className="flex items-center justify-between p-3 rounded-sm bg-white border border-hairline font-mono text-xs">
+          <div className="flex items-center justify-between p-3 rounded-sm bg-white dark:bg-[#161718] border border-hairline dark:border-[#23252a] font-mono text-xs">
             <span className="text-ink select-all">{installDepsCmd}</span>
             <button onClick={handleCopyInstall} className="text-muted hover:text-ink ml-2">
               {copiedInstall ? <Check className="w-4 h-4 text-[#0066ff]" /> : <Copy className="w-4 h-4" />}

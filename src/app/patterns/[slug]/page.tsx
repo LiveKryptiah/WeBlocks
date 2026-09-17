@@ -58,7 +58,7 @@ export default function PatternDetailPage() {
 
       {/* Pattern Header */}
       <div className="bg-canvas-soft rounded-md p-8 sm:p-12 border border-hairline-soft mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-hairline text-caption font-semibold text-ink mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-canvas dark:bg-[#161718] border border-hairline dark:border-[#23252a] text-caption font-semibold text-ink mb-4">
           <Layers className="w-3.5 h-3.5" />
           <span>Design Taxonomy</span>
         </div>

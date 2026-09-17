@@ -74,7 +74,7 @@ export default function AppDetailPage() {
           <div>
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <h1 className="text-h2 font-bold text-ink">{app.name}</h1>
-              <span className="text-body-sm bg-white px-3 py-1 rounded-full border border-hairline text-muted">
+              <span className="text-body-sm bg-canvas dark:bg-[#161718] px-3 py-1 rounded-full border border-hairline dark:border-[#23252a] text-muted dark:text-[#8a8f98]">
                 {app.industry}
               </span>
             </div>

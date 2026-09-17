@@ -63,7 +63,7 @@ export default function AccountPage() {
                   <span>Pro Member</span>
                 </div>
               ) : (
-                <div className="px-3 py-1 rounded-full bg-white border border-hairline-soft text-caption font-semibold text-muted">
+                <div className="px-3 py-1 rounded-full bg-canvas dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] text-caption font-semibold text-muted dark:text-[#8a8f98]">
                   Free Library Tier
                 </div>
               )}
@@ -83,7 +83,7 @@ export default function AccountPage() {
           <div className="grid grid-cols-2 gap-3">
             <Link
               href="/saved"
-              className="bg-white p-4 rounded-sm border border-hairline-soft hover:border-ink transition-colors flex flex-col"
+              className="bg-canvas dark:bg-[#161718] p-4 rounded-sm border border-hairline-soft dark:border-[#23252a] hover:border-ink dark:hover:border-white transition-colors flex flex-col"
             >
               <div className="flex items-center justify-between text-muted mb-2">
                 <Bookmark className="w-4 h-4" />
@@ -95,7 +95,7 @@ export default function AccountPage() {
 
             <Link
               href="/collections"
-              className="bg-white p-4 rounded-sm border border-hairline-soft hover:border-ink transition-colors flex flex-col"
+              className="bg-canvas dark:bg-[#161718] p-4 rounded-sm border border-hairline-soft dark:border-[#23252a] hover:border-ink dark:hover:border-white transition-colors flex flex-col"
             >
               <div className="flex items-center justify-between text-muted mb-2">
                 <FolderHeart className="w-4 h-4" />
@@ -143,7 +143,7 @@ export default function AccountPage() {
           </div>
 
           {/* Profile Form */}
-          <div className="bg-white rounded-md p-6 sm:p-8 border border-hairline-soft">
+          <div className="bg-canvas-soft dark:bg-[#0f1011] rounded-md p-6 sm:p-8 border border-hairline-soft dark:border-[#23252a]">
             <h3 className="text-h4 font-bold text-ink mb-2">Profile details.</h3>
             <p className="text-body-sm text-muted mb-6">
               Update your account details and display name.

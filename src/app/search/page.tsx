@@ -153,7 +153,7 @@ export default function SearchPage() {
                     key={i}
                     type="button"
                     onClick={() => handleSearch(item)}
-                    className="px-3.5 py-1.5 rounded-full bg-white hover:bg-field text-ink text-body-sm font-medium border border-hairline transition-colors"
+                    className="px-3.5 py-1.5 rounded-full bg-canvas dark:bg-[#161718] hover:bg-field dark:hover:bg-[#202226] text-ink text-body-sm font-medium border border-hairline dark:border-[#23252a] transition-colors"
                   >
                     {item}
                   </button>
@@ -178,7 +178,7 @@ export default function SearchPage() {
                   key={i}
                   type="button"
                   onClick={() => handleSearch(term)}
-                  className="px-3.5 py-1.5 rounded-full bg-white hover:bg-field text-ink text-body-sm font-medium border border-hairline transition-colors"
+                  className="px-3.5 py-1.5 rounded-full bg-canvas dark:bg-[#161718] hover:bg-field dark:hover:bg-[#202226] text-ink text-body-sm font-medium border border-hairline dark:border-[#23252a] transition-colors"
                 >
                   {term}
                 </button>

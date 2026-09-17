@@ -88,7 +88,7 @@ export default function AppsDirectoryPage() {
                   </div>
                 </div>
 
-                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-muted group-hover:text-ink transition-colors shrink-0">
+                <div className="w-8 h-8 rounded-full bg-canvas dark:bg-[#161718] border border-hairline dark:border-[#23252a] flex items-center justify-center text-muted dark:text-[#8a8f98] group-hover:text-ink transition-colors shrink-0">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </div>

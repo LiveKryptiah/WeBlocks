@@ -113,13 +113,13 @@ export default function ReferenceDetailPage() {
         {/* Large Screenshot presentation */}
         <div className="relative lg:col-span-8 bg-canvas-soft rounded-md p-6 sm:p-10 border-none flex items-center justify-center overflow-hidden min-h-[420px]">
           {/* Zoom controls */}
-          <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-sm p-1 rounded-full border border-hairline-soft text-caption font-semibold select-none">
+          <div className="absolute top-4 right-4 z-20 flex items-center gap-1 bg-white/90 dark:bg-[#161718]/90 backdrop-blur-sm p-1 rounded-full border border-hairline-soft dark:border-[#23252a] text-caption font-semibold select-none">
             <button
               type="button"
               onClick={() => setZoomLevel(1)}
               className={cn(
                 "px-2.5 py-1 rounded-full transition-colors",
-                zoomLevel === 1 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                zoomLevel === 1 ? "bg-ink text-white dark:bg-white dark:text-[#08090a]" : "text-muted hover:text-ink"
               )}
             >
               Fit
@@ -129,7 +129,7 @@ export default function ReferenceDetailPage() {
               onClick={() => setZoomLevel(1.4)}
               className={cn(
                 "px-2.5 py-1 rounded-full transition-colors",
-                zoomLevel === 1.4 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                zoomLevel === 1.4 ? "bg-ink text-white dark:bg-white dark:text-[#08090a]" : "text-muted hover:text-ink"
               )}
             >
               1.4x
@@ -139,7 +139,7 @@ export default function ReferenceDetailPage() {
               onClick={() => setZoomLevel(2)}
               className={cn(
                 "px-2.5 py-1 rounded-full transition-colors",
-                zoomLevel === 2 ? "bg-ink text-white" : "text-muted hover:text-ink"
+                zoomLevel === 2 ? "bg-ink text-white dark:bg-white dark:text-[#08090a]" : "text-muted hover:text-ink"
               )}
             >
               2x
@@ -147,7 +147,7 @@ export default function ReferenceDetailPage() {
           </div>
 
           <div
-            className="w-full max-w-xl rounded-sm overflow-hidden bg-white border border-hairline-soft transition-transform duration-200 cursor-zoom-in"
+            className="w-full max-w-xl rounded-sm overflow-hidden bg-white dark:bg-[#0f1011] border border-hairline-soft dark:border-[#23252a] transition-transform duration-200 cursor-zoom-in"
             style={{ transform: `scale(${zoomLevel})` }}
             onClick={() => setZoomLevel((prev) => (prev === 1 ? 1.4 : prev === 1.4 ? 2 : 1))}
             title="Click to toggle magnification"
@@ -157,7 +157,7 @@ export default function ReferenceDetailPage() {
         </div>
 
         {/* Metadata Details Column */}
-        <div className="lg:col-span-4 bg-white rounded-md p-6 sm:p-8 border border-hairline-soft space-y-6">
+        <div className="lg:col-span-4 bg-canvas-soft dark:bg-[#0f1011] rounded-md p-6 sm:p-8 border border-hairline-soft dark:border-[#23252a] space-y-6">
           {/* Header */}
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3">
@@ -213,7 +213,7 @@ export default function ReferenceDetailPage() {
             <button
               type="button"
               onClick={handleCopyFigma}
-              className="w-full h-11 px-4 rounded-full border border-hairline bg-white hover:bg-canvas-soft text-ink font-semibold text-body-sm flex items-center justify-center gap-2 transition-colors"
+              className="w-full h-11 px-4 rounded-full border border-hairline dark:border-[#23252a] bg-white dark:bg-[#161718] hover:bg-canvas-soft dark:hover:bg-[#202226] text-ink font-semibold text-body-sm flex items-center justify-center gap-2 transition-colors"
             >
               {copiedFigma ? (
                 <>

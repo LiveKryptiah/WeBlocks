@@ -416,34 +416,36 @@ export function SquircleProductCard() {
   const [saved, setSaved] = useState(false);
 
   return (
-    <div className="w-full max-w-sm p-4 rounded-2xl bg-white border border-hairline-soft flex items-center justify-between gap-3 group">
+    <div className="w-full max-w-sm p-4 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex items-center justify-between gap-3 group">
       <div className="flex items-center gap-3">
         {/* 30% Squircle Icon */}
-        <div className="w-12 h-12 rounded-[30%] bg-[#141414] text-white flex items-center justify-center font-bold text-base shrink-0">
+        <div className="w-12 h-12 rounded-[30%] bg-[#141414] dark:bg-white text-white dark:text-[#08090a] flex items-center justify-center font-bold text-base shrink-0">
           L
         </div>
         <div>
-          <h4 className="text-sm font-bold tracking-tight text-[#141414] group-hover:underline">
+          <h4 className="text-sm font-bold tracking-tight text-[#141414] dark:text-white group-hover:underline">
             Linear Mobile
           </h4>
-          <p className="text-xs text-[#707070]">Issue tracking and cycles.</p>
+          <p className="text-xs text-[#707070] dark:text-[#8a8f98]">Issue tracking and cycles.</p>
           <div className="flex items-center gap-1.5 mt-1">
-            <span className="px-2 py-0.5 rounded-full bg-[#f0f0f0] text-[10px] font-semibold text-[#141414]">
+            <span className="px-2 py-0.5 rounded-full bg-[#f0f0f0] dark:bg-[#23252a] text-[10px] font-semibold text-[#141414] dark:text-[#d0d6e0]">
               Productivity
             </span>
-            <span className="text-[10px] text-[#707070]">42 screens</span>
+            <span className="text-[10px] text-[#707070] dark:text-[#8a8f98]">42 screens</span>
           </div>
         </div>
       </div>
 
       <button
         onClick={() => setSaved(!saved)}
-        className={\`w-8 h-8 rounded-full flex items-center justify-center transition-colors \${
-          saved ? "bg-[#141414] text-white" : "bg-[#f3f3f3] text-[#707070] hover:text-[#141414]"
+        className={\`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 \${
+          saved
+            ? "bg-[#141414] text-white dark:bg-white dark:text-[#08090a] scale-105"
+            : "bg-[#f3f3f3] text-[#707070] hover:text-[#141414] dark:bg-[#23252a] dark:text-[#8a8f98] dark:hover:text-white"
         }\`}
         aria-label="Save app"
       >
-        <Bookmark className={\`w-3.5 h-3.5 \${saved ? "fill-current" : ""}\`} />
+        <Bookmark className={\`w-3.5 h-3.5 \${saved ? "fill-current text-[#0066ff]" : ""}\`} />
       </button>
     </div>
   );
@@ -471,27 +473,27 @@ import { Star, CheckCircle2 } from "lucide-react";
 
 export function TestimonialTicker() {
   return (
-    <div className="w-full max-w-md p-5 rounded-2xl bg-white border border-hairline-soft flex flex-col gap-3">
-      <div className="flex items-center gap-1 text-[#141414]">
+    <div className="w-full max-w-md p-5 rounded-2xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] flex flex-col gap-3">
+      <div className="flex items-center gap-1 text-[#141414] dark:text-white">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-3.5 h-3.5 fill-[#141414]" />
+          <Star key={i} className="w-3.5 h-3.5 fill-[#141414] dark:fill-white" />
         ))}
       </div>
 
-      <p className="text-xs leading-relaxed text-[#141414] font-medium">
+      <p className="text-xs leading-relaxed text-[#141414] dark:text-[#d0d6e0] font-medium">
         "Weblocks completely replaced our chaotic Figma moodboards. The exact screen breakdowns save our design team hours every week."
       </p>
 
-      <div className="flex items-center gap-2.5 pt-2 border-t border-[#f0f0f0]">
-        <div className="w-7 h-7 rounded-[30%] bg-[#141414] text-white flex items-center justify-center text-xs font-bold">
+      <div className="flex items-center gap-2.5 pt-2 border-t border-[#f0f0f0] dark:border-[#23252a]">
+        <div className="w-7 h-7 rounded-[30%] bg-[#141414] text-white dark:bg-white dark:text-[#08090a] flex items-center justify-center text-xs font-bold shrink-0">
           E
         </div>
         <div>
           <div className="flex items-center gap-1">
-            <span className="text-xs font-bold text-[#141414]">Elena Rostova</span>
+            <span className="text-xs font-bold text-[#141414] dark:text-white">Elena Rostova</span>
             <CheckCircle2 className="w-3 h-3 text-[#0066ff]" />
           </div>
-          <span className="text-[10px] text-[#707070]">Lead Product Designer, Vercel</span>
+          <span className="text-[10px] text-[#707070] dark:text-[#8a8f98]">Lead Product Designer, Vercel</span>
         </div>
       </div>
     </div>
@@ -2653,14 +2655,14 @@ export function StackedTaskCard({
   };
 
   return (
-    <div className="relative w-full max-w-[420px] sm:max-w-[450px] select-none font-sans pt-3 pb-8">
+    <div className="relative w-full max-w-[360px] sm:max-w-[380px] select-none font-sans pt-3 pb-6">
       {/* 1. Main Front Card */}
-      <div className="relative z-10 w-full rounded-[26px] sm:rounded-[30px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] p-4.5 sm:p-5.5 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)] transition-all">
+      <div className="relative z-10 w-full rounded-[24px] sm:rounded-[28px] bg-white dark:bg-[#161718] border border-black/[0.06] dark:border-[#23252a] p-4 sm:p-5 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08)] dark:shadow-[0_16px_36px_-8px_rgba(0,0,0,0.45)] transition-all duration-200">
         {/* Floating Top Right Pill Buttons */}
-        <div className="absolute -top-3.5 right-6 flex items-center gap-1.5 z-20">
+        <div className="absolute -top-3 right-5 flex items-center gap-1.5 z-20">
           <button
             type="button"
-            className="w-7 h-7 rounded-full bg-[#7a818c] hover:bg-[#686f7a] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+            className="w-6.5 h-6.5 rounded-full bg-[#828894] hover:bg-[#6f7580] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
             title="Options"
           >
             <MoreHorizontal className="w-3.5 h-3.5" />
@@ -2668,7 +2670,7 @@ export function StackedTaskCard({
           <button
             type="button"
             onClick={onDismiss}
-            className="w-7 h-7 rounded-full bg-[#7a818c] hover:bg-[#686f7a] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+            className="w-6.5 h-6.5 rounded-full bg-[#828894] hover:bg-[#6f7580] text-white flex items-center justify-center border-2 border-white dark:border-[#161718] shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
             title="Dismiss"
           >
             <X className="w-3.5 h-3.5" />
@@ -2676,61 +2678,61 @@ export function StackedTaskCard({
         </div>
 
         {/* Task Content Row */}
-        <div className="flex items-start gap-3.5 mb-5">
+        <div className="flex items-start gap-3.5 mb-4">
           {/* Document Receipt Icon with Plus Badge */}
-          <div className="relative w-8 h-10 sm:w-9 sm:h-11 shrink-0 text-[#7a818c] dark:text-[#9ca3af] mt-0.5">
-            <svg className="w-full h-full" viewBox="0 0 24 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="relative w-8 h-10 shrink-0 text-[#7a818c] dark:text-[#9ca3af] mt-0.5">
+            <svg className="w-full h-full" viewBox="0 0 24 28" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 2h16a2 2 0 0 1 2 2v20l-2.5-1.5-2.5 1.5-2.5-1.5-2.5 1.5-2.5-1.5-2.5 1.5-2.5-1.5L4 24V4a2 2 0 0 1 2-2z" fill="currentColor" fillOpacity="0.06" />
               <line x1="7" y1="7" x2="17" y2="7" />
               <line x1="7" y1="11" x2="17" y2="11" />
               <line x1="7" y1="15" x2="17" y2="15" />
               <line x1="7" y1="19" x2="13" y2="19" />
             </svg>
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white dark:bg-[#161718] border border-[#7a818c]/30 flex items-center justify-center text-[10px] font-bold text-[#7a818c] dark:text-[#9ca3af] shadow-xs">
+            <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-white dark:bg-[#161718] border border-[#7a818c]/35 flex items-center justify-center text-[9px] font-bold text-[#7a818c] dark:text-[#9ca3af] shadow-xs leading-none">
               +
             </div>
           </div>
 
           <div className="min-w-0 flex-1">
-            <div className="text-[12px] sm:text-[12.5px] font-medium text-[#7a818c] dark:text-[#9ca3af] mb-1 truncate">
+            <div className="text-[11.5px] sm:text-[12px] font-medium text-[#7a818c] dark:text-[#9ca3af] mb-0.5 truncate">
               {meta}
             </div>
-            <h3 className="text-[19px] sm:text-[22px] font-bold text-[#111827] dark:text-white tracking-tight leading-tight truncate">
+            <h3 className="text-[18px] sm:text-[20px] font-bold text-neutral-900 dark:text-white tracking-tight leading-tight truncate">
               {title}
             </h3>
           </div>
         </div>
 
-        {/* Action Buttons Row */}
-        <div className="grid grid-cols-2 gap-3">
+        {/* Action Buttons Row: Guaranteed Single Line Fit */}
+        <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
           <button
             type="button"
             onClick={onRemindLater}
-            className="inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-full bg-white dark:bg-[#202226] hover:bg-[#f9fafb] dark:hover:bg-[#282a30] text-[#555a64] dark:text-[#d1d5db] hover:text-neutral-900 dark:hover:text-white text-[12.5px] sm:text-[13px] font-semibold tracking-tight shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] border border-black/[0.04] dark:border-white/[0.06] transition-all cursor-pointer active:scale-95"
+            className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-full bg-white dark:bg-[#202226] hover:bg-[#f9fafb] dark:hover:bg-[#282a30] text-[#555a64] dark:text-[#d1d5db] hover:text-neutral-900 dark:hover:text-white text-[11.5px] sm:text-[12.5px] font-semibold tracking-tight shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.3)] border border-black/[0.04] dark:border-white/[0.06] transition-all cursor-pointer active:scale-95 whitespace-nowrap"
           >
-            <Bell className="w-4 h-4 text-[#7a818c] shrink-0" />
-            <span className="truncate">Remind Me Later</span>
+            <Bell className="w-3.5 h-3.5 text-[#7a818c] shrink-0" />
+            <span>Remind Me Later</span>
           </button>
 
           <button
             type="button"
             onClick={handleDone}
-            className="inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-full bg-[#22c55e] hover:bg-[#16a34a] text-white text-[12.5px] sm:text-[13px] font-semibold tracking-tight shadow-[0_4px_14px_rgba(34,197,94,0.35)] transition-all cursor-pointer active:scale-95"
+            className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-full bg-[#22c55e] hover:bg-[#16a34a] text-white text-[11.5px] sm:text-[12.5px] font-semibold tracking-tight shadow-[0_4px_12px_rgba(34,197,94,0.35)] transition-all cursor-pointer active:scale-95 whitespace-nowrap"
           >
-            <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
-            <span className="truncate">{isDone ? "Done!" : "Mark as Done"}</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0" />
+            <span>{isDone ? "Done!" : "Mark as Done"}</span>
           </button>
         </div>
       </div>
 
       {/* 2. Stacked Layer Underneath (Middle Card) */}
       {totalInQueue > 1 && (
-        <div className="absolute -bottom-2.5 inset-x-3.5 sm:inset-x-4 h-10 rounded-[24px] sm:rounded-[26px] bg-white/95 dark:bg-[#1c1d20] border border-black/[0.04] dark:border-[#23252a] -z-10 shadow-sm" />
+        <div className="absolute -bottom-2 inset-x-2.5 sm:inset-x-3 h-8 sm:h-9 rounded-[20px] sm:rounded-[24px] bg-white/95 dark:bg-[#1c1d20] border border-black/[0.04] dark:border-[#23252a] -z-10 shadow-[0_8px_16px_-6px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.35)]" />
       )}
 
       {/* 3. Deepest Stacked Layer (Bottom Card) */}
       {totalInQueue > 2 && (
-        <div className="absolute -bottom-5 inset-x-7 sm:inset-x-8 h-10 rounded-[22px] sm:rounded-[24px] bg-white/80 dark:bg-[#222428] border border-black/[0.03] dark:border-[#23252a] -z-20 shadow-xs" />
+        <div className="absolute -bottom-4 inset-x-5 sm:inset-x-6 h-8 sm:h-9 rounded-[18px] sm:rounded-[22px] bg-white/80 dark:bg-[#222428] border border-black/[0.03] dark:border-[#23252a] -z-20 shadow-[0_8px_12px_-6px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_12px_-6px_rgba(0,0,0,0.25)]" />
       )}
     </div>
   );

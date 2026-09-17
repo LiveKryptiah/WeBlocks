@@ -74,7 +74,7 @@ export default function HomePage() {
               value={heroSearch}
               onChange={(e) => setHeroSearch(e.target.value)}
               placeholder="Search by pattern, app, or keyword (e.g. Onboarding, Wise, Linear)..."
-              className="w-full h-14 bg-field text-ink placeholder:text-faint rounded-full pl-14 pr-36 text-body transition-all border-none outline-none focus:ring-2 focus:ring-ink focus:bg-white"
+              className="w-full h-14 bg-field text-ink placeholder:text-faint rounded-full pl-14 pr-36 text-body transition-all border-none outline-none focus:ring-2 focus:ring-ink focus:bg-canvas"
             />
             <div className="absolute right-2">
               <ButtonPrimary type="submit" size="sm">
@@ -163,7 +163,7 @@ export default function HomePage() {
               <Link
                 key={pattern.id}
                 href={`/explore?pattern=${encodeURIComponent(pattern.name)}`}
-                className="group p-5 rounded-sm bg-white hover:bg-field border border-hairline-soft transition-colors flex flex-col justify-between"
+                className="group p-5 rounded-sm bg-canvas dark:bg-[#0f1011] hover:bg-field dark:hover:bg-[#161718] border border-hairline-soft dark:border-[#23252a] transition-colors flex flex-col justify-between"
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-body font-bold text-ink group-hover:text-muted transition-colors">
@@ -221,7 +221,7 @@ export default function HomePage() {
                     <h3 className="text-title text-ink font-bold group-hover:text-muted transition-colors truncate">
                       {app.name}
                     </h3>
-                    <span className="text-caption bg-white px-2 py-0.5 rounded-full border border-hairline text-muted">
+                    <span className="text-caption bg-canvas dark:bg-[#161718] px-2 py-0.5 rounded-full border border-hairline dark:border-[#23252a] text-muted dark:text-[#8a8f98]">
                       {app.industry}
                     </span>
                   </div>
@@ -275,7 +275,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 6: CURATED EDITORIAL COLLECTIONS */}
-      <section className="w-full bg-white border-t border-hairline py-16 sm:py-24">
+      <section className="w-full bg-canvas border-t border-hairline dark:border-[#23252a] py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>

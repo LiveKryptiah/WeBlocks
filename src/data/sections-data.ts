@@ -629,22 +629,22 @@ export function SplitWaitlistHero() {
         </div>
 
         {/* Right Column: Visual Bento Preview */}
-        <div className="lg:col-span-5 bg-canvas-soft rounded-2xl p-6 border border-hairline-soft space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-hairline-soft">
+        <div className="lg:col-span-5 bg-canvas-soft rounded-2xl p-6 border border-hairline-soft dark:border-[#23252a] space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-hairline-soft dark:border-[#23252a]">
             <span className="text-body-sm font-semibold text-ink">Active Tokens</span>
-            <span className="text-caption text-muted bg-white px-2 py-0.5 rounded-full">v2.4</span>
+            <span className="text-caption text-muted bg-white dark:bg-[#161718] px-2 py-0.5 rounded-full border border-hairline-soft dark:border-[#23252a]">v2.4</span>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div className="p-4 rounded-xl bg-white space-y-1">
+            <div className="p-4 rounded-xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] space-y-1">
               <span className="text-caption text-muted">Headline Weight</span>
               <p className="text-title font-bold text-ink">652</p>
             </div>
-            <div className="p-4 rounded-xl bg-white space-y-1">
+            <div className="p-4 rounded-xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a] space-y-1">
               <span className="text-caption text-muted">Body Weight</span>
               <p className="text-title font-bold text-ink">456</p>
             </div>
           </div>
-          <div className="p-4 rounded-xl bg-white">
+          <div className="p-4 rounded-xl bg-white dark:bg-[#161718] border border-hairline-soft dark:border-[#23252a]">
             <span className="text-caption text-muted block mb-1">Primary Typeface</span>
             <p className="text-body font-semibold text-ink">M Saans / Inter Variable</p>
           </div>
@@ -669,7 +669,7 @@ import React from "react";
 
 export function MulticolumnModernFooter() {
   return (
-    <footer className="w-full bg-white text-ink border-t border-hairline-soft py-16 px-6 sm:px-10">
+    <footer className="w-full bg-canvas text-ink border-t border-hairline-soft dark:border-[#23252a] py-16 px-6 sm:px-10">
       <div className="max-w-6xl mx-auto space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Brand & Newsletter */}
