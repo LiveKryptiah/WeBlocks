@@ -44,7 +44,12 @@ function SectionShowcaseContent() {
   }, [selectedCategory, query]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
+    <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-8 sm:py-12 relative overflow-visible">
+      {/* Ambient background light glows for authentic frosted glass refraction */}
+      <div className="absolute top-28 left-4 w-96 h-96 bg-blue-500/[0.07] dark:bg-blue-600/[0.12] rounded-full blur-[100px] pointer-events-none -z-10" />
+      <div className="absolute top-1/3 right-4 w-[500px] h-[500px] bg-purple-500/[0.05] dark:bg-indigo-600/[0.1] rounded-full blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute top-2/3 left-1/3 w-[500px] h-[500px] bg-sky-500/[0.05] dark:bg-blue-500/[0.08] rounded-full blur-[120px] pointer-events-none -z-10" />
+
       {/* Header */}
       <div className="mb-10">
         <h1 className="text-h2 font-bold text-ink mb-2">Section showcase.</h1>

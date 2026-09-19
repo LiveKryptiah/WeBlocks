@@ -93,6 +93,7 @@ const config: Config = {
       boxShadow: {
         none: "none",
         "inset-ring": "inset 0 0 0 1px var(--color-hairline-soft, #f0f0f0)",
+        xs: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
       },
     },
   },
